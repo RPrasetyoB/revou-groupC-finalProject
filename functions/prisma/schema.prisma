@@ -1,0 +1,134 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          Int       @id @default(autoincrement())
+  username    String    @unique
+  email       String    @unique
+  password    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  fullName    String?
+  weight      Int?
+  height      Int?
+  gender      Gender?
+  age         Int?
+  activeness  Activeness?
+  sleep       Sleep[]
+  steps       Steps[]
+  food        Food[]
+  water       Water[]
+  meditation  Meditation[]
+  mood        Mood[]
+  report      Report[]
+}
+
+model Sleep {
+  id            Int       @id @default(autoincrement())
+  user          User?     @relation(fields: [userId], references: [id])
+  userId        Int?
+  createdAt     DateTime  @default(now())
+  sleep_start   DateTime  @default(now())
+  sleep_end     DateTime
+  sleep_actual  Int
+  target        Int        
+}
+
+model Steps {
+  id            Int       @id @default(autoincrement())
+  user          User?     @relation(fields: [userId], references: [id])
+  userId        Int?
+  createdAt     DateTime  @default(now())
+  steps_actual  Int
+  target        Int
+}
+
+model Food{
+  id            Int       @id @default(autoincrement())
+  user          User?     @relation(fields: [userId], references: [id])
+  userId        Int?
+  foodlist      FoodList  @relation(fields: [foodlist_id], references: [id])
+  foodlist_id   Int
+  createdAt     DateTime  @default(now())
+  calories      Int
+  min_calories  Int
+  max_calories  Int
+}
+
+model FoodList {
+  id          Int       @id @default(autoincrement())
+  food_name   String
+  calories    Int
+  food Food[]
+}
+
+model Water {
+  id            Int       @id @default(autoincrement())
+  user          User      @relation(fields: [userId], references: [id])
+  userId        Int
+  createdAt     DateTime  @default(now())
+  water_actual  Int
+  target        Int
+}
+
+model Meditation {
+  id                Int       @id @default(autoincrement())
+  user              User     @relation(fields: [userId], references: [id])
+  userId            Int
+  createdAt         DateTime  @default(now())
+  medication_actual Int
+  target            Int
+}
+
+model Mood {
+  id            Int       @id @default(autoincrement())
+  user          User     @relation(fields: [userId], references: [id])
+  userId        Int
+  createdAt     DateTime  @default(now())
+  current_mood  Todaymood
+}
+
+model Report {
+  id                 Int       @id @default(autoincrement())
+  user               User      @relation(fields: [userId], references: [id])
+  date               DateTime  @default(now())
+  userId             Int
+  sleepActual        Int
+  sleepTarget        Int
+  stepsActual        Int
+  stepsTarget        Int
+  foodCaloriesActual Int
+  foodCaloriesTarget Int
+  waterActual        Int
+  waterTarget        Int
+  meditationActual   Int
+  meditationTarget   Int
+  mood               Todaymood
+}
+
+
+enum Gender {
+  man
+  woman
+}
+
+enum Activeness {
+  light_active
+  moderate_active
+  very_active
+}
+
+enum Todaymood {
+  sad
+  netral
+  happy
+}
