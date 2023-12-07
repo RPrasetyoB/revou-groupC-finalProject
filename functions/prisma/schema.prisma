@@ -23,6 +23,7 @@ model User {
   gender      Gender?
   age         Int?
   activeness  Activeness?
+  category    Category?
   sleep       Sleep[]
   steps       Steps[]
   food        Food[]
@@ -131,4 +132,10 @@ enum Todaymood {
   sad
   netral
   happy
+}
+
+enum Category {
+  skinny
+  normal
+  over
 }
