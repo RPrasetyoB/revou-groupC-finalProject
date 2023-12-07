@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { userModel } from '../config/schemas/schema';
-import { loginUser, passResetReq, passwordReset, registerUser } from '../services/userService'
+import { loginUser, passResetReq, passwordReset, registerUser, updateUser } from '../services/userService'
 import jwt from 'jsonwebtoken'
 import { JWT_Sign } from '../config/auth/jwt';
 import { getToken, loggedUser } from '../utils/getToken';
@@ -41,6 +41,27 @@ const regUser = async (req : Request, res: Response, next: NextFunction) => {
     next(error);
   }
 };
+
+
+//------ Update user -------
+const editUser = async (req: Request, res: Response, next: NextFunction) => {
+  const decodeToken = getToken(req)
+  const { username } = loggedUser(decodeToken)
+    try {
+        const { fullname, weight, height, gender, age, activeness, category } = req.body;
+        const result = await updateUser(username, { fullname, weight, height, gender, age, activeness, category });
+
+    if (result.success) {
+      res.status(200).json({
+        success: true,
+        message: 'User updated successfully',
+        data: result.data,
+      });
+    } 
+    } catch (error) {
+        next(error)
+    }
+}
 
 
 //------ Password reset -------
@@ -154,4 +175,4 @@ const getOneUser = async (req: Request, res: Response) => {
 };
 
 
-export { getAllUsers, getOneUser, regUser, login, logoutUser, resetPass, resetPassReq }
+export { getAllUsers, getOneUser, regUser, login, logoutUser,editUser ,resetPass, resetPassReq }

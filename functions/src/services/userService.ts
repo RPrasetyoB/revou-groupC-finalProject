@@ -17,13 +17,19 @@ interface RegisterInput {
   email: string;
   password: string;
 }
-interface UserRole {
-  id: string;
-  role: string;
+interface UpdateInput {
+  fullname: string;
+  weight: string;
+  height: string;
+  gender: string;
+  age: number;
+  activeness: string;
+  category: string;
 }
 
 const failedLogins = new NodeCache({ stdTTL: 20 }) as any;
 const cache = new NodeCache({ stdTTL: 20 }) as any;
+
 
 //------ login ------
 const loginUser = async ({ username, password }: LoginInput) => {
@@ -85,6 +91,7 @@ const loginUser = async ({ username, password }: LoginInput) => {
   }
 };
 
+
 //------ register ------
 const registerUser = async ({ username, email, password }: RegisterInput) => {
   if (!username) {
@@ -141,6 +148,51 @@ const registerUser = async ({ username, email, password }: RegisterInput) => {
     await prisma.$disconnect();
   }
 }
+
+
+//------ update password -------
+const updateUser = async (username: string, { fullname, weight, gender, age, activeness, category }: UpdateInput) => {
+    try {
+      const existingUser = await prisma.user.findUnique({
+        where: { username: username },
+      });
+  
+      if (!existingUser) {
+        throw new ErrorCatch({
+          success: false,
+          message: "User not found",
+          status: 404,
+        });
+      }
+  
+      const updatedUserData: Record<string, any> = {};
+      if (fullname) updatedUserData.fullName = fullname;
+      if (weight) updatedUserData.weight = parseInt(weight, 10);
+      if (gender) updatedUserData.gender = gender;
+      if (age) updatedUserData.age = age;
+      if (activeness) updatedUserData.activeness = activeness;
+      if (category) updatedUserData.category = category;
+  
+      const updatedUser = await prisma.user.update({
+        where: { username: username },
+        data: updatedUserData,
+      });
+  
+      return {
+        success: true,
+        data: updatedUser,
+      };
+    } catch (error: any) {
+      console.error(error);
+      throw new ErrorCatch({
+        success: false,
+        message: error.message,
+        status: error.status,
+      });
+    } finally {
+      await prisma.$disconnect();
+    }
+  };
 
 
 //------ password reset request ------
@@ -214,4 +266,4 @@ const passwordReset = async (key: string, password: string) => {
 };
 
 
-export { loginUser, registerUser, passwordReset, passResetReq };
+export { loginUser, registerUser, updateUser, passwordReset, passResetReq };
