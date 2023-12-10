@@ -8,6 +8,7 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
+    "postinstall": "prisma generate",
     "test": "npx jest --detectOpenHandles",
     "testcoverage": "jest --coverage",
     "build": "prisma generate && tsc",
