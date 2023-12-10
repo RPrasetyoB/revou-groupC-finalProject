@@ -1,19 +1,15 @@
 {
-    "name": "group-c-final-project",
-    "version": 2,
-    "builds": [
-      {
-        "src": "dist/index.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      { "handle": "filesystem" },
-      { "src": "/", "dest": "dist/index.js" }
-    ],
-    "env": {
-      "SERVER_PORT": "80",
-      "SECRET_KEY": "secret",
-      "DATABASE_URL": "postgresql://postgres:Revoufinalproject@db.ehfrzwkcdejuqjaqmlht.supabase.co:5432/postgres"
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.js",
+      "use": "@vercel/node"
     }
-  }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.js"
+    }
+  ]
+}
