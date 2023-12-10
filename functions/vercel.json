@@ -11,5 +11,7 @@
       "src": "/(.*)",
       "dest": "src/index.ts"
     }
-  ]
+  ],
+  "public" : false,
+  "regionw" : ["sin1"]
 }
