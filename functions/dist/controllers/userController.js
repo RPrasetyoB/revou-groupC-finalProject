@@ -12,11 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.resetPassReq = exports.resetPass = exports.editUser = exports.logoutUser = exports.login = exports.regUser = exports.getOneUser = exports.getAllUsers = void 0;
+exports.editUser = exports.logoutUser = exports.login = exports.regUser = exports.getAllUsers = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const jwt_1 = require("../config/auth/jwt");
 const getToken_1 = require("../utils/getToken");
-const schema_1 = require("../config/schemas/schema");
 const userService_1 = require("../services/userService");
 //------ Login user ------
 const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -75,53 +74,47 @@ const editUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.editUser = editUser;
-//------ Password reset -------
-const resetPassReq = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { email } = req.body;
-        const result = yield (0, userService_1.passResetReq)(email);
-        if (result.success) {
-            return res.status(200).json({
-                success: true,
-                message: 'Password reset link sent',
-                data: result.data,
-            });
-        }
-        else {
-            return res.status(404).json({
-                success: false,
-                message: result.message,
-            });
-        }
-    }
-    catch (error) {
-        next(error);
-    }
-});
-exports.resetPassReq = resetPassReq;
-const resetPass = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const key = req.query.key;
-        const { password } = req.body;
-        const result = yield (0, userService_1.passwordReset)(key, password);
-        if (result.success) {
-            return res.status(200).json({
-                success: true,
-                message: 'Password reset successful',
-            });
-        }
-        else {
-            return res.status(401).json({
-                success: false,
-                message: result.message,
-            });
-        }
-    }
-    catch (error) {
-        next(error);
-    }
-});
-exports.resetPass = resetPass;
+// //------ Password reset -------
+// const resetPassReq = async (req: Request, res: Response, next: NextFunction) => {
+//   try {
+//       const { email } = req.body;
+//       const result = await passResetReq(email);
+//       if (result.success) {
+//           return res.status(200).json({
+//               success: true,
+//               message: 'Password reset link sent',
+//               data: result.data,
+//           });
+//       } else {
+//           return res.status(404).json({
+//               success: false,
+//               message: result.message,
+//           });
+//       }
+//   } catch (error) {
+//       next(error);
+//   }
+// }
+// const resetPass = async (req: Request, res: Response, next: NextFunction) => {
+//   try {
+//       const  key  = req.query.key as string
+//       const { password } = req.body;
+//       const result = await passwordReset(key, password);
+//       if (result.success) {
+//           return res.status(200).json({
+//               success: true,
+//               message: 'Password reset successful',
+//           });
+//       } else {
+//           return res.status(401).json({
+//               success: false,
+//               message: result.message,
+//           });
+//       }
+//   } catch (error) {
+//       next(error);
+//   }
+// }
 //------ log out ------
 const logoutUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -164,28 +157,3 @@ const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getAllUsers = getAllUsers;
-//------ Get one user by id ------
-const getOneUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { id } = req.params;
-        const user = yield schema_1.userModel.findById(id);
-        if (!user) {
-            return res.status(404).json({
-                message: "user not found"
-            });
-        }
-        return res.status(200).json({
-            success: true,
-            message: "success get user",
-            user: user,
-        });
-    }
-    catch (err) {
-        console.log('Error get user:', err);
-        return res.status(500).json({
-            success: false,
-            message: 'An error occurred while get the user or userId wrong format'
-        });
-    }
-});
-exports.getOneUser = getOneUser;

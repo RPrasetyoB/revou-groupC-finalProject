@@ -12,10 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.passResetReq = exports.passwordReset = exports.getUsers = exports.updateUser = exports.registerUser = exports.loginUser = void 0;
-const bcrypt_1 = __importDefault(require("bcrypt"));
-const uuid_1 = require("uuid");
-const schema_1 = require("../config/schemas/schema");
+exports.getUsers = exports.updateUser = exports.registerUser = exports.loginUser = void 0;
+// import bcrypt from "bcrypt";
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const node_cache_1 = __importDefault(require("node-cache"));
 const errorCatch_1 = __importDefault(require("../utils/errorCatch"));
 const db_connection_1 = require("../config/db/db.connection");
@@ -44,7 +43,7 @@ const loginUser = ({ username, password }) => __awaiter(void 0, void 0, void 0, 
                 status: 401,
             });
         }
-        const isPasswordCorrect = yield bcrypt_1.default.compare(password, user.password);
+        const isPasswordCorrect = yield bcryptjs_1.default.compare(password, user.password);
         if (isPasswordCorrect) {
             yield failedLogins.del(username);
             return {
@@ -123,7 +122,7 @@ const registerUser = ({ username, email, password }) => __awaiter(void 0, void 0
         });
     }
     try {
-        const hashedPass = yield bcrypt_1.default.hash(password, 10);
+        const hashedPass = yield bcryptjs_1.default.hash(password, 10);
         const newUser = yield db_connection_1.prisma.user.create({
             data: { username, email, password: hashedPass }
         });
@@ -219,74 +218,3 @@ const updateUser = (username, { nickname, weight, height, gender, age, activenes
     }
 });
 exports.updateUser = updateUser;
-//------ password reset request ------
-const sendEmail = (email, key) => {
-    console.log(`Subject: Password reset request`);
-    console.log(`To: ${email}`);
-    console.log(`${key}`);
-};
-const passResetReq = (email) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const user = yield schema_1.userModel.findOne({ email: email });
-        if (!user) {
-            throw new errorCatch_1.default({
-                success: false,
-                message: "Email not registered",
-                status: 404,
-            });
-        }
-        const key = (0, uuid_1.v4)();
-        cache.set(key, email, 25 * 1000);
-        sendEmail(user.email, key);
-        const linkReset = `${key}`;
-        // const linkReset = `https://week-16-rprasetyob-production.up.railway.app/reset?key=${key}`
-        return {
-            success: true,
-            message: "Password reset link sent",
-            data: linkReset,
-        };
-    }
-    catch (error) {
-        throw new errorCatch_1.default({
-            success: false,
-            message: error.message,
-            status: error.status,
-        });
-    }
-});
-exports.passResetReq = passResetReq;
-const passwordReset = (key, password) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const email = cache.get(key);
-        if (!email) {
-            throw new errorCatch_1.default({
-                success: false,
-                status: 401,
-                message: "Invalid or expired token",
-            });
-        }
-        const user = yield schema_1.userModel.findOne({ email: email });
-        if (!user) {
-            throw new errorCatch_1.default({
-                success: false,
-                message: "Email invalid / not registered",
-                status: 401,
-            });
-        }
-        const hashedPassword = yield bcrypt_1.default.hash(password, 10);
-        yield user.updateOne({ password: hashedPassword });
-        cache.del(key);
-        return {
-            success: true,
-            message: "Password reset successful",
-        };
-    }
-    catch (error) {
-        throw new errorCatch_1.default({
-            success: false,
-            message: error.message,
-            status: error.status,
-        });
-    }
-});
-exports.passwordReset = passwordReset;
