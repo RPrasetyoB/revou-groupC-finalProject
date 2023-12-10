@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.passResetReq = exports.passwordReset = exports.updateUser = exports.registerUser = exports.loginUser = void 0;
+exports.passResetReq = exports.passwordReset = exports.getUsers = exports.updateUser = exports.registerUser = exports.loginUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const uuid_1 = require("uuid");
 const schema_1 = require("../config/schemas/schema");
@@ -112,6 +112,16 @@ const registerUser = ({ username, email, password }) => __awaiter(void 0, void 0
             status: 409,
         });
     }
+    const existEmail = yield db_connection_1.prisma.user.findUnique({
+        where: { email }
+    });
+    if (existEmail) {
+        throw new errorCatch_1.default({
+            success: false,
+            message: 'Email already registered, please use other email',
+            status: 409,
+        });
+    }
     try {
         const hashedPass = yield bcrypt_1.default.hash(password, 10);
         const newUser = yield db_connection_1.prisma.user.create({
@@ -135,8 +145,32 @@ const registerUser = ({ username, email, password }) => __awaiter(void 0, void 0
     }
 });
 exports.registerUser = registerUser;
+//------ get all users ------
+const getUsers = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield db_connection_1.prisma.user.findMany();
+        return {
+            success: true,
+            message: "Users retrieved successfully",
+            status: 200,
+            data: users,
+        };
+    }
+    catch (error) {
+        console.error(error);
+        throw new errorCatch_1.default({
+            success: false,
+            message: "Error retrieving users",
+            status: 500,
+        });
+    }
+    finally {
+        yield db_connection_1.prisma.$disconnect();
+    }
+});
+exports.getUsers = getUsers;
 //------ update password -------
-const updateUser = (username, { fullname, weight, gender, age, activeness, category }) => __awaiter(void 0, void 0, void 0, function* () {
+const updateUser = (username, { nickname, weight, height, gender, age, activeness, category }) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const existingUser = yield db_connection_1.prisma.user.findUnique({
             where: { username: username },
@@ -149,10 +183,12 @@ const updateUser = (username, { fullname, weight, gender, age, activeness, categ
             });
         }
         const updatedUserData = {};
-        if (fullname)
-            updatedUserData.fullName = fullname;
+        if (nickname)
+            updatedUserData.nickname = nickname;
         if (weight)
             updatedUserData.weight = parseInt(weight, 10);
+        if (weight)
+            updatedUserData.height = parseInt(height, 10);
         if (gender)
             updatedUserData.gender = gender;
         if (age)

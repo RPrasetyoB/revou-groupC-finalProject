@@ -18,7 +18,7 @@ interface RegisterInput {
   password: string;
 }
 interface UpdateInput {
-  fullname: string;
+  nickname: string;
   weight: string;
   height: string;
   gender: string;
@@ -128,6 +128,18 @@ const registerUser = async ({ username, email, password }: RegisterInput) => {
     });
   }
 
+  const existEmail = await prisma.user.findUnique({
+    where: { email }
+  });
+
+  if (existEmail) {
+    throw new ErrorCatch({
+      success: false,
+      message: 'Email already registered, please use other email',
+      status: 409,
+    });
+  }
+
   try {
     const hashedPass = await bcrypt.hash(password, 10);
     const newUser = await prisma.user.create({
@@ -150,8 +162,31 @@ const registerUser = async ({ username, email, password }: RegisterInput) => {
 }
 
 
+//------ get all users ------
+const getUsers = async () => {
+  try {
+    const users = await prisma.user.findMany();
+    return {
+      success: true,
+      message: "Users retrieved successfully",
+      status: 200,
+      data: users,
+    };
+  } catch (error: any) {
+    console.error(error);
+    throw new ErrorCatch({
+      success: false,
+      message: "Error retrieving users",
+      status: 500,
+    });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+
 //------ update password -------
-const updateUser = async (username: string, { fullname, weight, gender, age, activeness, category }: UpdateInput) => {
+const updateUser = async (username: string, { nickname, weight, height, gender, age, activeness, category }: UpdateInput) => {
     try {
       const existingUser = await prisma.user.findUnique({
         where: { username: username },
@@ -166,8 +201,9 @@ const updateUser = async (username: string, { fullname, weight, gender, age, act
       }
   
       const updatedUserData: Record<string, any> = {};
-      if (fullname) updatedUserData.fullName = fullname;
+      if (nickname) updatedUserData.nickname = nickname;
       if (weight) updatedUserData.weight = parseInt(weight, 10);
+      if (weight) updatedUserData.height = parseInt(height, 10);
       if (gender) updatedUserData.gender = gender;
       if (age) updatedUserData.age = age;
       if (activeness) updatedUserData.activeness = activeness;
@@ -266,4 +302,4 @@ const passwordReset = async (key: string, password: string) => {
 };
 
 
-export { loginUser, registerUser, updateUser, passwordReset, passResetReq };
+export { loginUser, registerUser, updateUser,getUsers ,passwordReset, passResetReq };

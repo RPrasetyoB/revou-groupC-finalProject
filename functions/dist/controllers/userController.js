@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.resetPassReq = exports.resetPass = exports.editUser = exports.logoutUser = exports.login = exports.regUser = exports.getOneUser = exports.getAllUsers = void 0;
-const schema_1 = require("../config/schemas/schema");
-const userService_1 = require("../services/userService");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const jwt_1 = require("../config/auth/jwt");
 const getToken_1 = require("../utils/getToken");
+const schema_1 = require("../config/schemas/schema");
+const userService_1 = require("../services/userService");
 //------ Login user ------
 const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -60,8 +60,8 @@ const editUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
     const decodeToken = (0, getToken_1.getToken)(req);
     const { username } = (0, getToken_1.loggedUser)(decodeToken);
     try {
-        const { fullname, weight, height, gender, age, activeness, category } = req.body;
-        const result = yield (0, userService_1.updateUser)(username, { fullname, weight, height, gender, age, activeness, category });
+        const { nickname, weight, height, gender, age, activeness, category } = req.body;
+        const result = yield (0, userService_1.updateUser)(username, { nickname, weight, height, gender, age, activeness, category });
         if (result.success) {
             res.status(200).json({
                 success: true,
@@ -146,12 +146,14 @@ exports.logoutUser = logoutUser;
 //------ Get all users ------
 const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield schema_1.userModel.find({});
-        return res.status(200).json({
-            success: true,
-            message: "success get all user",
-            users: user
-        });
+        const result = yield (0, userService_1.getUsers)();
+        if (result.success) {
+            res.status(200).json({
+                success: true,
+                message: 'Success get all users',
+                data: result.data,
+            });
+        }
     }
     catch (error) {
         console.log(error);
