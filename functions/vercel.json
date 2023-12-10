@@ -13,5 +13,5 @@
     }
   ],
   "public" : false,
-  "regionw" : ["sin1"]
+  "regions" : ["sin1"]
 }
