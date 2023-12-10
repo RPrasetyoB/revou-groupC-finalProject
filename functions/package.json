@@ -7,11 +7,11 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "postinstall": "prisma generate",
+    "build": "tsc",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "test": "npx jest --detectOpenHandles",
     "testcoverage": "jest --coverage",
-    "build": "prisma generate && tsc",
     "build:watch": "tsc --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
