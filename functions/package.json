@@ -8,6 +8,7 @@
   "main": "dist/index.js",
   "scripts": {
     "postinstall": "prisma generate",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "build": "tsc",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "test": "npx jest --detectOpenHandles",
