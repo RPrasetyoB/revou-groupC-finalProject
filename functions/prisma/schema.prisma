@@ -11,25 +11,27 @@ datasource db {
 }
 
 model User {
-  id          Int       @id @default(autoincrement())
-  username    String    @unique
-  email       String    @unique
-  password    String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  fullName    String?
-  weight      Int?
-  height      Int?
-  gender      Gender?
-  age         Int?
-  activeness  Activeness?
-  sleep       Sleep[]
-  steps       Steps[]
-  food        Food[]
-  water       Water[]
-  meditation  Meditation[]
-  mood        Mood[]
-  report      Report[]
+  id            Int       @id @default(autoincrement())
+  username      String    @unique
+  email         String    @unique
+  password      String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  nickname      String?
+  weight        Int?
+  height        Int?
+  gender        Gender?
+  age           Int?
+  activeness    Activeness?
+  category      Category?
+  sleep         Sleep[]
+  steps         Steps[]
+  food          Calories[]
+  water         Water[]
+  meditation    Meditation[]
+  mood          Mood[]
+  report        Report[]
+  foodConsumed  FoodConsumed[]
 }
 
 model Sleep {
@@ -37,9 +39,9 @@ model Sleep {
   user          User?     @relation(fields: [userId], references: [id])
   userId        Int?
   createdAt     DateTime  @default(now())
-  sleep_start   DateTime  @default(now())
-  sleep_end     DateTime
-  sleep_actual  Int
+  sleepStart    DateTime  @default(now())
+  sleepEnd      DateTime
+  sleepActual   Int
   target        Int        
 }
 
@@ -48,53 +50,65 @@ model Steps {
   user          User?     @relation(fields: [userId], references: [id])
   userId        Int?
   createdAt     DateTime  @default(now())
-  steps_actual  Int
+  stepsActual   Int
   target        Int
 }
 
-model Food{
+model Calories{
   id            Int       @id @default(autoincrement())
   user          User?     @relation(fields: [userId], references: [id])
   userId        Int?
-  foodlist      FoodList  @relation(fields: [foodlist_id], references: [id])
-  foodlist_id   Int
   createdAt     DateTime  @default(now())
+  amr           Int
+  bmi           Int
+  actual        Int?
+  target        Int
+}
+
+model FoodConsumed{
+  id            Int       @id @default(autoincrement())
+  user          User?     @relation(fields: [userId], references: [id])
+  userId        Int?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  food          FoodList  @relation(fields: [foodName], references: [foodName])
+  foodName      String
   calories      Int
-  min_calories  Int
-  max_calories  Int
+  uniqueId       String
 }
 
 model FoodList {
-  id          Int       @id @default(autoincrement())
-  food_name   String
-  calories    Int
-  food Food[]
+  id             Int        @id @default(autoincrement())
+  foodName       String     @unique
+  calories       Float
+  foodConsumed   FoodConsumed[]
 }
+
 
 model Water {
   id            Int       @id @default(autoincrement())
   user          User      @relation(fields: [userId], references: [id])
   userId        Int
   createdAt     DateTime  @default(now())
-  water_actual  Int
+  waterActual   Int
   target        Int
 }
 
 model Meditation {
   id                Int       @id @default(autoincrement())
-  user              User     @relation(fields: [userId], references: [id])
+  user              User      @relation(fields: [userId], references: [id])
   userId            Int
   createdAt         DateTime  @default(now())
-  medication_actual Int
+  medicationActual  Int
   target            Int
 }
 
 model Mood {
   id            Int       @id @default(autoincrement())
-  user          User     @relation(fields: [userId], references: [id])
+  user          User      @relation(fields: [userId], references: [id])
   userId        Int
   createdAt     DateTime  @default(now())
-  current_mood  Todaymood
+  currentMood   Todaymood
 }
 
 model Report {
@@ -122,13 +136,19 @@ enum Gender {
 }
 
 enum Activeness {
-  light_active
-  moderate_active
-  very_active
+  light
+  moderate
+  active
 }
 
 enum Todaymood {
   sad
   netral
   happy
+}
+
+enum Category {
+  skinny
+  normal
+  over
 }

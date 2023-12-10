@@ -20,6 +20,6 @@ export const loggedUser = (decodedToken: JwtPayload | null) => {
   return {
     userRole: decodedToken?.role,
     username: decodedToken?.username,
-    userId: decodedToken?._id
+    userId: decodedToken?.id
   };
 };

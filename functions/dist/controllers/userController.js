@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.accessTokenRefresh = exports.resetPassReq = exports.resetPass = exports.logoutUser = exports.login = exports.regUser = exports.getOneUser = exports.getAllUsers = void 0;
-const schema_1 = require("../config/schemas/schema");
-const userService_1 = require("../services/userService");
+exports.resetPassReq = exports.resetPass = exports.editUser = exports.logoutUser = exports.login = exports.regUser = exports.getOneUser = exports.getAllUsers = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const jwt_1 = require("../config/auth/jwt");
+const getToken_1 = require("../utils/getToken");
+const schema_1 = require("../config/schemas/schema");
+const userService_1 = require("../services/userService");
 //------ Login user ------
 const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -54,6 +55,26 @@ const regUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.regUser = regUser;
+//------ Update user -------
+const editUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const decodeToken = (0, getToken_1.getToken)(req);
+    const { username } = (0, getToken_1.loggedUser)(decodeToken);
+    try {
+        const { nickname, weight, height, gender, age, activeness, category } = req.body;
+        const result = yield (0, userService_1.updateUser)(username, { nickname, weight, height, gender, age, activeness, category });
+        if (result.success) {
+            res.status(200).json({
+                success: true,
+                message: 'User updated successfully',
+                data: result.data,
+            });
+        }
+    }
+    catch (error) {
+        next(error);
+    }
+});
+exports.editUser = editUser;
 //------ Password reset -------
 const resetPassReq = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -101,38 +122,6 @@ const resetPass = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.resetPass = resetPass;
-//------ token refresh -------
-const accessTokenRefresh = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const refreshToken = req.cookies['refreshToken'];
-    const decodedToken = jsonwebtoken_1.default.decode(refreshToken);
-    if (!refreshToken) {
-        return res.status(401).json({
-            success: false,
-            message: "refresh token is missing"
-        });
-    }
-    if (!jwt_1.JWT_Sign)
-        throw new Error('JWT_SIGN is not defined');
-    try {
-        if (refreshToken) {
-            const accessToken = jsonwebtoken_1.default.sign(decodedToken, jwt_1.JWT_Sign);
-            res.cookie("accessToken", accessToken, {
-                maxAge: 10 * 60 * 1000,
-                httpOnly: true,
-                path: '/'
-            });
-            return res.status(200).json({
-                success: true,
-                message: "access token refresh successfully",
-                data: { accessToken }
-            });
-        }
-    }
-    catch (error) {
-        next(error);
-    }
-});
-exports.accessTokenRefresh = accessTokenRefresh;
 //------ log out ------
 const logoutUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -157,12 +146,14 @@ exports.logoutUser = logoutUser;
 //------ Get all users ------
 const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield schema_1.userModel.find({});
-        return res.status(200).json({
-            success: true,
-            message: "success get all user",
-            users: user
-        });
+        const result = yield (0, userService_1.getUsers)();
+        if (result.success) {
+            res.status(200).json({
+                success: true,
+                message: 'Success get all users',
+                data: result.data,
+            });
+        }
     }
     catch (error) {
         console.log(error);

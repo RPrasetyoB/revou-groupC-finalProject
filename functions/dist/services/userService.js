@@ -12,12 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.refreshAccessToken = exports.passwordReset = exports.passResetReq = exports.registerUser = exports.loginUser = void 0;
+exports.passResetReq = exports.passwordReset = exports.getUsers = exports.updateUser = exports.registerUser = exports.loginUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const uuid_1 = require("uuid");
 const schema_1 = require("../config/schemas/schema");
-const jwt_1 = require("../config/auth/jwt");
 const node_cache_1 = __importDefault(require("node-cache"));
 const errorCatch_1 = __importDefault(require("../utils/errorCatch"));
 const db_connection_1 = require("../config/db/db.connection");
@@ -104,22 +102,30 @@ const registerUser = ({ username, email, password }) => __awaiter(void 0, void 0
             status: 400,
         });
     }
-    const existUser = yield db_connection_1.prisma.user.findUnique({ where: { username } });
+    const existUser = yield db_connection_1.prisma.user.findUnique({
+        where: { username }
+    });
     if (existUser) {
         throw new errorCatch_1.default({
             success: false,
-            message: "Username already exists",
+            message: 'Username already exists',
+            status: 409,
+        });
+    }
+    const existEmail = yield db_connection_1.prisma.user.findUnique({
+        where: { email }
+    });
+    if (existEmail) {
+        throw new errorCatch_1.default({
+            success: false,
+            message: 'Email already registered, please use other email',
             status: 409,
         });
     }
     try {
         const hashedPass = yield bcrypt_1.default.hash(password, 10);
         const newUser = yield db_connection_1.prisma.user.create({
-            data: {
-                username,
-                email,
-                password: hashedPass,
-            },
+            data: { username, email, password: hashedPass }
         });
         return {
             success: true,
@@ -127,7 +133,7 @@ const registerUser = ({ username, email, password }) => __awaiter(void 0, void 0
         };
     }
     catch (error) {
-        console.log(error);
+        console.error(error);
         throw new errorCatch_1.default({
             success: false,
             message: error.message,
@@ -139,6 +145,80 @@ const registerUser = ({ username, email, password }) => __awaiter(void 0, void 0
     }
 });
 exports.registerUser = registerUser;
+//------ get all users ------
+const getUsers = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const users = yield db_connection_1.prisma.user.findMany();
+        return {
+            success: true,
+            message: "Users retrieved successfully",
+            status: 200,
+            data: users,
+        };
+    }
+    catch (error) {
+        console.error(error);
+        throw new errorCatch_1.default({
+            success: false,
+            message: "Error retrieving users",
+            status: 500,
+        });
+    }
+    finally {
+        yield db_connection_1.prisma.$disconnect();
+    }
+});
+exports.getUsers = getUsers;
+//------ update password -------
+const updateUser = (username, { nickname, weight, height, gender, age, activeness, category }) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const existingUser = yield db_connection_1.prisma.user.findUnique({
+            where: { username: username },
+        });
+        if (!existingUser) {
+            throw new errorCatch_1.default({
+                success: false,
+                message: "User not found",
+                status: 404,
+            });
+        }
+        const updatedUserData = {};
+        if (nickname)
+            updatedUserData.nickname = nickname;
+        if (weight)
+            updatedUserData.weight = parseInt(weight, 10);
+        if (weight)
+            updatedUserData.height = parseInt(height, 10);
+        if (gender)
+            updatedUserData.gender = gender;
+        if (age)
+            updatedUserData.age = age;
+        if (activeness)
+            updatedUserData.activeness = activeness;
+        if (category)
+            updatedUserData.category = category;
+        const updatedUser = yield db_connection_1.prisma.user.update({
+            where: { username: username },
+            data: updatedUserData,
+        });
+        return {
+            success: true,
+            data: updatedUser,
+        };
+    }
+    catch (error) {
+        console.error(error);
+        throw new errorCatch_1.default({
+            success: false,
+            message: error.message,
+            status: error.status,
+        });
+    }
+    finally {
+        yield db_connection_1.prisma.$disconnect();
+    }
+});
+exports.updateUser = updateUser;
 //------ password reset request ------
 const sendEmail = (email, key) => {
     console.log(`Subject: Password reset request`);
@@ -210,19 +290,3 @@ const passwordReset = (key, password) => __awaiter(void 0, void 0, void 0, funct
     }
 });
 exports.passwordReset = passwordReset;
-//------- RefreshToken -------
-const refreshAccessToken = (refreshToken) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const user = jsonwebtoken_1.default.verify(refreshToken, jwt_1.JWT_Sign);
-        const accessToken = jsonwebtoken_1.default.sign({ user }, jwt_1.JWT_Sign, { expiresIn: "15m" });
-        return accessToken;
-    }
-    catch (error) {
-        throw new errorCatch_1.default({
-            success: false,
-            message: error.message,
-            status: error.status,
-        });
-    }
-});
-exports.refreshAccessToken = refreshAccessToken;

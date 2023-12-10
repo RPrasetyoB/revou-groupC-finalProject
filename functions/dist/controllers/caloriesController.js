@@ -9,15 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCalories = void 0;
+exports.createCalories = exports.getCalories = void 0;
 const getToken_1 = require("../utils/getToken");
-const foodService_1 = require("../services/foodService");
+const caloriesService_1 = require("../services/caloriesService");
 //----- get user calories ------
 const getCalories = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const decodedToken = (0, getToken_1.getToken)(req);
-    const { username } = (0, getToken_1.loggedUser)(decodedToken);
     try {
-        const result = yield (0, foodService_1.getCaloriesUser)(username);
+        const decodedToken = (0, getToken_1.getToken)(req);
+        const { username } = (0, getToken_1.loggedUser)(decodedToken);
+        const result = yield (0, caloriesService_1.getCaloriesUser)(username);
         if (result.success) {
             return res.status(200).json({
                 message: result.message,
@@ -26,6 +26,25 @@ const getCalories = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         }
     }
     catch (error) {
+        next(error);
     }
 });
 exports.getCalories = getCalories;
+//------ create user calories ------
+const createCalories = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const decodedToken = (0, getToken_1.getToken)(req);
+        const { userId } = (0, getToken_1.loggedUser)(decodedToken);
+        const result = yield (0, caloriesService_1.caloriesCalculation)(userId);
+        if (result === null || result === void 0 ? void 0 : result.success) {
+            return res.status(200).json({
+                message: result.message,
+                data: result.data
+            });
+        }
+    }
+    catch (error) {
+        next(error);
+    }
+});
+exports.createCalories = createCalories;
