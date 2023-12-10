@@ -1,4 +1,4 @@
-# Full-Stack Project milestone 3
+# Final project
 
 Development project from designing, building, and maintaining both the server-side (back end) and client-side (front end) components of an application. This individual manages the entire software stack, ensuring the integration and functionality of both ends for a complete user experience.
 
@@ -28,107 +28,25 @@ Development project from designing, building, and maintaining both the server-si
 
 ## Front-end sneak peek
 
-![](assets/img/README/2023-10-27-18-48-41-image.png)
+
 
 ## Back-end Authentication
-
-```js
-import { Request, Response, NextFunction } from 'express';
-
-const authentication = (req: Request, res: Response, next: NextFunction) => {
-    const authHeader = req.headers.authorization    
-    if (!authHeader) {
-        res.status(401).json({ error: 'Acces forbidden' })
-    }
-    next()    
-}
-
-export default authentication
-```
 
 ## Back-end Authorization
 
 ##### By Role :
 
-```js
-//------ getTodo ------
-const getAllTodo = async (req: Request, res: Response) => {
-  const decodedToken = getToken(req)
-  const { userRole, username } = loggedUser(decodedToken);
-console.log('test', userRole, username )
-
-  try {
-    if (userRole == "admin") {
-      const todo = await getMakerTodos();
-      return res.status(200).json({
-        success: true,
-        message: "Successfully fetched all todo",
-        result: todo,
-        user: username,
-        role: userRole
-      });
-    } else if(userRole == "guest") {
-      const todo = await getMakerTodos(username);
-      return res.status(200).json({
-        success: true,
-        message: "Successfully fetched todos for the user",
-        result: todo,
-        user: username,
-        role: userRole
-      });
-    }
-    else {
-      return res.status(403).json({
-        success: false,
-        message: "Please login first"
-      });
-    }
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({
-      success: false,
-      message: "Failed to get todos",
-    });
-  }
-};
-```
-
 ##### By Username :
-
-- update Todolist authorization
-
-```js
-if(todoId.maker == username){
-      const updatedStatus = await updateMakerTodos(id , todo, status, priority, dueDate);
-      if (updatedStatus.success) {
-        return res.status(200).json({
-          success: true,
-          message: "Successfully updated status",
-          updatedData: {todo, status, dueDate}
-        });
-      } else {
-        return res.status(updatedStatus.status).json({
-          success: false,
-          message: updatedStatus.message,
-        });
-      }
-    } else {
-      return res.status(403).json({
-        success: false,
-        message: "You do not have permission to update this todo",
-      });
-    }
-```
 
 ## Security test
 
 - Front-end :
   
-  ![2023-10-27-12-08-11-image](https://github.com/RevoU-FSSE-2/week-18-RPrasetyoB/assets/129088807/349417d3-8c63-489b-bedf-37cd1fbec217)
+  
 
 - Back-end:
   
-  ![2023-10-27-12-08-59-image](https://github.com/RevoU-FSSE-2/week-18-RPrasetyoB/assets/129088807/f46fe5f6-8865-4560-9697-057aa762ebd3)
+  
 
 ## Postmant API documentation
 

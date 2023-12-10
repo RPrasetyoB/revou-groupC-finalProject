@@ -24,7 +24,7 @@ const loggedUser = (decodedToken) => {
     return {
         userRole: decodedToken === null || decodedToken === void 0 ? void 0 : decodedToken.role,
         username: decodedToken === null || decodedToken === void 0 ? void 0 : decodedToken.username,
-        userId: decodedToken === null || decodedToken === void 0 ? void 0 : decodedToken._id
+        userId: decodedToken === null || decodedToken === void 0 ? void 0 : decodedToken.id
     };
 };
 exports.loggedUser = loggedUser;

@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import { userModel } from '../config/schemas/schema';
-import { loginUser, passResetReq, passwordReset, registerUser, updateUser } from '../services/userService'
 import jwt from 'jsonwebtoken'
 import { JWT_Sign } from '../config/auth/jwt';
 import { getToken, loggedUser } from '../utils/getToken';
+import { userModel } from '../config/schemas/schema';
+import { getUsers, loginUser, passResetReq, passwordReset, registerUser, updateUser } from '../services/userService'
 
 //------ Login user ------
 const login = async (req: Request, res: Response, next: NextFunction) => {
@@ -48,8 +48,8 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
   const decodeToken = getToken(req)
   const { username } = loggedUser(decodeToken)
     try {
-        const { fullname, weight, height, gender, age, activeness, category } = req.body;
-        const result = await updateUser(username, { fullname, weight, height, gender, age, activeness, category });
+        const { nickname, weight, height, gender, age, activeness, category } = req.body;
+        const result = await updateUser(username, { nickname, weight, height, gender, age, activeness, category });
 
     if (result.success) {
       res.status(200).json({
@@ -133,13 +133,14 @@ const logoutUser = async (req: Request, res: Response, next: NextFunction) => {
 //------ Get all users ------
 const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const user = await userModel.find({})
- 
-    return res.status(200).json({
-      success: true,
-      message: "success get all user",
-      users: user
-    });
+    const result = await getUsers() 
+    if (result.success) {
+      res.status(200).json({
+        success: true,
+        message: 'Success get all users',
+        data: result.data,
+      });
+    } 
   } catch (error) {
     console.log(error);
     return res.status(400).json({
