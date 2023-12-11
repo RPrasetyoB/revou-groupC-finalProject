@@ -3,7 +3,7 @@ import 'dotenv/config';
 import { db } from './config/db/db.connection';
 import middleWares from './middlewares';
 import errorHandler from './middlewares/errorHandler';
-import * as functions from 'firebase-functions';
+// import * as functions from 'firebase-functions';
 import mainRoutes from './routes/mainRoutes';
 import routes from './routes/index'
 import corsMiddleware from './middlewares/corsMiddleware';
@@ -23,4 +23,4 @@ app.listen(server_port, () => {
   console.log(`server listening at http://localhost:${server_port}`);
 });
 
-export const grupc_project = functions.https.onRequest(app);
+// export const grupc_project = functions.https.onRequest(app);
