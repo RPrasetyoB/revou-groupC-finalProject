@@ -11,7 +11,23 @@ interface MultipleFoodInput {
   foodNames: string[];
 }
 
+interface FoodListEntry {
+  foodName: string;
+  calories: number;
+}
+
+interface RecordType {
+  id: number;
+}
+
+interface EntryType {
+  foodName: string;
+  calories: number;
+}
+
 type FoodInput = InputFood | MultipleFoodInput;
+
+
 
 const today = new Date();
 const startOfToday = startOfDay(today);
@@ -51,7 +67,7 @@ const foodConsumed = async (userId: number, input: FoodInput) => {
     const uniqueId = uuidv4();
 
     await prisma.foodConsumed.createMany({
-      data: foodListEntries.map((entry) => ({
+      data: foodListEntries.map((entry: FoodListEntry) => ({
         userId: userId,
         foodName: entry.foodName,
         calories: entry.calories,
@@ -148,8 +164,8 @@ const editFood = async (userId: number, input: FoodInput, uniqueId : string) => 
       });
     }
 
-    const updatePromises = getFood.map(async (record, index) => {
-      const entry = foodListEntries[index];
+    const updatePromises = getFood.map(async (record : RecordType, index) => {
+      const entry : EntryType = foodListEntries[index];
       return prisma.foodConsumed.update({
         where: {
           id: record.id,

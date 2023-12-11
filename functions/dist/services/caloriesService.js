@@ -133,7 +133,7 @@ const caloriesCalculation = (userId) => __awaiter(void 0, void 0, void 0, functi
         console.log('consumed', foodConsumed);
         let totalActualCalories = 0;
         if (foodConsumed.length > 0) {
-            totalActualCalories = foodConsumed.reduce((total, item) => total + (item.calories || 0), 0);
+            totalActualCalories = foodConsumed.reduce((total, item) => { var _a; return total + ((_a = item.calories) !== null && _a !== void 0 ? _a : 0); }, 0);
         }
         // Check if there are existing calories records for today
         const existingCalories = yield db_connection_1.prisma.calories.findMany({

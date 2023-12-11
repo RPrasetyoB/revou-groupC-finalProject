@@ -116,14 +116,14 @@ const caloriesCalculation = async (userId?: number) => {
           lte: endOfToday
         } 
       },
-    });
+    }) as { calories: number }[];
 
   console.log('consumed', foodConsumed)
 
   let totalActualCalories = 0;
 
     if (foodConsumed.length > 0) {
-      totalActualCalories = foodConsumed.reduce((total, item) => total + (item.calories || 0), 0);
+      totalActualCalories = foodConsumed.reduce((total, item) => total + (item.calories ?? 0), 0);
     }
 
     // Check if there are existing calories records for today
@@ -135,7 +135,7 @@ const caloriesCalculation = async (userId?: number) => {
           lte: endOfToday
         } 
       },
-    });
+    }) as { id: number }[];
 
     if (existingCalories.length > 0) {
       // Update the existing Calories record
