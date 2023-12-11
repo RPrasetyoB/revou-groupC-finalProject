@@ -27,8 +27,6 @@ interface EntryType {
 
 type FoodInput = InputFood | MultipleFoodInput;
 
-
-
 const today = new Date();
 const startOfToday = startOfDay(today);
 const endOfToday = endOfDay(today);
@@ -36,19 +34,6 @@ const endOfToday = endOfDay(today);
 //----- create foodConsumed ------
 const foodConsumed = async (userId: number, input: FoodInput) => {
   try {
-    await prisma.$connect;
-    const user = await prisma.user.findUnique({
-      where: { id: userId },
-    });
-
-    if (!user) {
-      throw new ErrorCatch({
-        success: false,
-        message: "Unauthorized! please login",
-        status: 400,
-      });
-    }
-
     const foodNames = "foodNames" in input ? input.foodNames : [input.foodName];
     const filteredFoodNames = foodNames.filter(Boolean);
     const foodListEntries = await prisma.foodList.findMany({
@@ -58,14 +43,12 @@ const foodConsumed = async (userId: number, input: FoodInput) => {
 
     if (foodListEntries.length !== filteredFoodNames.length) {
       throw new ErrorCatch({
+        status: 404,
         success: false,
         message: "Some food items not found in the FoodList",
-        status: 404,
       });
     }
-
     const uniqueId = uuidv4();
-
     await prisma.foodConsumed.createMany({
       data: foodListEntries.map((entry: FoodListEntry) => ({
         userId: userId,
@@ -74,7 +57,6 @@ const foodConsumed = async (userId: number, input: FoodInput) => {
         uniqueId: uniqueId,
       })),
     });
-
     const createdRecords = await prisma.foodConsumed.findMany({
       where: {
         userId: userId,
@@ -83,7 +65,6 @@ const foodConsumed = async (userId: number, input: FoodInput) => {
         },
       },
     });
-
     return {
       success: true,
       message: "Successfully recorded consumed food",
@@ -103,7 +84,6 @@ const foodConsumed = async (userId: number, input: FoodInput) => {
 //----- get food consumed -----
 const getFood = async (userId: number) => {
   try {
-    await prisma.$connect;
     const foodConsumed = await prisma.foodConsumed.findMany({
       where: {
         userId: userId,
@@ -113,7 +93,6 @@ const getFood = async (userId: number) => {
         },
       },
     });
-
     return {
       success: true,
       message: "Successfully recorded consumed food",
@@ -133,15 +112,12 @@ const getFood = async (userId: number) => {
 //----- update food consumed -----
 const editFood = async (userId: number, input: FoodInput, uniqueId : string) => {
   try {
-    await prisma.$connect();
-
     const getFood = await prisma.foodConsumed.findMany({
       where: {
         userId: userId,
         uniqueId: uniqueId,
       },
     });
-
     if (!getFood || getFood.length === 0) {
       throw new ErrorCatch({
         success: false,
@@ -155,7 +131,6 @@ const editFood = async (userId: number, input: FoodInput, uniqueId : string) => 
       where: { foodName: { in: filteredFoodNames } },
       select: { foodName: true, calories: true },
     });
-
     if (foodListEntries.length !== filteredFoodNames.length) {
       throw new ErrorCatch({
         success: false,
@@ -163,7 +138,6 @@ const editFood = async (userId: number, input: FoodInput, uniqueId : string) => 
         status: 404,
       });
     }
-
     const updatePromises = getFood.map(async (record : RecordType, index: number) => {
       const entry : EntryType = foodListEntries[index];
       return prisma.foodConsumed.update({
@@ -175,10 +149,8 @@ const editFood = async (userId: number, input: FoodInput, uniqueId : string) => 
           calories: entry.calories,
         },
       });
-    });
-    
+    });    
     const updatedRecords = await Promise.all(updatePromises);
-
     return {
       success: true,
       message: "Successfully updated consumed food",
@@ -195,4 +167,44 @@ const editFood = async (userId: number, input: FoodInput, uniqueId : string) => 
   }
 };
 
-export { foodConsumed, getFood, editFood };
+
+//----- delete food consumed ------
+const deleteFood = async (userId: number, uniqueId : string) => {
+  try {
+    const getFood = await prisma.foodConsumed.findMany({
+      where: {
+        userId: userId,
+        uniqueId: uniqueId,
+      },
+    });
+    if (!getFood || getFood.length === 0) {
+      throw new ErrorCatch({
+        success: false,
+        message: "Food consumed not found",
+        status: 400,
+      });
+    }    
+    const delFood = await prisma.foodConsumed.deleteMany({
+      where : {
+        userId: userId,
+        uniqueId: uniqueId
+      }
+    })
+    return {
+      success: true,
+      message: "Successfully updated consumed food",
+      data: getFood,
+    };
+  } catch (error: any) {
+    throw new ErrorCatch({
+      success: false,
+      message: error.message,
+      status: 500,
+    });
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+
+export { foodConsumed, getFood, editFood, deleteFood };
