@@ -7,7 +7,7 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "npm install && prisma migrate deploy && prisma generate && npm run generate && tsc",
+    "build": "npm install && prisma migrate deploy && prisma generate && tsc",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "start": "node dist/index.js"
   },
