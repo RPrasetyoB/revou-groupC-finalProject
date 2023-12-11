@@ -118,10 +118,7 @@ const caloriesCalculation = async (userId?: number) => {
       },
     }) as { calories: number }[];
 
-  console.log('consumed', foodConsumed)
-
   let totalActualCalories = 0;
-
     if (foodConsumed.length > 0) {
       totalActualCalories = foodConsumed.reduce((total, item) => total + (item.calories ?? 0), 0);
     }
