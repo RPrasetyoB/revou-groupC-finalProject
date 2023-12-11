@@ -90,7 +90,7 @@ const caloriesCalculation = async (userId?: number) => {
       }
     };
     const amr = getAmr();
-    const bmi = user?.weight! / (user?.height! / 100);
+    const bmi = user?.weight! / (user?.height! * 0.01) ** 2;
     const getTarget = () => {
       const skinny = amr + 300;
       const over = amr - 300;
