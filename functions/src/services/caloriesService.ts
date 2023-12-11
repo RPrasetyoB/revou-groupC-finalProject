@@ -90,10 +90,10 @@ const caloriesCalculation = async (userId?: number) => {
       }
     };
     const amr = getAmr();
-    const bmi = user?.weight! / (user?.height! / 100);
+    const bmi = user?.weight! / (user?.height! * 0.01) ** 2;
     const getTarget = () => {
-      const skinny = amr - 300;
-      const over = amr + 300;
+      const skinny = amr + 300;
+      const over = amr - 300;
       if (bmi <= 18.5) {
         return skinny;
       } else if (bmi >= 18.5 && bmi <= 25) {
@@ -103,7 +103,6 @@ const caloriesCalculation = async (userId?: number) => {
       }
     };
     const target = getTarget();
-
     const today = new Date();
     const startOfToday = startOfDay(today);
     const endOfToday = endOfDay(today);
@@ -142,7 +141,6 @@ const caloriesCalculation = async (userId?: number) => {
           actual: totalActualCalories,
         },
       });
-
       return {
         success: true,
         message: "success update calories",
@@ -159,7 +157,6 @@ const caloriesCalculation = async (userId?: number) => {
           target: target,
         },
       });
-
       return {
         success: true,
         message: "success post calories",
