@@ -164,7 +164,7 @@ const editFood = async (userId: number, input: FoodInput, uniqueId : string) => 
       });
     }
 
-    const updatePromises = getFood.map(async (record : RecordType, index) => {
+    const updatePromises = getFood.map(async (record : RecordType, index: number) => {
       const entry : EntryType = foodListEntries[index];
       return prisma.foodConsumed.update({
         where: {
