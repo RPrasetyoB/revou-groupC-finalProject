@@ -15,6 +15,7 @@ model User {
   id            Int       @id @default(autoincrement())
   username      String    @unique
   email         String    @unique
+  googleId      String?   @unique
   password      String
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -23,8 +24,7 @@ model User {
   height        Int?
   gender        Gender?
   age           Int?
-  activeness    Activeness?
-  category      Category?
+  activeness    Activeness?  
   sleep         Sleep[]
   steps         Steps[]
   food          Calories[]
@@ -128,6 +128,7 @@ model Report {
   meditationActual   Int
   meditationTarget   Int
   mood               Todaymood
+  category           Float?
 }
 
 
@@ -146,10 +147,4 @@ enum Todaymood {
   sad
   netral
   happy
-}
-
-enum Category {
-  skinny
-  normal
-  over
 }

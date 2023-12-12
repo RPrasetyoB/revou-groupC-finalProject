@@ -85,15 +85,6 @@ export const Activeness: {
 export type Activeness = (typeof Activeness)[keyof typeof Activeness]
 
 
-export const Category: {
-  skinny: 'skinny',
-  normal: 'normal',
-  over: 'over'
-};
-
-export type Category = (typeof Category)[keyof typeof Category]
-
-
 export const Todaymood: {
   sad: 'sad',
   netral: 'netral',
@@ -111,10 +102,6 @@ export const Gender: typeof $Enums.Gender
 export type Activeness = $Enums.Activeness
 
 export const Activeness: typeof $Enums.Activeness
-
-export type Category = $Enums.Category
-
-export const Category: typeof $Enums.Category
 
 export type Todaymood = $Enums.Todaymood
 
@@ -1817,6 +1804,7 @@ export namespace Prisma {
     id: number | null
     username: string | null
     email: string | null
+    googleId: string | null
     password: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1826,13 +1814,13 @@ export namespace Prisma {
     gender: $Enums.Gender | null
     age: number | null
     activeness: $Enums.Activeness | null
-    category: $Enums.Category | null
   }
 
   export type UserMaxAggregateOutputType = {
     id: number | null
     username: string | null
     email: string | null
+    googleId: string | null
     password: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -1842,13 +1830,13 @@ export namespace Prisma {
     gender: $Enums.Gender | null
     age: number | null
     activeness: $Enums.Activeness | null
-    category: $Enums.Category | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
     username: number
     email: number
+    googleId: number
     password: number
     createdAt: number
     updatedAt: number
@@ -1858,7 +1846,6 @@ export namespace Prisma {
     gender: number
     age: number
     activeness: number
-    category: number
     _all: number
   }
 
@@ -1881,6 +1868,7 @@ export namespace Prisma {
     id?: true
     username?: true
     email?: true
+    googleId?: true
     password?: true
     createdAt?: true
     updatedAt?: true
@@ -1890,13 +1878,13 @@ export namespace Prisma {
     gender?: true
     age?: true
     activeness?: true
-    category?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
     username?: true
     email?: true
+    googleId?: true
     password?: true
     createdAt?: true
     updatedAt?: true
@@ -1906,13 +1894,13 @@ export namespace Prisma {
     gender?: true
     age?: true
     activeness?: true
-    category?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
     username?: true
     email?: true
+    googleId?: true
     password?: true
     createdAt?: true
     updatedAt?: true
@@ -1922,7 +1910,6 @@ export namespace Prisma {
     gender?: true
     age?: true
     activeness?: true
-    category?: true
     _all?: true
   }
 
@@ -2016,6 +2003,7 @@ export namespace Prisma {
     id: number
     username: string
     email: string
+    googleId: string | null
     password: string
     createdAt: Date
     updatedAt: Date
@@ -2025,7 +2013,6 @@ export namespace Prisma {
     gender: $Enums.Gender | null
     age: number | null
     activeness: $Enums.Activeness | null
-    category: $Enums.Category | null
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -2051,6 +2038,7 @@ export namespace Prisma {
     id?: boolean
     username?: boolean
     email?: boolean
+    googleId?: boolean
     password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2060,7 +2048,6 @@ export namespace Prisma {
     gender?: boolean
     age?: boolean
     activeness?: boolean
-    category?: boolean
     sleep?: boolean | User$sleepArgs<ExtArgs>
     steps?: boolean | User$stepsArgs<ExtArgs>
     food?: boolean | User$foodArgs<ExtArgs>
@@ -2076,6 +2063,7 @@ export namespace Prisma {
     id?: boolean
     username?: boolean
     email?: boolean
+    googleId?: boolean
     password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2085,7 +2073,6 @@ export namespace Prisma {
     gender?: boolean
     age?: boolean
     activeness?: boolean
-    category?: boolean
   }
 
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2117,6 +2104,7 @@ export namespace Prisma {
       id: number
       username: string
       email: string
+      googleId: string | null
       password: string
       createdAt: Date
       updatedAt: Date
@@ -2126,7 +2114,6 @@ export namespace Prisma {
       gender: $Enums.Gender | null
       age: number | null
       activeness: $Enums.Activeness | null
-      category: $Enums.Category | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2539,6 +2526,7 @@ export namespace Prisma {
     readonly id: FieldRef<"User", 'Int'>
     readonly username: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
+    readonly googleId: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
@@ -2548,7 +2536,6 @@ export namespace Prisma {
     readonly gender: FieldRef<"User", 'Gender'>
     readonly age: FieldRef<"User", 'Int'>
     readonly activeness: FieldRef<"User", 'Activeness'>
-    readonly category: FieldRef<"User", 'Category'>
   }
     
 
@@ -10894,6 +10881,7 @@ export namespace Prisma {
     waterTarget: number | null
     meditationActual: number | null
     meditationTarget: number | null
+    category: number | null
   }
 
   export type ReportSumAggregateOutputType = {
@@ -10909,6 +10897,7 @@ export namespace Prisma {
     waterTarget: number | null
     meditationActual: number | null
     meditationTarget: number | null
+    category: number | null
   }
 
   export type ReportMinAggregateOutputType = {
@@ -10926,6 +10915,7 @@ export namespace Prisma {
     meditationActual: number | null
     meditationTarget: number | null
     mood: $Enums.Todaymood | null
+    category: number | null
   }
 
   export type ReportMaxAggregateOutputType = {
@@ -10943,6 +10933,7 @@ export namespace Prisma {
     meditationActual: number | null
     meditationTarget: number | null
     mood: $Enums.Todaymood | null
+    category: number | null
   }
 
   export type ReportCountAggregateOutputType = {
@@ -10960,6 +10951,7 @@ export namespace Prisma {
     meditationActual: number
     meditationTarget: number
     mood: number
+    category: number
     _all: number
   }
 
@@ -10977,6 +10969,7 @@ export namespace Prisma {
     waterTarget?: true
     meditationActual?: true
     meditationTarget?: true
+    category?: true
   }
 
   export type ReportSumAggregateInputType = {
@@ -10992,6 +10985,7 @@ export namespace Prisma {
     waterTarget?: true
     meditationActual?: true
     meditationTarget?: true
+    category?: true
   }
 
   export type ReportMinAggregateInputType = {
@@ -11009,6 +11003,7 @@ export namespace Prisma {
     meditationActual?: true
     meditationTarget?: true
     mood?: true
+    category?: true
   }
 
   export type ReportMaxAggregateInputType = {
@@ -11026,6 +11021,7 @@ export namespace Prisma {
     meditationActual?: true
     meditationTarget?: true
     mood?: true
+    category?: true
   }
 
   export type ReportCountAggregateInputType = {
@@ -11043,6 +11039,7 @@ export namespace Prisma {
     meditationActual?: true
     meditationTarget?: true
     mood?: true
+    category?: true
     _all?: true
   }
 
@@ -11147,6 +11144,7 @@ export namespace Prisma {
     meditationActual: number
     meditationTarget: number
     mood: $Enums.Todaymood
+    category: number | null
     _count: ReportCountAggregateOutputType | null
     _avg: ReportAvgAggregateOutputType | null
     _sum: ReportSumAggregateOutputType | null
@@ -11183,6 +11181,7 @@ export namespace Prisma {
     meditationActual?: boolean
     meditationTarget?: boolean
     mood?: boolean
+    category?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["report"]>
 
@@ -11201,6 +11200,7 @@ export namespace Prisma {
     meditationActual?: boolean
     meditationTarget?: boolean
     mood?: boolean
+    category?: boolean
   }
 
   export type ReportInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11228,6 +11228,7 @@ export namespace Prisma {
       meditationActual: number
       meditationTarget: number
       mood: $Enums.Todaymood
+      category: number | null
     }, ExtArgs["result"]["report"]>
     composites: {}
   }
@@ -11637,6 +11638,7 @@ export namespace Prisma {
     readonly meditationActual: FieldRef<"Report", 'Int'>
     readonly meditationTarget: FieldRef<"Report", 'Int'>
     readonly mood: FieldRef<"Report", 'Todaymood'>
+    readonly category: FieldRef<"Report", 'Float'>
   }
     
 
@@ -11982,6 +11984,7 @@ export namespace Prisma {
     id: 'id',
     username: 'username',
     email: 'email',
+    googleId: 'googleId',
     password: 'password',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -11990,8 +11993,7 @@ export namespace Prisma {
     height: 'height',
     gender: 'gender',
     age: 'age',
-    activeness: 'activeness',
-    category: 'category'
+    activeness: 'activeness'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -12102,7 +12104,8 @@ export namespace Prisma {
     waterTarget: 'waterTarget',
     meditationActual: 'meditationActual',
     meditationTarget: 'meditationTarget',
-    mood: 'mood'
+    mood: 'mood',
+    category: 'category'
   };
 
   export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
@@ -12208,20 +12211,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Category'
-   */
-  export type EnumCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Category'>
-    
-
-
-  /**
-   * Reference to a field of type 'Category[]'
-   */
-  export type ListEnumCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Category[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -12259,6 +12248,7 @@ export namespace Prisma {
     id?: IntFilter<"User"> | number
     username?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
+    googleId?: StringNullableFilter<"User"> | string | null
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
@@ -12268,7 +12258,6 @@ export namespace Prisma {
     gender?: EnumGenderNullableFilter<"User"> | $Enums.Gender | null
     age?: IntNullableFilter<"User"> | number | null
     activeness?: EnumActivenessNullableFilter<"User"> | $Enums.Activeness | null
-    category?: EnumCategoryNullableFilter<"User"> | $Enums.Category | null
     sleep?: SleepListRelationFilter
     steps?: StepsListRelationFilter
     food?: CaloriesListRelationFilter
@@ -12283,6 +12272,7 @@ export namespace Prisma {
     id?: SortOrder
     username?: SortOrder
     email?: SortOrder
+    googleId?: SortOrderInput | SortOrder
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12292,7 +12282,6 @@ export namespace Prisma {
     gender?: SortOrderInput | SortOrder
     age?: SortOrderInput | SortOrder
     activeness?: SortOrderInput | SortOrder
-    category?: SortOrderInput | SortOrder
     sleep?: SleepOrderByRelationAggregateInput
     steps?: StepsOrderByRelationAggregateInput
     food?: CaloriesOrderByRelationAggregateInput
@@ -12307,6 +12296,7 @@ export namespace Prisma {
     id?: number
     username?: string
     email?: string
+    googleId?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
@@ -12319,7 +12309,6 @@ export namespace Prisma {
     gender?: EnumGenderNullableFilter<"User"> | $Enums.Gender | null
     age?: IntNullableFilter<"User"> | number | null
     activeness?: EnumActivenessNullableFilter<"User"> | $Enums.Activeness | null
-    category?: EnumCategoryNullableFilter<"User"> | $Enums.Category | null
     sleep?: SleepListRelationFilter
     steps?: StepsListRelationFilter
     food?: CaloriesListRelationFilter
@@ -12328,12 +12317,13 @@ export namespace Prisma {
     mood?: MoodListRelationFilter
     report?: ReportListRelationFilter
     foodConsumed?: FoodConsumedListRelationFilter
-  }, "id" | "username" | "email">
+  }, "id" | "username" | "email" | "googleId">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     username?: SortOrder
     email?: SortOrder
+    googleId?: SortOrderInput | SortOrder
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12343,7 +12333,6 @@ export namespace Prisma {
     gender?: SortOrderInput | SortOrder
     age?: SortOrderInput | SortOrder
     activeness?: SortOrderInput | SortOrder
-    category?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -12358,6 +12347,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"User"> | number
     username?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
+    googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -12367,7 +12357,6 @@ export namespace Prisma {
     gender?: EnumGenderNullableWithAggregatesFilter<"User"> | $Enums.Gender | null
     age?: IntNullableWithAggregatesFilter<"User"> | number | null
     activeness?: EnumActivenessNullableWithAggregatesFilter<"User"> | $Enums.Activeness | null
-    category?: EnumCategoryNullableWithAggregatesFilter<"User"> | $Enums.Category | null
   }
 
   export type SleepWhereInput = {
@@ -12862,6 +12851,7 @@ export namespace Prisma {
     meditationActual?: IntFilter<"Report"> | number
     meditationTarget?: IntFilter<"Report"> | number
     mood?: EnumTodaymoodFilter<"Report"> | $Enums.Todaymood
+    category?: FloatNullableFilter<"Report"> | number | null
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
@@ -12880,6 +12870,7 @@ export namespace Prisma {
     meditationActual?: SortOrder
     meditationTarget?: SortOrder
     mood?: SortOrder
+    category?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -12901,6 +12892,7 @@ export namespace Prisma {
     meditationActual?: IntFilter<"Report"> | number
     meditationTarget?: IntFilter<"Report"> | number
     mood?: EnumTodaymoodFilter<"Report"> | $Enums.Todaymood
+    category?: FloatNullableFilter<"Report"> | number | null
     user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id">
 
@@ -12919,6 +12911,7 @@ export namespace Prisma {
     meditationActual?: SortOrder
     meditationTarget?: SortOrder
     mood?: SortOrder
+    category?: SortOrderInput | SortOrder
     _count?: ReportCountOrderByAggregateInput
     _avg?: ReportAvgOrderByAggregateInput
     _max?: ReportMaxOrderByAggregateInput
@@ -12944,11 +12937,13 @@ export namespace Prisma {
     meditationActual?: IntWithAggregatesFilter<"Report"> | number
     meditationTarget?: IntWithAggregatesFilter<"Report"> | number
     mood?: EnumTodaymoodWithAggregatesFilter<"Report"> | $Enums.Todaymood
+    category?: FloatNullableWithAggregatesFilter<"Report"> | number | null
   }
 
   export type UserCreateInput = {
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12958,7 +12953,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepCreateNestedManyWithoutUserInput
     steps?: StepsCreateNestedManyWithoutUserInput
     food?: CaloriesCreateNestedManyWithoutUserInput
@@ -12973,6 +12967,7 @@ export namespace Prisma {
     id?: number
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -12982,7 +12977,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepUncheckedCreateNestedManyWithoutUserInput
     steps?: StepsUncheckedCreateNestedManyWithoutUserInput
     food?: CaloriesUncheckedCreateNestedManyWithoutUserInput
@@ -12996,6 +12990,7 @@ export namespace Prisma {
   export type UserUpdateInput = {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13005,7 +13000,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUpdateManyWithoutUserNestedInput
     steps?: StepsUpdateManyWithoutUserNestedInput
     food?: CaloriesUpdateManyWithoutUserNestedInput
@@ -13020,6 +13014,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13029,7 +13024,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUncheckedUpdateManyWithoutUserNestedInput
     steps?: StepsUncheckedUpdateManyWithoutUserNestedInput
     food?: CaloriesUncheckedUpdateManyWithoutUserNestedInput
@@ -13044,6 +13038,7 @@ export namespace Prisma {
     id?: number
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13053,12 +13048,12 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
   }
 
   export type UserUpdateManyMutationInput = {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13068,13 +13063,13 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13084,7 +13079,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
   }
 
   export type SleepCreateInput = {
@@ -13541,6 +13535,7 @@ export namespace Prisma {
     meditationActual: number
     meditationTarget: number
     mood: $Enums.Todaymood
+    category?: number | null
     user: UserCreateNestedOneWithoutReportInput
   }
 
@@ -13559,6 +13554,7 @@ export namespace Prisma {
     meditationActual: number
     meditationTarget: number
     mood: $Enums.Todaymood
+    category?: number | null
   }
 
   export type ReportUpdateInput = {
@@ -13574,6 +13570,7 @@ export namespace Prisma {
     meditationActual?: IntFieldUpdateOperationsInput | number
     meditationTarget?: IntFieldUpdateOperationsInput | number
     mood?: EnumTodaymoodFieldUpdateOperationsInput | $Enums.Todaymood
+    category?: NullableFloatFieldUpdateOperationsInput | number | null
     user?: UserUpdateOneRequiredWithoutReportNestedInput
   }
 
@@ -13592,6 +13589,7 @@ export namespace Prisma {
     meditationActual?: IntFieldUpdateOperationsInput | number
     meditationTarget?: IntFieldUpdateOperationsInput | number
     mood?: EnumTodaymoodFieldUpdateOperationsInput | $Enums.Todaymood
+    category?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type ReportCreateManyInput = {
@@ -13609,6 +13607,7 @@ export namespace Prisma {
     meditationActual: number
     meditationTarget: number
     mood: $Enums.Todaymood
+    category?: number | null
   }
 
   export type ReportUpdateManyMutationInput = {
@@ -13624,6 +13623,7 @@ export namespace Prisma {
     meditationActual?: IntFieldUpdateOperationsInput | number
     meditationTarget?: IntFieldUpdateOperationsInput | number
     mood?: EnumTodaymoodFieldUpdateOperationsInput | $Enums.Todaymood
+    category?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type ReportUncheckedUpdateManyInput = {
@@ -13641,6 +13641,7 @@ export namespace Prisma {
     meditationActual?: IntFieldUpdateOperationsInput | number
     meditationTarget?: IntFieldUpdateOperationsInput | number
     mood?: EnumTodaymoodFieldUpdateOperationsInput | $Enums.Todaymood
+    category?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -13669,17 +13670,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -13693,6 +13683,17 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -13718,13 +13719,6 @@ export namespace Prisma {
     in?: $Enums.Activeness[] | ListEnumActivenessFieldRefInput<$PrismaModel> | null
     notIn?: $Enums.Activeness[] | ListEnumActivenessFieldRefInput<$PrismaModel> | null
     not?: NestedEnumActivenessNullableFilter<$PrismaModel> | $Enums.Activeness | null
-  }
-
-  export type EnumCategoryNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.Category | EnumCategoryFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumCategoryNullableFilter<$PrismaModel> | $Enums.Category | null
   }
 
   export type SleepListRelationFilter = {
@@ -13816,6 +13810,7 @@ export namespace Prisma {
     id?: SortOrder
     username?: SortOrder
     email?: SortOrder
+    googleId?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -13825,7 +13820,6 @@ export namespace Prisma {
     gender?: SortOrder
     age?: SortOrder
     activeness?: SortOrder
-    category?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -13839,6 +13833,7 @@ export namespace Prisma {
     id?: SortOrder
     username?: SortOrder
     email?: SortOrder
+    googleId?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -13848,13 +13843,13 @@ export namespace Prisma {
     gender?: SortOrder
     age?: SortOrder
     activeness?: SortOrder
-    category?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
     id?: SortOrder
     username?: SortOrder
     email?: SortOrder
+    googleId?: SortOrder
     password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -13864,7 +13859,6 @@ export namespace Prisma {
     gender?: SortOrder
     age?: SortOrder
     activeness?: SortOrder
-    category?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -13908,20 +13902,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -13938,6 +13918,20 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -13974,16 +13968,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumActivenessNullableFilter<$PrismaModel>
     _max?: NestedEnumActivenessNullableFilter<$PrismaModel>
-  }
-
-  export type EnumCategoryNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Category | EnumCategoryFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumCategoryNullableWithAggregatesFilter<$PrismaModel> | $Enums.Category | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumCategoryNullableFilter<$PrismaModel>
-    _max?: NestedEnumCategoryNullableFilter<$PrismaModel>
   }
 
   export type UserNullableRelationFilter = {
@@ -14352,6 +14336,17 @@ export namespace Prisma {
     _max?: NestedEnumTodaymoodFilter<$PrismaModel>
   }
 
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type ReportCountOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
@@ -14367,6 +14362,7 @@ export namespace Prisma {
     meditationActual?: SortOrder
     meditationTarget?: SortOrder
     mood?: SortOrder
+    category?: SortOrder
   }
 
   export type ReportAvgOrderByAggregateInput = {
@@ -14382,6 +14378,7 @@ export namespace Prisma {
     waterTarget?: SortOrder
     meditationActual?: SortOrder
     meditationTarget?: SortOrder
+    category?: SortOrder
   }
 
   export type ReportMaxOrderByAggregateInput = {
@@ -14399,6 +14396,7 @@ export namespace Prisma {
     meditationActual?: SortOrder
     meditationTarget?: SortOrder
     mood?: SortOrder
+    category?: SortOrder
   }
 
   export type ReportMinOrderByAggregateInput = {
@@ -14416,6 +14414,7 @@ export namespace Prisma {
     meditationActual?: SortOrder
     meditationTarget?: SortOrder
     mood?: SortOrder
+    category?: SortOrder
   }
 
   export type ReportSumOrderByAggregateInput = {
@@ -14431,6 +14430,23 @@ export namespace Prisma {
     waterTarget?: SortOrder
     meditationActual?: SortOrder
     meditationTarget?: SortOrder
+    category?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type SleepCreateNestedManyWithoutUserInput = {
@@ -14549,12 +14565,12 @@ export namespace Prisma {
     set?: string
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -14571,10 +14587,6 @@ export namespace Prisma {
 
   export type NullableEnumActivenessFieldUpdateOperationsInput = {
     set?: $Enums.Activeness | null
-  }
-
-  export type NullableEnumCategoryFieldUpdateOperationsInput = {
-    set?: $Enums.Category | null
   }
 
   export type SleepUpdateManyWithoutUserNestedInput = {
@@ -14989,6 +15001,14 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type UserUpdateOneRequiredWithoutReportNestedInput = {
     create?: XOR<UserCreateWithoutReportInput, UserUncheckedCreateWithoutReportInput>
     connectOrCreate?: UserCreateOrConnectWithoutReportInput
@@ -15022,17 +15042,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -15045,6 +15054,17 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedIntNullableFilter<$PrismaModel = never> = {
@@ -15070,13 +15090,6 @@ export namespace Prisma {
     in?: $Enums.Activeness[] | ListEnumActivenessFieldRefInput<$PrismaModel> | null
     notIn?: $Enums.Activeness[] | ListEnumActivenessFieldRefInput<$PrismaModel> | null
     not?: NestedEnumActivenessNullableFilter<$PrismaModel> | $Enums.Activeness | null
-  }
-
-  export type NestedEnumCategoryNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.Category | EnumCategoryFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumCategoryNullableFilter<$PrismaModel> | $Enums.Category | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -15123,20 +15136,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -15152,6 +15151,20 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -15201,16 +15214,6 @@ export namespace Prisma {
     _max?: NestedEnumActivenessNullableFilter<$PrismaModel>
   }
 
-  export type NestedEnumCategoryNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Category | EnumCategoryFieldRefInput<$PrismaModel> | null
-    in?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.Category[] | ListEnumCategoryFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumCategoryNullableWithAggregatesFilter<$PrismaModel> | $Enums.Category | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumCategoryNullableFilter<$PrismaModel>
-    _max?: NestedEnumCategoryNullableFilter<$PrismaModel>
-  }
-
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -15242,6 +15245,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTodaymoodFilter<$PrismaModel>
     _max?: NestedEnumTodaymoodFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type SleepCreateWithoutUserInput = {
@@ -15401,6 +15420,7 @@ export namespace Prisma {
     meditationActual: number
     meditationTarget: number
     mood: $Enums.Todaymood
+    category?: number | null
   }
 
   export type ReportUncheckedCreateWithoutUserInput = {
@@ -15417,6 +15437,7 @@ export namespace Prisma {
     meditationActual: number
     meditationTarget: number
     mood: $Enums.Todaymood
+    category?: number | null
   }
 
   export type ReportCreateOrConnectWithoutUserInput = {
@@ -15655,6 +15676,7 @@ export namespace Prisma {
     meditationActual?: IntFilter<"Report"> | number
     meditationTarget?: IntFilter<"Report"> | number
     mood?: EnumTodaymoodFilter<"Report"> | $Enums.Todaymood
+    category?: FloatNullableFilter<"Report"> | number | null
   }
 
   export type FoodConsumedUpsertWithWhereUniqueWithoutUserInput = {
@@ -15689,6 +15711,7 @@ export namespace Prisma {
   export type UserCreateWithoutSleepInput = {
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15698,7 +15721,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     steps?: StepsCreateNestedManyWithoutUserInput
     food?: CaloriesCreateNestedManyWithoutUserInput
     water?: WaterCreateNestedManyWithoutUserInput
@@ -15712,6 +15734,7 @@ export namespace Prisma {
     id?: number
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15721,7 +15744,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     steps?: StepsUncheckedCreateNestedManyWithoutUserInput
     food?: CaloriesUncheckedCreateNestedManyWithoutUserInput
     water?: WaterUncheckedCreateNestedManyWithoutUserInput
@@ -15750,6 +15772,7 @@ export namespace Prisma {
   export type UserUpdateWithoutSleepInput = {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15759,7 +15782,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     steps?: StepsUpdateManyWithoutUserNestedInput
     food?: CaloriesUpdateManyWithoutUserNestedInput
     water?: WaterUpdateManyWithoutUserNestedInput
@@ -15773,6 +15795,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15782,7 +15805,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     steps?: StepsUncheckedUpdateManyWithoutUserNestedInput
     food?: CaloriesUncheckedUpdateManyWithoutUserNestedInput
     water?: WaterUncheckedUpdateManyWithoutUserNestedInput
@@ -15795,6 +15817,7 @@ export namespace Prisma {
   export type UserCreateWithoutStepsInput = {
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15804,7 +15827,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepCreateNestedManyWithoutUserInput
     food?: CaloriesCreateNestedManyWithoutUserInput
     water?: WaterCreateNestedManyWithoutUserInput
@@ -15818,6 +15840,7 @@ export namespace Prisma {
     id?: number
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15827,7 +15850,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepUncheckedCreateNestedManyWithoutUserInput
     food?: CaloriesUncheckedCreateNestedManyWithoutUserInput
     water?: WaterUncheckedCreateNestedManyWithoutUserInput
@@ -15856,6 +15878,7 @@ export namespace Prisma {
   export type UserUpdateWithoutStepsInput = {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15865,7 +15888,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUpdateManyWithoutUserNestedInput
     food?: CaloriesUpdateManyWithoutUserNestedInput
     water?: WaterUpdateManyWithoutUserNestedInput
@@ -15879,6 +15901,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15888,7 +15911,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUncheckedUpdateManyWithoutUserNestedInput
     food?: CaloriesUncheckedUpdateManyWithoutUserNestedInput
     water?: WaterUncheckedUpdateManyWithoutUserNestedInput
@@ -15901,6 +15923,7 @@ export namespace Prisma {
   export type UserCreateWithoutFoodInput = {
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15910,7 +15933,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepCreateNestedManyWithoutUserInput
     steps?: StepsCreateNestedManyWithoutUserInput
     water?: WaterCreateNestedManyWithoutUserInput
@@ -15924,6 +15946,7 @@ export namespace Prisma {
     id?: number
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15933,7 +15956,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepUncheckedCreateNestedManyWithoutUserInput
     steps?: StepsUncheckedCreateNestedManyWithoutUserInput
     water?: WaterUncheckedCreateNestedManyWithoutUserInput
@@ -15962,6 +15984,7 @@ export namespace Prisma {
   export type UserUpdateWithoutFoodInput = {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15971,7 +15994,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUpdateManyWithoutUserNestedInput
     steps?: StepsUpdateManyWithoutUserNestedInput
     water?: WaterUpdateManyWithoutUserNestedInput
@@ -15985,6 +16007,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15994,7 +16017,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUncheckedUpdateManyWithoutUserNestedInput
     steps?: StepsUncheckedUpdateManyWithoutUserNestedInput
     water?: WaterUncheckedUpdateManyWithoutUserNestedInput
@@ -16007,6 +16029,7 @@ export namespace Prisma {
   export type UserCreateWithoutFoodConsumedInput = {
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16016,7 +16039,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepCreateNestedManyWithoutUserInput
     steps?: StepsCreateNestedManyWithoutUserInput
     food?: CaloriesCreateNestedManyWithoutUserInput
@@ -16030,6 +16052,7 @@ export namespace Prisma {
     id?: number
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16039,7 +16062,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepUncheckedCreateNestedManyWithoutUserInput
     steps?: StepsUncheckedCreateNestedManyWithoutUserInput
     food?: CaloriesUncheckedCreateNestedManyWithoutUserInput
@@ -16084,6 +16106,7 @@ export namespace Prisma {
   export type UserUpdateWithoutFoodConsumedInput = {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16093,7 +16116,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUpdateManyWithoutUserNestedInput
     steps?: StepsUpdateManyWithoutUserNestedInput
     food?: CaloriesUpdateManyWithoutUserNestedInput
@@ -16107,6 +16129,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16116,7 +16139,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUncheckedUpdateManyWithoutUserNestedInput
     steps?: StepsUncheckedUpdateManyWithoutUserNestedInput
     food?: CaloriesUncheckedUpdateManyWithoutUserNestedInput
@@ -16194,6 +16216,7 @@ export namespace Prisma {
   export type UserCreateWithoutWaterInput = {
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16203,7 +16226,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepCreateNestedManyWithoutUserInput
     steps?: StepsCreateNestedManyWithoutUserInput
     food?: CaloriesCreateNestedManyWithoutUserInput
@@ -16217,6 +16239,7 @@ export namespace Prisma {
     id?: number
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16226,7 +16249,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepUncheckedCreateNestedManyWithoutUserInput
     steps?: StepsUncheckedCreateNestedManyWithoutUserInput
     food?: CaloriesUncheckedCreateNestedManyWithoutUserInput
@@ -16255,6 +16277,7 @@ export namespace Prisma {
   export type UserUpdateWithoutWaterInput = {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16264,7 +16287,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUpdateManyWithoutUserNestedInput
     steps?: StepsUpdateManyWithoutUserNestedInput
     food?: CaloriesUpdateManyWithoutUserNestedInput
@@ -16278,6 +16300,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16287,7 +16310,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUncheckedUpdateManyWithoutUserNestedInput
     steps?: StepsUncheckedUpdateManyWithoutUserNestedInput
     food?: CaloriesUncheckedUpdateManyWithoutUserNestedInput
@@ -16300,6 +16322,7 @@ export namespace Prisma {
   export type UserCreateWithoutMeditationInput = {
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16309,7 +16332,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepCreateNestedManyWithoutUserInput
     steps?: StepsCreateNestedManyWithoutUserInput
     food?: CaloriesCreateNestedManyWithoutUserInput
@@ -16323,6 +16345,7 @@ export namespace Prisma {
     id?: number
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16332,7 +16355,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepUncheckedCreateNestedManyWithoutUserInput
     steps?: StepsUncheckedCreateNestedManyWithoutUserInput
     food?: CaloriesUncheckedCreateNestedManyWithoutUserInput
@@ -16361,6 +16383,7 @@ export namespace Prisma {
   export type UserUpdateWithoutMeditationInput = {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16370,7 +16393,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUpdateManyWithoutUserNestedInput
     steps?: StepsUpdateManyWithoutUserNestedInput
     food?: CaloriesUpdateManyWithoutUserNestedInput
@@ -16384,6 +16406,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16393,7 +16416,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUncheckedUpdateManyWithoutUserNestedInput
     steps?: StepsUncheckedUpdateManyWithoutUserNestedInput
     food?: CaloriesUncheckedUpdateManyWithoutUserNestedInput
@@ -16406,6 +16428,7 @@ export namespace Prisma {
   export type UserCreateWithoutMoodInput = {
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16415,7 +16438,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepCreateNestedManyWithoutUserInput
     steps?: StepsCreateNestedManyWithoutUserInput
     food?: CaloriesCreateNestedManyWithoutUserInput
@@ -16429,6 +16451,7 @@ export namespace Prisma {
     id?: number
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16438,7 +16461,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepUncheckedCreateNestedManyWithoutUserInput
     steps?: StepsUncheckedCreateNestedManyWithoutUserInput
     food?: CaloriesUncheckedCreateNestedManyWithoutUserInput
@@ -16467,6 +16489,7 @@ export namespace Prisma {
   export type UserUpdateWithoutMoodInput = {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16476,7 +16499,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUpdateManyWithoutUserNestedInput
     steps?: StepsUpdateManyWithoutUserNestedInput
     food?: CaloriesUpdateManyWithoutUserNestedInput
@@ -16490,6 +16512,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16499,7 +16522,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUncheckedUpdateManyWithoutUserNestedInput
     steps?: StepsUncheckedUpdateManyWithoutUserNestedInput
     food?: CaloriesUncheckedUpdateManyWithoutUserNestedInput
@@ -16512,6 +16534,7 @@ export namespace Prisma {
   export type UserCreateWithoutReportInput = {
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16521,7 +16544,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepCreateNestedManyWithoutUserInput
     steps?: StepsCreateNestedManyWithoutUserInput
     food?: CaloriesCreateNestedManyWithoutUserInput
@@ -16535,6 +16557,7 @@ export namespace Prisma {
     id?: number
     username: string
     email: string
+    googleId?: string | null
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -16544,7 +16567,6 @@ export namespace Prisma {
     gender?: $Enums.Gender | null
     age?: number | null
     activeness?: $Enums.Activeness | null
-    category?: $Enums.Category | null
     sleep?: SleepUncheckedCreateNestedManyWithoutUserInput
     steps?: StepsUncheckedCreateNestedManyWithoutUserInput
     food?: CaloriesUncheckedCreateNestedManyWithoutUserInput
@@ -16573,6 +16595,7 @@ export namespace Prisma {
   export type UserUpdateWithoutReportInput = {
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16582,7 +16605,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUpdateManyWithoutUserNestedInput
     steps?: StepsUpdateManyWithoutUserNestedInput
     food?: CaloriesUpdateManyWithoutUserNestedInput
@@ -16596,6 +16618,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     username?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16605,7 +16628,6 @@ export namespace Prisma {
     gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
     age?: NullableIntFieldUpdateOperationsInput | number | null
     activeness?: NullableEnumActivenessFieldUpdateOperationsInput | $Enums.Activeness | null
-    category?: NullableEnumCategoryFieldUpdateOperationsInput | $Enums.Category | null
     sleep?: SleepUncheckedUpdateManyWithoutUserNestedInput
     steps?: StepsUncheckedUpdateManyWithoutUserNestedInput
     food?: CaloriesUncheckedUpdateManyWithoutUserNestedInput
@@ -16674,6 +16696,7 @@ export namespace Prisma {
     meditationActual: number
     meditationTarget: number
     mood: $Enums.Todaymood
+    category?: number | null
   }
 
   export type FoodConsumedCreateManyUserInput = {
@@ -16827,6 +16850,7 @@ export namespace Prisma {
     meditationActual?: IntFieldUpdateOperationsInput | number
     meditationTarget?: IntFieldUpdateOperationsInput | number
     mood?: EnumTodaymoodFieldUpdateOperationsInput | $Enums.Todaymood
+    category?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type ReportUncheckedUpdateWithoutUserInput = {
@@ -16843,6 +16867,7 @@ export namespace Prisma {
     meditationActual?: IntFieldUpdateOperationsInput | number
     meditationTarget?: IntFieldUpdateOperationsInput | number
     mood?: EnumTodaymoodFieldUpdateOperationsInput | $Enums.Todaymood
+    category?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type ReportUncheckedUpdateManyWithoutUserInput = {
@@ -16859,6 +16884,7 @@ export namespace Prisma {
     meditationActual?: IntFieldUpdateOperationsInput | number
     meditationTarget?: IntFieldUpdateOperationsInput | number
     mood?: EnumTodaymoodFieldUpdateOperationsInput | $Enums.Todaymood
+    category?: NullableFloatFieldUpdateOperationsInput | number | null
   }
 
   export type FoodConsumedUpdateWithoutUserInput = {
