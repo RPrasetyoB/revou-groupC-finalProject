@@ -22,7 +22,6 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
     try {
         const { username, password } = req.body;
         const result = yield (0, userService_1.loginUser)({ username, password });
-        console.log('user', result.data.username);
         if (result.success) {
             const token = jsonwebtoken_1.default.sign({ id: result.data.id, username: result.data.username }, jwt_1.JWT_Sign);
             return res.status(200).json({

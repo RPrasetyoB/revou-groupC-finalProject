@@ -7,15 +7,17 @@ import errorHandler from './middlewares/errorHandler';
 import mainRoutes from './routes/mainRoutes';
 import routes from './routes/index'
 import corsMiddleware from './middlewares/corsMiddleware';
+import cors from 'cors';
 
 const app = express();
 const server_port = process.env.SERVER_PORT || 3000;
 
 db()
 app.use(express.json());
+app.use(cors())
 middleWares(app)
 app.use(mainRoutes)
-corsMiddleware(app)
+// corsMiddleware(app)
 app.use(routes);
 app.use(errorHandler);
 
