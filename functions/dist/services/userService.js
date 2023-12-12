@@ -49,7 +49,6 @@ const loginUser = ({ username, password }) => __awaiter(void 0, void 0, void 0, 
             return {
                 success: true,
                 message: "Login successfully",
-                status: 200,
                 data: {
                     id: user.id,
                     username: user.username,

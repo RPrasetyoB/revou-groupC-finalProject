@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.editFood = exports.getFood = exports.foodConsumed = void 0;
+exports.deleteFood = exports.editFood = exports.getFood = exports.foodConsumed = void 0;
 const errorCatch_1 = __importDefault(require("../utils/errorCatch"));
 const db_connection_1 = require("../config/db/db.connection");
 const date_fns_1 = require("date-fns");
@@ -23,17 +23,6 @@ const endOfToday = (0, date_fns_1.endOfDay)(today);
 //----- create foodConsumed ------
 const foodConsumed = (userId, input) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield db_connection_1.prisma.$connect;
-        const user = yield db_connection_1.prisma.user.findUnique({
-            where: { id: userId },
-        });
-        if (!user) {
-            throw new errorCatch_1.default({
-                success: false,
-                message: "Unauthorized! please login",
-                status: 400,
-            });
-        }
         const foodNames = "foodNames" in input ? input.foodNames : [input.foodName];
         const filteredFoodNames = foodNames.filter(Boolean);
         const foodListEntries = yield db_connection_1.prisma.foodList.findMany({
@@ -42,9 +31,9 @@ const foodConsumed = (userId, input) => __awaiter(void 0, void 0, void 0, functi
         });
         if (foodListEntries.length !== filteredFoodNames.length) {
             throw new errorCatch_1.default({
+                status: 404,
                 success: false,
                 message: "Some food items not found in the FoodList",
-                status: 404,
             });
         }
         const uniqueId = (0, uuid_1.v4)();
@@ -85,7 +74,6 @@ exports.foodConsumed = foodConsumed;
 //----- get food consumed -----
 const getFood = (userId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield db_connection_1.prisma.$connect;
         const foodConsumed = yield db_connection_1.prisma.foodConsumed.findMany({
             where: {
                 userId: userId,
@@ -116,7 +104,6 @@ exports.getFood = getFood;
 //----- update food consumed -----
 const editFood = (userId, input, uniqueId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield db_connection_1.prisma.$connect();
         const getFood = yield db_connection_1.prisma.foodConsumed.findMany({
             where: {
                 userId: userId,
@@ -174,3 +161,43 @@ const editFood = (userId, input, uniqueId) => __awaiter(void 0, void 0, void 0, 
     }
 });
 exports.editFood = editFood;
+//----- delete food consumed ------
+const deleteFood = (userId, uniqueId) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const getFood = yield db_connection_1.prisma.foodConsumed.findMany({
+            where: {
+                userId: userId,
+                uniqueId: uniqueId,
+            },
+        });
+        if (!getFood || getFood.length === 0) {
+            throw new errorCatch_1.default({
+                success: false,
+                message: "Food consumed not found",
+                status: 400,
+            });
+        }
+        const delFood = yield db_connection_1.prisma.foodConsumed.deleteMany({
+            where: {
+                userId: userId,
+                uniqueId: uniqueId
+            }
+        });
+        return {
+            success: true,
+            message: "Successfully updated consumed food",
+            data: getFood,
+        };
+    }
+    catch (error) {
+        throw new errorCatch_1.default({
+            success: false,
+            message: error.message,
+            status: 500,
+        });
+    }
+    finally {
+        yield db_connection_1.prisma.$disconnect();
+    }
+});
+exports.deleteFood = deleteFood;
