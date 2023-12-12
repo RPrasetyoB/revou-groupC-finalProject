@@ -111,6 +111,7 @@ exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   username: 'username',
   email: 'email',
+  googleId: 'googleId',
   password: 'password',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -119,8 +120,7 @@ exports.Prisma.UserScalarFieldEnum = {
   height: 'height',
   gender: 'gender',
   age: 'age',
-  activeness: 'activeness',
-  category: 'category'
+  activeness: 'activeness'
 };
 
 exports.Prisma.SleepScalarFieldEnum = {
@@ -204,7 +204,8 @@ exports.Prisma.ReportScalarFieldEnum = {
   waterTarget: 'waterTarget',
   meditationActual: 'meditationActual',
   meditationTarget: 'meditationTarget',
-  mood: 'mood'
+  mood: 'mood',
+  category: 'category'
 };
 
 exports.Prisma.SortOrder = {
@@ -230,12 +231,6 @@ exports.Activeness = exports.$Enums.Activeness = {
   light: 'light',
   moderate: 'moderate',
   active: 'active'
-};
-
-exports.Category = exports.$Enums.Category = {
-  skinny: 'skinny',
-  normal: 'normal',
-  over: 'over'
 };
 
 exports.Todaymood = exports.$Enums.Todaymood = {

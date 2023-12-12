@@ -103,10 +103,10 @@ const caloriesCalculation = (userId) => __awaiter(void 0, void 0, void 0, functi
             }
         };
         const amr = getAmr();
-        const bmi = (user === null || user === void 0 ? void 0 : user.weight) / ((user === null || user === void 0 ? void 0 : user.height) / 100);
+        const bmi = (user === null || user === void 0 ? void 0 : user.weight) / (((user === null || user === void 0 ? void 0 : user.height) * 0.01) ** 2);
         const getTarget = () => {
-            const skinny = amr - 300;
-            const over = amr + 300;
+            const skinny = amr + 300;
+            const over = amr - 300;
             if (bmi <= 18.5) {
                 return skinny;
             }
@@ -130,7 +130,6 @@ const caloriesCalculation = (userId) => __awaiter(void 0, void 0, void 0, functi
                 }
             },
         });
-        console.log('consumed', foodConsumed);
         let totalActualCalories = 0;
         if (foodConsumed.length > 0) {
             totalActualCalories = foodConsumed.reduce((total, item) => { var _a; return total + ((_a = item.calories) !== null && _a !== void 0 ? _a : 0); }, 0);

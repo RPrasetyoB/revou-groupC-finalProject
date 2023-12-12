@@ -57,14 +57,13 @@ const loginUser = async ({ username, password }: LoginInput) => {
       });
     }
 
-    const isPasswordCorrect = await bcryptjs.compare(password, user.password);
+    const isPasswordCorrect = await bcryptjs.compare(password, user.password!);
 
     if (isPasswordCorrect) {
       await failedLogins.del(username);
       return {
         success: true,
         message: "Login successfully",
-        status: 200,
         data: {
           id: user.id,
           username: user.username,

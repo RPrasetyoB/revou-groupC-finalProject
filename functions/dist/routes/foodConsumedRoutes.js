@@ -9,4 +9,5 @@ const foodConsumedRoutes = express_1.default.Router();
 foodConsumedRoutes.post('/consume', foodConsumedController_1.createDailyFoodConsumed);
 foodConsumedRoutes.get('/consume', foodConsumedController_1.getDailyFoodConsumed);
 foodConsumedRoutes.put('/consume/:uniqueId', foodConsumedController_1.updateDailyFoodConsumed);
+foodConsumedRoutes.delete('/consume/:uniqueId', foodConsumedController_1.deleteDailyFoodConsumed);
 exports.default = foodConsumedRoutes;

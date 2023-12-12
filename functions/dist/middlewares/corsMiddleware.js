@@ -7,7 +7,8 @@ const cors_1 = __importDefault(require("cors"));
 const origin = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://milestone3-rpb.web.app"
+    "https://helena-development.netlify.app",
+    "https://helena-health-tracker.web.app"
 ];
 const partnerOrigin = [
     "https://week15-rpb-y.netlify.app"
