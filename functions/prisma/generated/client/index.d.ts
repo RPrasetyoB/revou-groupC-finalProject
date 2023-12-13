@@ -1806,6 +1806,8 @@ export namespace Prisma {
     email: string | null
     googleId: string | null
     password: string | null
+    isEmailVerified: boolean | null
+    verificationToken: string | null
     createdAt: Date | null
     updatedAt: Date | null
     nickname: string | null
@@ -1822,6 +1824,8 @@ export namespace Prisma {
     email: string | null
     googleId: string | null
     password: string | null
+    isEmailVerified: boolean | null
+    verificationToken: string | null
     createdAt: Date | null
     updatedAt: Date | null
     nickname: string | null
@@ -1838,6 +1842,8 @@ export namespace Prisma {
     email: number
     googleId: number
     password: number
+    isEmailVerified: number
+    verificationToken: number
     createdAt: number
     updatedAt: number
     nickname: number
@@ -1870,6 +1876,8 @@ export namespace Prisma {
     email?: true
     googleId?: true
     password?: true
+    isEmailVerified?: true
+    verificationToken?: true
     createdAt?: true
     updatedAt?: true
     nickname?: true
@@ -1886,6 +1894,8 @@ export namespace Prisma {
     email?: true
     googleId?: true
     password?: true
+    isEmailVerified?: true
+    verificationToken?: true
     createdAt?: true
     updatedAt?: true
     nickname?: true
@@ -1902,6 +1912,8 @@ export namespace Prisma {
     email?: true
     googleId?: true
     password?: true
+    isEmailVerified?: true
+    verificationToken?: true
     createdAt?: true
     updatedAt?: true
     nickname?: true
@@ -2005,6 +2017,8 @@ export namespace Prisma {
     email: string
     googleId: string | null
     password: string | null
+    isEmailVerified: boolean | null
+    verificationToken: string | null
     createdAt: Date
     updatedAt: Date
     nickname: string | null
@@ -2040,6 +2054,8 @@ export namespace Prisma {
     email?: boolean
     googleId?: boolean
     password?: boolean
+    isEmailVerified?: boolean
+    verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     nickname?: boolean
@@ -2065,6 +2081,8 @@ export namespace Prisma {
     email?: boolean
     googleId?: boolean
     password?: boolean
+    isEmailVerified?: boolean
+    verificationToken?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     nickname?: boolean
@@ -2106,6 +2124,8 @@ export namespace Prisma {
       email: string
       googleId: string | null
       password: string | null
+      isEmailVerified: boolean | null
+      verificationToken: string | null
       createdAt: Date
       updatedAt: Date
       nickname: string | null
@@ -2528,6 +2548,8 @@ export namespace Prisma {
     readonly email: FieldRef<"User", 'String'>
     readonly googleId: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
+    readonly isEmailVerified: FieldRef<"User", 'Boolean'>
+    readonly verificationToken: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly nickname: FieldRef<"User", 'String'>
@@ -11986,6 +12008,8 @@ export namespace Prisma {
     email: 'email',
     googleId: 'googleId',
     password: 'password',
+    isEmailVerified: 'isEmailVerified',
+    verificationToken: 'verificationToken',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     nickname: 'nickname',
@@ -12169,6 +12193,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -12250,6 +12281,8 @@ export namespace Prisma {
     email?: StringFilter<"User"> | string
     googleId?: StringNullableFilter<"User"> | string | null
     password?: StringNullableFilter<"User"> | string | null
+    isEmailVerified?: BoolNullableFilter<"User"> | boolean | null
+    verificationToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     nickname?: StringNullableFilter<"User"> | string | null
@@ -12274,6 +12307,8 @@ export namespace Prisma {
     email?: SortOrder
     googleId?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
+    isEmailVerified?: SortOrderInput | SortOrder
+    verificationToken?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     nickname?: SortOrderInput | SortOrder
@@ -12301,6 +12336,8 @@ export namespace Prisma {
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringNullableFilter<"User"> | string | null
+    isEmailVerified?: BoolNullableFilter<"User"> | boolean | null
+    verificationToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     nickname?: StringNullableFilter<"User"> | string | null
@@ -12325,6 +12362,8 @@ export namespace Prisma {
     email?: SortOrder
     googleId?: SortOrderInput | SortOrder
     password?: SortOrderInput | SortOrder
+    isEmailVerified?: SortOrderInput | SortOrder
+    verificationToken?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     nickname?: SortOrderInput | SortOrder
@@ -12349,6 +12388,8 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"User"> | string
     googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
+    isEmailVerified?: BoolNullableWithAggregatesFilter<"User"> | boolean | null
+    verificationToken?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     nickname?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -12945,6 +12986,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -12969,6 +13012,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -12992,6 +13037,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13016,6 +13063,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13040,6 +13089,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -13055,6 +13106,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13071,6 +13124,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13685,6 +13740,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -13812,6 +13872,8 @@ export namespace Prisma {
     email?: SortOrder
     googleId?: SortOrder
     password?: SortOrder
+    isEmailVerified?: SortOrder
+    verificationToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     nickname?: SortOrder
@@ -13835,6 +13897,8 @@ export namespace Prisma {
     email?: SortOrder
     googleId?: SortOrder
     password?: SortOrder
+    isEmailVerified?: SortOrder
+    verificationToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     nickname?: SortOrder
@@ -13851,6 +13915,8 @@ export namespace Prisma {
     email?: SortOrder
     googleId?: SortOrder
     password?: SortOrder
+    isEmailVerified?: SortOrder
+    verificationToken?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     nickname?: SortOrder
@@ -13918,6 +13984,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -14569,6 +14643,10 @@ export namespace Prisma {
     set?: string | null
   }
 
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -15056,6 +15134,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -15151,6 +15234,14 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -15713,6 +15804,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -15736,6 +15829,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -15774,6 +15869,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15797,6 +15894,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15819,6 +15918,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -15842,6 +15943,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -15880,6 +15983,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15903,6 +16008,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15925,6 +16032,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -15948,6 +16057,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -15986,6 +16097,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16009,6 +16122,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16031,6 +16146,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -16054,6 +16171,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -16108,6 +16227,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16131,6 +16252,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16218,6 +16341,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -16241,6 +16366,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -16279,6 +16406,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16302,6 +16431,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16324,6 +16455,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -16347,6 +16480,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -16385,6 +16520,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16408,6 +16545,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16430,6 +16569,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -16453,6 +16594,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -16491,6 +16634,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16514,6 +16659,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16536,6 +16683,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -16559,6 +16708,8 @@ export namespace Prisma {
     email: string
     googleId?: string | null
     password?: string | null
+    isEmailVerified?: boolean | null
+    verificationToken?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     nickname?: string | null
@@ -16597,6 +16748,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16620,6 +16773,8 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
     password?: NullableStringFieldUpdateOperationsInput | string | null
+    isEmailVerified?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    verificationToken?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     nickname?: NullableStringFieldUpdateOperationsInput | string | null

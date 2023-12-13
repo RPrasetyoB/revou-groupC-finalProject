@@ -12,27 +12,29 @@ datasource db {
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
-  username      String    @unique
-  email         String    @unique
-  googleId      String?   @unique
-  password      String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  nickname      String?
-  weight        Int?
-  height        Int?
-  gender        Gender?
-  age           Int?
-  activeness    Activeness?  
-  sleep         Sleep[]
-  steps         Steps[]
-  food          Calories[]
-  water         Water[]
-  meditation    Meditation[]
-  mood          Mood[]
-  report        Report[]
-  foodConsumed  FoodConsumed[]
+  id                Int       @id @default(autoincrement())
+  username          String    @unique
+  email             String    @unique
+  googleId          String?   @unique
+  password          String?
+  isEmailVerified   Boolean? @default(false)
+  verificationToken String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  nickname          String?
+  weight            Int?
+  height            Int?
+  gender            Gender?
+  age               Int?
+  activeness        Activeness?  
+  sleep             Sleep[]
+  steps             Steps[]
+  food              Calories[]
+  water             Water[]
+  meditation        Meditation[]
+  mood              Mood[]
+  report            Report[]
+  foodConsumed      FoodConsumed[]
 }
 
 model Sleep {

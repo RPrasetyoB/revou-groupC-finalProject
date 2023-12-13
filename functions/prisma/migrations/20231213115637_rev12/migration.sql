@@ -69,7 +69,9 @@ ADD COLUMN     "stepsActual" INTEGER NOT NULL;
 -- AlterTable
 ALTER TABLE "User" DROP COLUMN "fullName",
 ADD COLUMN     "googleId" TEXT,
+ADD COLUMN     "isEmailVerified" BOOLEAN DEFAULT false,
 ADD COLUMN     "nickname" TEXT,
+ADD COLUMN     "verificationToken" TEXT,
 ALTER COLUMN "password" DROP NOT NULL;
 
 -- AlterTable
