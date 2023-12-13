@@ -12332,12 +12332,12 @@ export namespace Prisma {
     username?: string
     email?: string
     googleId?: string
+    verificationToken?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringNullableFilter<"User"> | string | null
     isEmailVerified?: BoolNullableFilter<"User"> | boolean | null
-    verificationToken?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     nickname?: StringNullableFilter<"User"> | string | null
@@ -12354,7 +12354,7 @@ export namespace Prisma {
     mood?: MoodListRelationFilter
     report?: ReportListRelationFilter
     foodConsumed?: FoodConsumedListRelationFilter
-  }, "id" | "username" | "email" | "googleId">
+  }, "id" | "username" | "email" | "googleId" | "verificationToken">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder

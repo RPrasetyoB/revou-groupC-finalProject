@@ -1,4 +1,3 @@
-// Import dotenv to use environment variables
 import dotenv from 'dotenv';
 dotenv.config();
 import passport from 'passport';
