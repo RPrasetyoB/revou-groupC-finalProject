@@ -15,6 +15,7 @@ interface RegisterInput {
   username: string;
   email: string;
   password: string;
+  verificationToken: string;
 }
 interface UpdateInput {
   nickname: string;
@@ -91,7 +92,7 @@ const loginUser = async ({ username, password }: LoginInput) => {
 
 
 //------ register ------
-const registerUser = async ({ username, email, password }: RegisterInput) => {
+const registerUser = async ({ username, email, password, verificationToken }: RegisterInput) => {
   if (!username) {
     throw new ErrorCatch({
       success: false,
@@ -141,7 +142,7 @@ const registerUser = async ({ username, email, password }: RegisterInput) => {
   try {
     const hashedPass = await bcryptjs.hash(password, 10);
     const newUser = await prisma.user.create({
-      data: { username, email, password: hashedPass }
+      data: { username, email, password: hashedPass, verificationToken }
     });
     return {
       success: true,
@@ -229,6 +230,8 @@ const updateUser = async (username: string, { nickname, weight, height, gender, 
   };
 
 
+
+
 //------ password reset request ------
 // const sendEmail = (email: string, key: string) => {
 //   console.log(`Subject: Password reset request`);
@@ -300,4 +303,4 @@ const updateUser = async (username: string, { nickname, weight, height, gender, 
 // };
 
 
-export { loginUser, registerUser, updateUser,getUsers };
+export { loginUser, registerUser, updateUser, getUsers };

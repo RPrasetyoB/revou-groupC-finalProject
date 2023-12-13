@@ -1,8 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken'
 import { JWT_Sign } from '../config/auth/jwt';
+import { v4 } from "uuid";
 import { getToken, loggedUser } from '../utils/getToken';
 import { getUsers, loginUser, registerUser, updateUser } from '../services/userService'
+import { sendVerificationEmail } from '../services/emailService';
+import { verifyEmail } from '../services/verifyService';
 
 //------ Login user ------
 const login = async (req: Request, res: Response, next: NextFunction) => {
@@ -27,13 +30,14 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 const regUser = async (req : Request, res: Response, next: NextFunction) => {
   try {
   const { username, email, password } = req.body;
-  const result = await registerUser({ username, email, password})
-
-    if (result.success) {
-      res.status(201).json({
-        success: true,
-        message: 'Registration success',
-      })
+  const verificationToken = v4()
+  const result = await registerUser({ username, email, password, verificationToken})
+  if (result.success) {
+    res.status(201).json({
+      success: true,
+      message: 'User registered successfully. Please check your email for verification.',
+    })
+    await sendVerificationEmail(email, verificationToken);
     }
   } catch (error) {
     next(error);
@@ -60,6 +64,22 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
         next(error)
     }
 }
+
+
+//------ Verify user email -------
+const emailVerification = async (req: Request, res: Response, next: NextFunction) => {
+  const verificationToken = req.query.token as string;
+  try {
+    const result = await verifyEmail(verificationToken);
+    if (result.success) {
+      res.redirect('http://localhost:5173/verify');
+    } else {
+      res.redirect('http://localhost:5173/failed-veriy')
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 
 
 // //------ Password reset -------
@@ -149,4 +169,4 @@ const getAllUsers = async (req: Request, res: Response) => {
 };
 
 
-export { getAllUsers, regUser, login, logoutUser,editUser }
+export { getAllUsers, regUser, login, emailVerification, editUser }
