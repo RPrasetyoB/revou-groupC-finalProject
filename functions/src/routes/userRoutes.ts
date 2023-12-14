@@ -1,10 +1,11 @@
 import express from 'express'
-import { editUser, getAllUsers } from '../controllers/userController'
-import authorization from '../middlewares/authorization'
+import { editUser, getAllUsers, userProfile } from '../controllers/userController'
+import authentication from '../middlewares/authentication'
 
 const userRoutes = express.Router()
 
 userRoutes.get('/users', getAllUsers)
-userRoutes.put('/profile', editUser)
+userRoutes.put('/profile', authentication, editUser)
+userRoutes.get('/profile', authentication, userProfile)
 
 export default userRoutes

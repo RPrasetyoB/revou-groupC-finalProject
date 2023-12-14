@@ -58,6 +58,14 @@ const loginUser = async ({ username, password }: LoginInput) => {
       });
     }
 
+    if (user.verificationToken !== null) {
+      throw new ErrorCatch({
+        success: false,
+        message: "Email not verified yet, please verify your email",
+        status: 403,
+      });
+    }
+
     const isPasswordCorrect = await bcryptjs.compare(password, user.password!);
 
     if (isPasswordCorrect) {
@@ -147,6 +155,7 @@ const registerUser = async ({ username, email, password, verificationToken }: Re
     return {
       success: true,
       data: newUser,
+      message: 'User registered successfully. Please check your email for verification.'
     };
   } catch (error: any) {
     console.error(error);
@@ -184,7 +193,31 @@ const getUsers = async () => {
 };
 
 
-//------ update password -------
+//----- get current user detail ------
+const getUser = async (userId: number) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {id: userId}});
+    return {
+      success: true,
+      message: "User detail retrieved successfully",
+      status: 200,
+      data: user,
+    };
+  } catch (error: any) {
+    console.error(error);
+    throw new ErrorCatch({
+      success: false,
+      message: "Error retrieving users",
+      status: 500,
+    });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+
+//------ update user data -------
 const updateUser = async (username: string, { nickname, weight, height, gender, age, activeness, category }: UpdateInput) => {
     try {
       const existingUser = await prisma.user.findUnique({
@@ -230,6 +263,37 @@ const updateUser = async (username: string, { nickname, weight, height, gender, 
   };
 
 
+//----- verify email -----
+const verifyEmail = async (verificationToken: string) => {
+  try {
+    const user = await prisma.user.findFirst({ where: { verificationToken: verificationToken } });
+    if (!user) {
+      throw new ErrorCatch({
+        success: false,
+        message: 'Invalid verification token or verification token expired.',
+        status: 403
+      });
+    }
+    await prisma.user.update({
+        where: { id: user.id },
+        data: { isEmailVerified: true, verificationToken: null },
+      });
+      console.log('user', user )
+    return {
+      success: true,
+      message: 'Email verified successfully.',
+    };
+  } catch (error: any) {
+    console.error(error);
+    throw new ErrorCatch({
+      success: false,
+      message: error.message,
+      status: error.status,
+    });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
 
 
 //------ password reset request ------
@@ -303,4 +367,4 @@ const updateUser = async (username: string, { nickname, weight, height, gender, 
 // };
 
 
-export { loginUser, registerUser, updateUser, getUsers };
+export { loginUser, registerUser, updateUser, getUser, getUsers, verifyEmail };

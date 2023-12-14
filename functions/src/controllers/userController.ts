@@ -3,9 +3,14 @@ import jwt from 'jsonwebtoken'
 import { JWT_Sign } from '../config/auth/jwt';
 import { v4 } from "uuid";
 import { getToken, loggedUser } from '../utils/getToken';
-import { getUsers, loginUser, registerUser, updateUser } from '../services/userService'
+import { getUser, getUsers, loginUser, registerUser, updateUser, verifyEmail } from '../services/userService'
 import { sendVerificationEmail } from '../services/emailService';
-import { verifyEmail } from '../services/verifyService';
+import { Session, SessionData } from 'express-session';
+import { prisma } from '../config/db/db.connection';
+
+interface CustomSession extends Session {
+  email?: string;
+}
 
 //------ Login user ------
 const login = async (req: Request, res: Response, next: NextFunction) => {
@@ -27,18 +32,55 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 
 //------ Create user ------
-const regUser = async (req : Request, res: Response, next: NextFunction) => {
+const regUser = async (req: Request & { session: CustomSession }, res: Response, next: NextFunction) => {
   try {
   const { username, email, password } = req.body;
   const verificationToken = v4()
+  req.session.email = email;
   const result = await registerUser({ username, email, password, verificationToken})
   if (result.success) {
     res.status(201).json({
       success: true,
-      message: 'User registered successfully. Please check your email for verification.',
+      message: result.message,
     })
     await sendVerificationEmail(email, verificationToken);
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+//------ Get user profile -------
+const userProfile = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const decodeToken = getToken(req)
+    const { userId } = loggedUser(decodeToken)
+    const result = await getUser(userId)
+    if (result.success) {
+      res.status(201).json({
+        success: true,
+        message: result.message,
+        data: result.data
+      })
+    }
+  } catch (error) {
+    next(error);
+  }
+}
+
+
+//------ Get all users ------
+const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await getUsers() 
+    if (result.success) {
+      res.status(200).json({
+        success: true,
+        message: result.message,
+        data: result.data,
+      });
+    } 
   } catch (error) {
     next(error);
   }
@@ -76,6 +118,33 @@ const emailVerification = async (req: Request, res: Response, next: NextFunction
     } else {
       res.redirect('http://localhost:5173/failed-veriy')
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+// ----- resend email verification -----
+const resendVerification = async (req: Request & { session: CustomSession }, res: Response, next: NextFunction) => {
+  try {
+    const email = req.session.email;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email not found in session. Please register again.',
+      });
+    }
+    const newVerificationToken = v4();
+    await prisma.user.update({
+      where: { email },
+      data: { verificationToken: newVerificationToken },
+    });
+    await sendVerificationEmail(email, newVerificationToken);
+    res.status(200).json({
+      success: true,
+      message: 'Verification email resent successfully. Please check your email for verification.',
+    });
   } catch (error) {
     next(error);
   }
@@ -128,45 +197,4 @@ const emailVerification = async (req: Request, res: Response, next: NextFunction
 // }
 
 
-//------ log out ------
-const logoutUser = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-      res.clearCookie('accessToken', {
-        httpOnly: true,
-        path: '/'
-      });
-      res.clearCookie('refreshToken', {
-        httpOnly: true,
-        path: '/'
-      });
-      return res.status(200).json({    
-          success: true,
-          message: 'Successfully logout'
-      })
-  } catch (error: any) {
-      next(error)
-  }
-}
-
-//------ Get all users ------
-const getAllUsers = async (req: Request, res: Response) => {
-  try {
-    const result = await getUsers() 
-    if (result.success) {
-      res.status(200).json({
-        success: true,
-        message: 'Success get all users',
-        data: result.data,
-      });
-    } 
-  } catch (error) {
-    console.log(error);
-    return res.status(400).json({
-      success: false,
-      message: "failed to get all users"
-    });
-  }
-};
-
-
-export { getAllUsers, regUser, login, emailVerification, editUser }
+export { userProfile, getAllUsers, regUser, login, emailVerification, resendVerification, editUser }

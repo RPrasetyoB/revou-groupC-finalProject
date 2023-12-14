@@ -6,8 +6,8 @@ import { caloriesCalculation, getCaloriesUser } from "../services/caloriesServic
 const getCalories = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const decodedToken = getToken(req)
-        const { username } = loggedUser(decodedToken)
-        const result = await getCaloriesUser(username)
+        const { userId, username } = loggedUser(decodedToken)
+        const result = await getCaloriesUser(userId, username)
         if(result.success) {
             return res.status(200).json({
                 message: result.message,

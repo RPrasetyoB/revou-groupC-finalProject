@@ -13,12 +13,6 @@ const createDailyFoodConsumed = async ( req: Request, res: Response, next: NextF
   try {
     const decodedToken = getToken(req);
     const { userId } = loggedUser(decodedToken);
-    if(!userId) {
-      return res.status(401).json({
-        success: false,
-        message: "Unauthorized, please login"
-    });
-    }
     const { foodNames }: FoodConsumedRequest = req.body;
     const result = await foodConsumed(userId, { foodNames });
     if (result.success) {
@@ -38,12 +32,6 @@ const getDailyFoodConsumed = async ( req: Request, res: Response, next: NextFunc
   try {
     const decodedToken = getToken(req);
     const { userId } = loggedUser(decodedToken);
-    if(!userId) {
-      return res.status(401).json({
-        success: false,
-        message: "Unauthorized, please login"
-    });
-    }
     const result = await getFood(userId);
     if (result.success) {
       return res.status(200).json({
@@ -61,12 +49,6 @@ const updateDailyFoodConsumed = async ( req: Request, res: Response, next: NextF
   try {
     const decodedToken = getToken(req);
     const { userId } = loggedUser(decodedToken);
-    if(!userId) {
-      return res.status(401).json({
-        success: false,
-        message: "Unauthorized, please login"
-    });
-    }
     const { foodNames }: FoodConsumedRequest = req.body;
     const uniqueId = req.params.uniqueId
     const result = await editFood(userId, {foodNames}, uniqueId);

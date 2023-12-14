@@ -3,7 +3,7 @@ import { prisma } from "../config/db/db.connection";
 import { endOfDay, startOfDay } from "date-fns";
 
 //------ Get food calories ------
-const getCaloriesUser = async (username?: string) => {
+const getCaloriesUser = async (userId: number, username?: string) => {
   try {
     if (!username) {
       throw new ErrorCatch({
@@ -12,6 +12,43 @@ const getCaloriesUser = async (username?: string) => {
         status: 400,
       });
     }
+
+    const today = new Date();
+    const startOfToday = startOfDay(today);
+    const endOfToday = endOfDay(today);
+
+    const foodConsumed = await prisma.foodConsumed.findMany({
+      where: {
+        userId: userId,
+        createdAt:{
+          gte: startOfToday,
+          lte: endOfToday
+        } 
+      },
+    }) as { calories: number }[];
+
+  let totalActualCalories = 0;
+    if (foodConsumed.length > 0) {
+      totalActualCalories = foodConsumed.reduce((total, item) => total + (item.calories ?? 0), 0);
+    }
+
+    const existingCalories = await prisma.calories.findMany({
+      where: {
+        userId: userId,
+        createdAt: {
+          gte: startOfToday,
+          lte: endOfToday
+        } 
+      },
+    }) as { id: number }[];
+
+    await prisma.calories.update({
+      where: { id: existingCalories[0].id },
+      data: {
+        actual: totalActualCalories,
+      },
+    });
+      
     const user = await prisma.user.findUnique({
       where: { username },
       include: {
