@@ -3,14 +3,16 @@ import jwt from 'jsonwebtoken'
 import { JWT_Sign } from '../config/auth/jwt';
 import { v4 } from "uuid";
 import { getToken, loggedUser } from '../utils/getToken';
-import { getUser, getUsers, loginUser, registerUser, updateUser, verifyEmail } from '../services/userService'
-import { sendVerificationEmail } from '../services/emailService';
+import { getUser, getUsers, loginUser, passResetReq, passwordReset, registerUser, updateUser, verifyEmail } from '../services/userService'
+import { sendVerificationEmail, sentResetPassword } from '../services/emailService';
 import { Session, SessionData } from 'express-session';
 import { prisma } from '../config/db/db.connection';
+import NodeCache from 'node-cache';
 
 interface CustomSession extends Session {
   email?: string;
 }
+const cache = new NodeCache({ stdTTL: 20 }) as any;
 
 //------ Login user ------
 const login = async (req: Request, res: Response, next: NextFunction) => {
@@ -116,7 +118,7 @@ const emailVerification = async (req: Request, res: Response, next: NextFunction
     if (result.success) {
       res.redirect('http://localhost:5173/verify');
     } else {
-      res.redirect('http://localhost:5173/failed-veriy')
+      res.redirect('http://localhost:5173/failed-verify')
     }
   } catch (error) {
     next(error);
@@ -152,49 +154,46 @@ const resendVerification = async (req: Request & { session: CustomSession }, res
 
 
 // //------ Password reset -------
-// const resetPassReq = async (req: Request, res: Response, next: NextFunction) => {
-//   try {
-//       const { email } = req.body;
-//       const result = await passResetReq(email);
+const resetPassReq = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { email } = req.body;
+    const result = await passResetReq(email);
+    if (result.success) {
+      return res.status(200).json({
+          success: true,
+          message: result.message,
+          key: result.data
+        });
+    } else {
+      return res.status(404).json({
+          success: false,
+          message: result.message,
+      });
+    }
+  } catch (error) {
+      next(error);
+  }
+}
 
-//       if (result.success) {
-//           return res.status(200).json({
-//               success: true,
-//               message: 'Password reset link sent',
-//               data: result.data,
-//           });
-//       } else {
-//           return res.status(404).json({
-//               success: false,
-//               message: result.message,
-//           });
-//       }
-//   } catch (error) {
-//       next(error);
-//   }
-// }
-
-// const resetPass = async (req: Request, res: Response, next: NextFunction) => {
-//   try {
-//       const  key  = req.query.key as string
-//       const { password } = req.body;
-//       const result = await passwordReset(key, password);
-
-//       if (result.success) {
-//           return res.status(200).json({
-//               success: true,
-//               message: 'Password reset successful',
-//           });
-//       } else {
-//           return res.status(401).json({
-//               success: false,
-//               message: result.message,
-//           });
-//       }
-//   } catch (error) {
-//       next(error);
-//   }
-// }
+const resetPass = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+      const {userId, token, password} = req.body;
+      const result = await passwordReset(userId, token, password);
+      if (result.success) {
+          return res.status(200).json({
+              success: true,
+              message: result.message
+          });
+      } else {
+          return res.status(401).json({
+              success: false,
+              message: result.message,
+          });
+      }
+  } catch (error) {
+      next(error);
+  }
+}
 
 
-export { userProfile, getAllUsers, regUser, login, emailVerification, resendVerification, editUser }
+export { userProfile, getAllUsers, regUser, login, emailVerification, resendVerification, editUser, resetPassReq, resetPass }

@@ -5,6 +5,8 @@ import { v4 } from "uuid";
 import NodeCache from "node-cache";
 import ErrorCatch from "../utils/errorCatch";
 import { prisma } from "../config/db/db.connection";
+import { sentResetPassword } from "./emailService";
+import { JWT_Sign } from "../config/auth/jwt";
 
 interface LoginInput {
   username: string;
@@ -29,7 +31,6 @@ interface UpdateInput {
 
 const failedLogins = new NodeCache({ stdTTL: 20 }) as any;
 const cache = new NodeCache({ stdTTL: 20 }) as any;
-
 
 //------ login ------
 const loginUser = async ({ username, password }: LoginInput) => {
@@ -278,7 +279,6 @@ const verifyEmail = async (verificationToken: string) => {
         where: { id: user.id },
         data: { isEmailVerified: true, verificationToken: null },
       });
-      console.log('user', user )
     return {
       success: true,
       message: 'Email verified successfully.',
@@ -297,74 +297,79 @@ const verifyEmail = async (verificationToken: string) => {
 
 
 //------ password reset request ------
-// const sendEmail = (email: string, key: string) => {
+// const resetRequest = (email: string, key: string) => {
 //   console.log(`Subject: Password reset request`);
 //   console.log(`To: ${email}`);
 //   console.log(`${key}`);
 // };
-// const passResetReq = async (email: string) => {
-//   try {
-//     const user = await userModel.findOne({ email: email });
-//     if (!user) {
-//       throw new ErrorCatch({
-//         success: false,
-//         message: "Email not registered",
-//         status: 404,
-//       });
-//     }
-//     const key = v4();
-//     cache.set(key, email, 25 * 1000);
-//     sendEmail(user.email, key);
-//     const linkReset = `${key}`;
-//     // const linkReset = `https://week-16-rprasetyob-production.up.railway.app/reset?key=${key}`
-//     return {
-//       success: true,
-//       message: "Password reset link sent",
-//       data: linkReset,
-//     };
-//   } catch (error: any) {
-//     throw new ErrorCatch({
-//       success: false,
-//       message: error.message,
-//       status: error.status,
-//     });
-//   }
-// };
+const passResetReq = async (email: string) => {
+  try {
+    const user = await prisma.user.findFirst({
+      where: {email: email} });
+      if (!user) {
+        throw new ErrorCatch({
+          success: false,
+          message: "Email not registered",
+          status: 404,
+        });
+      }
+    const userId = user.id
+    const token = jwt.sign({id : userId}, JWT_Sign, {expiresIn: "20m"})
+    await sentResetPassword(email, token, userId)
+    return {
+      success: true,
+      message: 'Password reset link sent to your email',
+      data: { userId, token }
+    };
+  } catch (error: any) {
+    throw new ErrorCatch({
+      success: false,
+      message: error.message,
+      status: error.status,
+    });
+  }
+};
 
-// const passwordReset = async (key: string, password: string) => {
-//   try {
-//     const email = cache.get(key);
-//     if (!email) {
-//       throw new ErrorCatch({
-//         success: false,
-//         status: 401,
-//         message: "Invalid or expired token",
-//       });
-//     }
-//     const user = await userModel.findOne({ email: email });
-//     if (!user) {
-//       throw new ErrorCatch({
-//         success: false,
-//         message: "Email invalid / not registered",
-//         status: 401,
-//       });
-//     }
-//     const hashedPassword = await bcryptjs.hash(password, 10);
-//     await user.updateOne({ password: hashedPassword });
+const passwordReset = async (userId: number, token: string, password: string) => {
+  try {
+    if (!token) {
+      throw new ErrorCatch({
+        success: false,
+        status: 401,
+        message: "Invalid or expired token",
+      });
+    }
 
-//     cache.del(key);
-//     return {
-//       success: true,
-//       message: "Password reset successful",
-//     };
-//   } catch (error: any) {
-//     throw new ErrorCatch({
-//       success: false,
-//       message: error.message,
-//       status: error.status,
-//     });
-//   }
-// };
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      throw new ErrorCatch({
+        success: false,
+        message: "Email invalid / not registered",
+        status: 401,
+      });
+    }
+
+    const hashedPassword = await bcryptjs.hash(password, 10);
+
+    await prisma.user.update({
+      where: { id: userId },
+      data: { password: hashedPassword },
+    });
+    return {
+      success: true,
+      message: "Password reset successfully",
+    };
+  } catch (error: any) {
+    throw new ErrorCatch({
+      success: false,
+      message: error.message,
+      status: error.status,
+    });
+  }
+};
 
 
-export { loginUser, registerUser, updateUser, getUser, getUsers, verifyEmail };
+export { loginUser, registerUser, updateUser, getUser, getUsers, verifyEmail, passResetReq, passwordReset };

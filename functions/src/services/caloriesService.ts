@@ -171,7 +171,6 @@ const caloriesCalculation = async (userId?: number) => {
     }) as { id: number }[];
 
     if (existingCalories.length > 0) {
-      // Update the existing Calories record
       const updatedCalories = await prisma.calories.update({
         where: { id: existingCalories[0].id },
         data: {
@@ -184,7 +183,6 @@ const caloriesCalculation = async (userId?: number) => {
         data: updatedCalories,
       };
     } else {
-      // Create a new Calories record
       const createFood = await prisma.calories.create({
         data: {
           userId: userId,
