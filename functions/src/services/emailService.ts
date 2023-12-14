@@ -20,16 +20,18 @@ const sendVerificationEmail = async (email: string, verificationToken: string) =
   }, 5000);
 };
 
-const resendVerificationEmail = async (email: string, verificationToken: string) => {
-  setTimeout(async () => {
+const sentResetPassword = async (email: string, token: string, userId : number) => {
+  console.log('Sending reset password email to:', email);
+  try {
     const mailOptions = {
       from: process.env.SERVER_EMAIL,
       to: email,
-      subject: 'Resend Email Verification',
-      html: `<p>Click the following link to verify your email: <a href="${process.env.SERVER_URL}/v1/verify?token=${verificationToken}">Verify Email</a></p>`,
+      subject: 'Reset password',
+      html: `<p>Click the following link to reset password: <a href="http://localhost:5173/request-reset/${token}/${userId}">Reset Password</a></p>`,
     };
     await transporter.sendMail(mailOptions);
-  }, 5000);
+  } catch (error) {
+  }
 };
 
-export { sendVerificationEmail, resendVerificationEmail };
+export { sendVerificationEmail, sentResetPassword };
