@@ -279,7 +279,6 @@ const verifyEmail = async (verificationToken: string) => {
         where: { id: user.id },
         data: { isEmailVerified: true, verificationToken: null },
       });
-      console.log('user', user )
     return {
       success: true,
       message: 'Email verified successfully.',
@@ -333,7 +332,6 @@ const passResetReq = async (email: string) => {
 
 const passwordReset = async (userId: number, token: string, password: string) => {
   try {
-  console.log(' ', token)
     if (!token) {
       throw new ErrorCatch({
         success: false,

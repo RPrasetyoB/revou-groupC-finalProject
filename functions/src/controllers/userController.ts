@@ -178,7 +178,6 @@ const resetPassReq = async (req: Request, res: Response, next: NextFunction) => 
 const resetPass = async (req: Request, res: Response, next: NextFunction) => {
   try {
       const {userId, token, password} = req.body;
-      console.log('Request Body:', req.body); 
       const result = await passwordReset(userId, token, password);
       if (result.success) {
           return res.status(200).json({
