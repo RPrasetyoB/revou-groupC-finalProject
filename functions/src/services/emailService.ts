@@ -21,7 +21,6 @@ const sendVerificationEmail = async (email: string, verificationToken: string) =
 };
 
 const sentResetPassword = async (email: string, token: string, userId : number) => {
-  console.log('Sending reset password email to:', email);
   try {
     const mailOptions = {
       from: process.env.SERVER_EMAIL,
