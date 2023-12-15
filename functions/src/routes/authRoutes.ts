@@ -11,6 +11,6 @@ authRoutes.post('/verify', resendVerification)
 authRoutes.post('/request-reset', resetPassReq)
 authRoutes.post('/reset', resetPass)
 authRoutes.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-authRoutes.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),(req, res) => { res.redirect('http://localhost:5173')});
+authRoutes.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: 'http://localhost:5173/login' }),(req, res) => { res.redirect('http://localhost:5173/home')});
 
 export default authRoutes
