@@ -1,7 +1,6 @@
 // import bcrypt from "bcrypt";
 import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { v4 } from "uuid";
 import NodeCache from "node-cache";
 import ErrorCatch from "../utils/errorCatch";
 import { prisma } from "../config/db/db.connection";
@@ -59,7 +58,7 @@ const loginUser = async ({ username, password }: LoginInput) => {
       });
     }
 
-    if (user.verificationToken !== null) {
+    if (user.googleId == null && user.verificationToken !== null) {
       throw new ErrorCatch({
         success: false,
         message: "Email not verified yet, please verify your email",
@@ -314,7 +313,7 @@ const passResetReq = async (email: string) => {
         });
       }
     const userId = user.id
-    const token = jwt.sign({id : userId}, JWT_Sign, {expiresIn: "20m"})
+    const token = jwt.sign({id : userId}, JWT_Sign, {expiresIn: "10m"})
     await sentResetPassword(email, token, userId)
     return {
       success: true,

@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
-import { JWT_Sign } from "../config/auth/jwt";
 import { getToken, loggedUser } from "../utils/getToken";
 import { foodConsumed, getFood, editFood, deleteFood } from "../services/foodConsumedService";
 
