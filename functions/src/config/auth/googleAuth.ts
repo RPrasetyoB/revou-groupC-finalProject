@@ -13,9 +13,11 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        await googleLogin(profile);
-
-        done(null, { temporaryId: profile.id });
+        const result = await googleLogin(profile);
+        if (result?.success) {
+          const user = {user: result.user, token: result.token}
+          done(null, user);
+        }
       } catch (error: any) {
         console.error('Error during Google authentication:', error);
         done(error as Error, null!);
