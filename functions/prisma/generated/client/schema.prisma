@@ -45,7 +45,7 @@ model Sleep {
   sleepStart    DateTime  @default(now())
   sleepEnd      DateTime
   sleepActual   Int
-  target        Int        
+  target        Int       @default(8)
 }
 
 model Steps {
@@ -54,7 +54,7 @@ model Steps {
   userId        Int?
   createdAt     DateTime  @default(now())
   stepsActual   Int
-  target        Int
+  target        Int       @default(8000)
 }
 
 model Calories{
@@ -77,7 +77,7 @@ model FoodConsumed{
   food          FoodList  @relation(fields: [foodName], references: [foodName])
   foodName      String
   calories      Int
-  uniqueId       String
+  uniqueId      String
 }
 
 model FoodList {
@@ -94,7 +94,7 @@ model Water {
   userId        Int
   createdAt     DateTime  @default(now())
   waterActual   Int
-  target        Int
+  target        Int       @default(8)
 }
 
 model Meditation {
@@ -103,7 +103,7 @@ model Meditation {
   userId            Int
   createdAt         DateTime  @default(now())
   medicationActual  Int
-  target            Int
+  target            Int       @default(15)
 }
 
 model Mood {

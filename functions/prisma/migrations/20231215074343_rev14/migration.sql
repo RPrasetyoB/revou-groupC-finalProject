@@ -46,7 +46,8 @@ ALTER COLUMN "calories" SET DATA TYPE DOUBLE PRECISION;
 
 -- AlterTable
 ALTER TABLE "Meditation" DROP COLUMN "medication_actual",
-ADD COLUMN     "medicationActual" INTEGER NOT NULL;
+ADD COLUMN     "medicationActual" INTEGER NOT NULL,
+ALTER COLUMN "target" SET DEFAULT 15;
 
 -- AlterTable
 ALTER TABLE "Mood" DROP COLUMN "current_mood",
@@ -61,11 +62,13 @@ DROP COLUMN "sleep_end",
 DROP COLUMN "sleep_start",
 ADD COLUMN     "sleepActual" INTEGER NOT NULL,
 ADD COLUMN     "sleepEnd" TIMESTAMP(3) NOT NULL,
-ADD COLUMN     "sleepStart" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ADD COLUMN     "sleepStart" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ALTER COLUMN "target" SET DEFAULT 8;
 
 -- AlterTable
 ALTER TABLE "Steps" DROP COLUMN "steps_actual",
-ADD COLUMN     "stepsActual" INTEGER NOT NULL;
+ADD COLUMN     "stepsActual" INTEGER NOT NULL,
+ALTER COLUMN "target" SET DEFAULT 8000;
 
 -- AlterTable
 ALTER TABLE "User" DROP COLUMN "fullName",
@@ -77,7 +80,8 @@ ALTER COLUMN "password" DROP NOT NULL;
 
 -- AlterTable
 ALTER TABLE "Water" DROP COLUMN "water_actual",
-ADD COLUMN     "waterActual" INTEGER NOT NULL;
+ADD COLUMN     "waterActual" INTEGER NOT NULL,
+ALTER COLUMN "target" SET DEFAULT 8;
 
 -- DropTable
 DROP TABLE "Food";

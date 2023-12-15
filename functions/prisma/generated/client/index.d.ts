@@ -13141,7 +13141,7 @@ export namespace Prisma {
     sleepStart?: Date | string
     sleepEnd: Date | string
     sleepActual: number
-    target: number
+    target?: number
     user?: UserCreateNestedOneWithoutSleepInput
   }
 
@@ -13152,7 +13152,7 @@ export namespace Prisma {
     sleepStart?: Date | string
     sleepEnd: Date | string
     sleepActual: number
-    target: number
+    target?: number
   }
 
   export type SleepUpdateInput = {
@@ -13181,7 +13181,7 @@ export namespace Prisma {
     sleepStart?: Date | string
     sleepEnd: Date | string
     sleepActual: number
-    target: number
+    target?: number
   }
 
   export type SleepUpdateManyMutationInput = {
@@ -13205,7 +13205,7 @@ export namespace Prisma {
   export type StepsCreateInput = {
     createdAt?: Date | string
     stepsActual: number
-    target: number
+    target?: number
     user?: UserCreateNestedOneWithoutStepsInput
   }
 
@@ -13214,7 +13214,7 @@ export namespace Prisma {
     userId?: number | null
     createdAt?: Date | string
     stepsActual: number
-    target: number
+    target?: number
   }
 
   export type StepsUpdateInput = {
@@ -13237,7 +13237,7 @@ export namespace Prisma {
     userId?: number | null
     createdAt?: Date | string
     stepsActual: number
-    target: number
+    target?: number
   }
 
   export type StepsUpdateManyMutationInput = {
@@ -13431,7 +13431,7 @@ export namespace Prisma {
   export type WaterCreateInput = {
     createdAt?: Date | string
     waterActual: number
-    target: number
+    target?: number
     user: UserCreateNestedOneWithoutWaterInput
   }
 
@@ -13440,7 +13440,7 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     waterActual: number
-    target: number
+    target?: number
   }
 
   export type WaterUpdateInput = {
@@ -13463,7 +13463,7 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     waterActual: number
-    target: number
+    target?: number
   }
 
   export type WaterUpdateManyMutationInput = {
@@ -13483,7 +13483,7 @@ export namespace Prisma {
   export type MeditationCreateInput = {
     createdAt?: Date | string
     medicationActual: number
-    target: number
+    target?: number
     user: UserCreateNestedOneWithoutMeditationInput
   }
 
@@ -13492,7 +13492,7 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     medicationActual: number
-    target: number
+    target?: number
   }
 
   export type MeditationUpdateInput = {
@@ -13515,7 +13515,7 @@ export namespace Prisma {
     userId: number
     createdAt?: Date | string
     medicationActual: number
-    target: number
+    target?: number
   }
 
   export type MeditationUpdateManyMutationInput = {
@@ -15359,7 +15359,7 @@ export namespace Prisma {
     sleepStart?: Date | string
     sleepEnd: Date | string
     sleepActual: number
-    target: number
+    target?: number
   }
 
   export type SleepUncheckedCreateWithoutUserInput = {
@@ -15368,7 +15368,7 @@ export namespace Prisma {
     sleepStart?: Date | string
     sleepEnd: Date | string
     sleepActual: number
-    target: number
+    target?: number
   }
 
   export type SleepCreateOrConnectWithoutUserInput = {
@@ -15384,14 +15384,14 @@ export namespace Prisma {
   export type StepsCreateWithoutUserInput = {
     createdAt?: Date | string
     stepsActual: number
-    target: number
+    target?: number
   }
 
   export type StepsUncheckedCreateWithoutUserInput = {
     id?: number
     createdAt?: Date | string
     stepsActual: number
-    target: number
+    target?: number
   }
 
   export type StepsCreateOrConnectWithoutUserInput = {
@@ -15434,14 +15434,14 @@ export namespace Prisma {
   export type WaterCreateWithoutUserInput = {
     createdAt?: Date | string
     waterActual: number
-    target: number
+    target?: number
   }
 
   export type WaterUncheckedCreateWithoutUserInput = {
     id?: number
     createdAt?: Date | string
     waterActual: number
-    target: number
+    target?: number
   }
 
   export type WaterCreateOrConnectWithoutUserInput = {
@@ -15457,14 +15457,14 @@ export namespace Prisma {
   export type MeditationCreateWithoutUserInput = {
     createdAt?: Date | string
     medicationActual: number
-    target: number
+    target?: number
   }
 
   export type MeditationUncheckedCreateWithoutUserInput = {
     id?: number
     createdAt?: Date | string
     medicationActual: number
-    target: number
+    target?: number
   }
 
   export type MeditationCreateOrConnectWithoutUserInput = {
@@ -16798,14 +16798,14 @@ export namespace Prisma {
     sleepStart?: Date | string
     sleepEnd: Date | string
     sleepActual: number
-    target: number
+    target?: number
   }
 
   export type StepsCreateManyUserInput = {
     id?: number
     createdAt?: Date | string
     stepsActual: number
-    target: number
+    target?: number
   }
 
   export type CaloriesCreateManyUserInput = {
@@ -16821,14 +16821,14 @@ export namespace Prisma {
     id?: number
     createdAt?: Date | string
     waterActual: number
-    target: number
+    target?: number
   }
 
   export type MeditationCreateManyUserInput = {
     id?: number
     createdAt?: Date | string
     medicationActual: number
-    target: number
+    target?: number
   }
 
   export type MoodCreateManyUserInput = {
