@@ -2,10 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { getToken, loggedUser } from "../utils/getToken";
 import { foodConsumed, getFood, editFood, deleteFood } from "../services/foodConsumedService";
 
-interface FoodConsumedRequest {
-  foodNames: string[];
-}
-
 //----- create daily food consumed -----
 const createDailyFoodConsumed = async ( req: Request, res: Response, next: NextFunction) => {
   try {

@@ -7,26 +7,6 @@ import { prisma } from "../config/db/db.connection";
 import { sentResetPassword } from "./emailService";
 import { JWT_Sign } from "../config/auth/jwt";
 
-interface LoginInput {
-  username: string;
-  password: string;
-}
-
-interface RegisterInput {
-  username: string;
-  email: string;
-  password: string;
-  verificationToken: string;
-}
-interface UpdateInput {
-  nickname: string;
-  weight: string;
-  height: string;
-  gender: string;
-  age: number;
-  activeness: string;
-  category: string;
-}
 
 const failedLogins = new NodeCache({ stdTTL: 20 }) as any;
 const cache = new NodeCache({ stdTTL: 20 }) as any;

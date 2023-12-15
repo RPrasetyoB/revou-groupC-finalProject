@@ -3,29 +3,7 @@ import { prisma } from "../config/db/db.connection";
 import { endOfDay, startOfDay, subSeconds } from "date-fns";
 import { v4 as uuidv4 } from "uuid";
 
-interface InputFood {
-  foodName: string;
-}
 
-interface MultipleFoodInput {
-  foodNames: string[];
-}
-
-interface FoodListEntry {
-  foodName: string;
-  calories: number;
-}
-
-interface RecordType {
-  id: number;
-}
-
-interface EntryType {
-  foodName: string;
-  calories: number;
-}
-
-type FoodInput = InputFood | MultipleFoodInput;
 
 const today = new Date();
 const startOfToday = startOfDay(today);
@@ -112,6 +90,20 @@ const getFood = async (userId: number) => {
 //----- update food consumed -----
 const editFood = async (userId: number, input: FoodInput, uniqueId : string) => {
   try {
+    const user = await prisma.foodConsumed.findMany({
+      where: {
+        userId: userId,
+      },
+    });
+
+    if (!user) {
+      throw new ErrorCatch({
+        success: false,
+        message: "Unauthorized, please re-login",
+        status: 403,
+      });
+    }
+
     const getFood = await prisma.foodConsumed.findMany({
       where: {
         userId: userId,
@@ -121,8 +113,8 @@ const editFood = async (userId: number, input: FoodInput, uniqueId : string) => 
     if (!getFood || getFood.length === 0) {
       throw new ErrorCatch({
         success: false,
-        message: "Food consumed not found",
-        status: 400,
+        message: "Food consumed not found or Unauthorized to delete",
+        status: 404,
       });
     }
     const foodNames = "foodNames" in input ? input.foodNames : [input.foodName];
@@ -171,6 +163,20 @@ const editFood = async (userId: number, input: FoodInput, uniqueId : string) => 
 //----- delete food consumed ------
 const deleteFood = async (userId: number, uniqueId : string) => {
   try {
+    const user = await prisma.foodConsumed.findMany({
+      where: {
+        userId: userId,
+      },
+    });
+
+    if (!user) {
+      throw new ErrorCatch({
+        success: false,
+        message: "Unauthorized, please re-login",
+        status: 403,
+      });
+    }
+
     const getFood = await prisma.foodConsumed.findMany({
       where: {
         userId: userId,
@@ -180,11 +186,12 @@ const deleteFood = async (userId: number, uniqueId : string) => {
     if (!getFood || getFood.length === 0) {
       throw new ErrorCatch({
         success: false,
-        message: "Food consumed not found",
-        status: 400,
+        message: "Food consumed not found or Unauthorized to delete",
+        status: 404,
       });
     }    
-    const delFood = await prisma.foodConsumed.deleteMany({
+    
+    await prisma.foodConsumed.deleteMany({
       where : {
         userId: userId,
         uniqueId: uniqueId

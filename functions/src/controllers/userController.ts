@@ -5,13 +5,8 @@ import { v4 } from "uuid";
 import { getToken, loggedUser } from '../utils/getToken';
 import { getUser, getUsers, loginUser, passResetReq, passwordReset, registerUser, updateUser, verifyEmail } from '../services/userService'
 import { sendVerificationEmail } from '../services/emailService';
-import { Session } from 'express-session';
 import { prisma } from '../config/db/db.connection';
-import NodeCache from 'node-cache';
 
-interface CustomSession extends Session {
-  email?: string;
-}
 
 //------ Login user ------
 const login = async (req: Request, res: Response, next: NextFunction) => {
