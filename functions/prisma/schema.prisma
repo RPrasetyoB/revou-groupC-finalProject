@@ -45,7 +45,7 @@ model Sleep {
   sleepStart    DateTime  @default(now())
   sleepEnd      DateTime
   sleepActual   Int
-  target        Int       @default(8)
+  target        Int       @default(7)
 }
 
 model Steps {
