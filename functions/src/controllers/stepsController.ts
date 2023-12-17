@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { getToken, loggedUser } from "../utils/getToken";
-import { getTodaySteps, postTodaySteps } from "../services/steps";
+import { getAllSteps, getTodaySteps, postTodaySteps } from "../services/steps";
 
+//------ post daily steps ------
 const createUpdateStepsDaily = async ( req: Request, res: Response, next: NextFunction ) => {
   try {
     const decodedToken = getToken(req);
@@ -20,6 +21,8 @@ const createUpdateStepsDaily = async ( req: Request, res: Response, next: NextFu
   }
 };
 
+
+//------ get daily steps ------
 const getStepsDaily = async ( req: Request, res: Response, next: NextFunction ) => {
   try {
     const decodedToken = getToken(req);
@@ -37,11 +40,13 @@ const getStepsDaily = async ( req: Request, res: Response, next: NextFunction ) 
   }
 };
 
+
+//------ get all steps history ------
 const getAllStepsHistory = async ( req: Request, res: Response, next: NextFunction ) => {
   try {
     const decodedToken = getToken(req);
     const { userId } = loggedUser(decodedToken);
-    const result = await getTodaySteps(userId);
+    const result = await getAllSteps(userId);
     if (result.success) {
       return res.status(200).json({
         success: true,
