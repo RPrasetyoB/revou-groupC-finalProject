@@ -16,7 +16,7 @@
   - A unique constraint covering the columns `[googleId]` on the table `User` will be added. If there are existing duplicate values, this will fail.
   - A unique constraint covering the columns `[verificationToken]` on the table `User` will be added. If there are existing duplicate values, this will fail.
   - Added the required column `foodName` to the `FoodList` table without a default value. This is not possible if the table is not empty.
-  - Added the required column `medicationActual` to the `Meditation` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `meditationActual` to the `Meditation` table without a default value. This is not possible if the table is not empty.
   - Added the required column `currentMood` to the `Mood` table without a default value. This is not possible if the table is not empty.
   - Added the required column `sleepActual` to the `Sleep` table without a default value. This is not possible if the table is not empty.
   - Added the required column `sleepEnd` to the `Sleep` table without a default value. This is not possible if the table is not empty.
@@ -47,7 +47,7 @@ ALTER COLUMN "calories" SET DATA TYPE DOUBLE PRECISION;
 
 -- AlterTable
 ALTER TABLE "Meditation" DROP COLUMN "medication_actual",
-ADD COLUMN     "medicationActual" INTEGER NOT NULL,
+ADD COLUMN     "meditationActual" INTEGER NOT NULL,
 ALTER COLUMN "target" SET DEFAULT 15;
 
 -- AlterTable
