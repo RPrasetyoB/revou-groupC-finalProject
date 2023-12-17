@@ -29,7 +29,7 @@ const getDailyFoodConsumed = async ( req: Request, res: Response, next: NextFunc
     const result = await getFoodConsumed(userId);
     if (result.success) {
       return res.status(200).json({
-        message: "get daily foodCosumed success",
+        message: result.message,
         data: result.data,
       });
     }
@@ -47,7 +47,7 @@ const getAllFoodConsumedHistory = async ( req: Request, res: Response, next: Nex
     const result = await getAllFoodConsumed(userId);
     if (result.success) {
       return res.status(200).json({
-        message: "get daily foodCosumed success",
+        message: result.message,
         data: result.data,
       });
     }

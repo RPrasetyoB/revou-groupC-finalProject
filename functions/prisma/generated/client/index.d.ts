@@ -8984,14 +8984,14 @@ export namespace Prisma {
   export type MeditationAvgAggregateOutputType = {
     id: number | null
     userId: number | null
-    medicationActual: number | null
+    meditationActual: number | null
     target: number | null
   }
 
   export type MeditationSumAggregateOutputType = {
     id: number | null
     userId: number | null
-    medicationActual: number | null
+    meditationActual: number | null
     target: number | null
   }
 
@@ -8999,7 +8999,7 @@ export namespace Prisma {
     id: number | null
     userId: number | null
     createdAt: Date | null
-    medicationActual: number | null
+    meditationActual: number | null
     target: number | null
   }
 
@@ -9007,7 +9007,7 @@ export namespace Prisma {
     id: number | null
     userId: number | null
     createdAt: Date | null
-    medicationActual: number | null
+    meditationActual: number | null
     target: number | null
   }
 
@@ -9015,7 +9015,7 @@ export namespace Prisma {
     id: number
     userId: number
     createdAt: number
-    medicationActual: number
+    meditationActual: number
     target: number
     _all: number
   }
@@ -9024,14 +9024,14 @@ export namespace Prisma {
   export type MeditationAvgAggregateInputType = {
     id?: true
     userId?: true
-    medicationActual?: true
+    meditationActual?: true
     target?: true
   }
 
   export type MeditationSumAggregateInputType = {
     id?: true
     userId?: true
-    medicationActual?: true
+    meditationActual?: true
     target?: true
   }
 
@@ -9039,7 +9039,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     createdAt?: true
-    medicationActual?: true
+    meditationActual?: true
     target?: true
   }
 
@@ -9047,7 +9047,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     createdAt?: true
-    medicationActual?: true
+    meditationActual?: true
     target?: true
   }
 
@@ -9055,7 +9055,7 @@ export namespace Prisma {
     id?: true
     userId?: true
     createdAt?: true
-    medicationActual?: true
+    meditationActual?: true
     target?: true
     _all?: true
   }
@@ -9150,7 +9150,7 @@ export namespace Prisma {
     id: number
     userId: number
     createdAt: Date
-    medicationActual: number
+    meditationActual: number
     target: number
     _count: MeditationCountAggregateOutputType | null
     _avg: MeditationAvgAggregateOutputType | null
@@ -9177,7 +9177,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     createdAt?: boolean
-    medicationActual?: boolean
+    meditationActual?: boolean
     target?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["meditation"]>
@@ -9186,7 +9186,7 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     createdAt?: boolean
-    medicationActual?: boolean
+    meditationActual?: boolean
     target?: boolean
   }
 
@@ -9204,7 +9204,7 @@ export namespace Prisma {
       id: number
       userId: number
       createdAt: Date
-      medicationActual: number
+      meditationActual: number
       target: number
     }, ExtArgs["result"]["meditation"]>
     composites: {}
@@ -9604,7 +9604,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Meditation", 'Int'>
     readonly userId: FieldRef<"Meditation", 'Int'>
     readonly createdAt: FieldRef<"Meditation", 'DateTime'>
-    readonly medicationActual: FieldRef<"Meditation", 'Int'>
+    readonly meditationActual: FieldRef<"Meditation", 'Int'>
     readonly target: FieldRef<"Meditation", 'Int'>
   }
     
@@ -12097,7 +12097,7 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     createdAt: 'createdAt',
-    medicationActual: 'medicationActual',
+    meditationActual: 'meditationActual',
     target: 'target'
   };
 
@@ -12772,7 +12772,7 @@ export namespace Prisma {
     id?: IntFilter<"Meditation"> | number
     userId?: IntFilter<"Meditation"> | number
     createdAt?: DateTimeFilter<"Meditation"> | Date | string
-    medicationActual?: IntFilter<"Meditation"> | number
+    meditationActual?: IntFilter<"Meditation"> | number
     target?: IntFilter<"Meditation"> | number
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
@@ -12781,7 +12781,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
-    medicationActual?: SortOrder
+    meditationActual?: SortOrder
     target?: SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -12793,7 +12793,7 @@ export namespace Prisma {
     NOT?: MeditationWhereInput | MeditationWhereInput[]
     userId?: IntFilter<"Meditation"> | number
     createdAt?: DateTimeFilter<"Meditation"> | Date | string
-    medicationActual?: IntFilter<"Meditation"> | number
+    meditationActual?: IntFilter<"Meditation"> | number
     target?: IntFilter<"Meditation"> | number
     user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id">
@@ -12802,7 +12802,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
-    medicationActual?: SortOrder
+    meditationActual?: SortOrder
     target?: SortOrder
     _count?: MeditationCountOrderByAggregateInput
     _avg?: MeditationAvgOrderByAggregateInput
@@ -12818,7 +12818,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Meditation"> | number
     userId?: IntWithAggregatesFilter<"Meditation"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Meditation"> | Date | string
-    medicationActual?: IntWithAggregatesFilter<"Meditation"> | number
+    meditationActual?: IntWithAggregatesFilter<"Meditation"> | number
     target?: IntWithAggregatesFilter<"Meditation"> | number
   }
 
@@ -13482,7 +13482,7 @@ export namespace Prisma {
 
   export type MeditationCreateInput = {
     createdAt?: Date | string
-    medicationActual: number
+    meditationActual: number
     target?: number
     user: UserCreateNestedOneWithoutMeditationInput
   }
@@ -13491,13 +13491,13 @@ export namespace Prisma {
     id?: number
     userId: number
     createdAt?: Date | string
-    medicationActual: number
+    meditationActual: number
     target?: number
   }
 
   export type MeditationUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    medicationActual?: IntFieldUpdateOperationsInput | number
+    meditationActual?: IntFieldUpdateOperationsInput | number
     target?: IntFieldUpdateOperationsInput | number
     user?: UserUpdateOneRequiredWithoutMeditationNestedInput
   }
@@ -13506,7 +13506,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    medicationActual?: IntFieldUpdateOperationsInput | number
+    meditationActual?: IntFieldUpdateOperationsInput | number
     target?: IntFieldUpdateOperationsInput | number
   }
 
@@ -13514,13 +13514,13 @@ export namespace Prisma {
     id?: number
     userId: number
     createdAt?: Date | string
-    medicationActual: number
+    meditationActual: number
     target?: number
   }
 
   export type MeditationUpdateManyMutationInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    medicationActual?: IntFieldUpdateOperationsInput | number
+    meditationActual?: IntFieldUpdateOperationsInput | number
     target?: IntFieldUpdateOperationsInput | number
   }
 
@@ -13528,7 +13528,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    medicationActual?: IntFieldUpdateOperationsInput | number
+    meditationActual?: IntFieldUpdateOperationsInput | number
     target?: IntFieldUpdateOperationsInput | number
   }
 
@@ -14328,14 +14328,14 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
-    medicationActual?: SortOrder
+    meditationActual?: SortOrder
     target?: SortOrder
   }
 
   export type MeditationAvgOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    medicationActual?: SortOrder
+    meditationActual?: SortOrder
     target?: SortOrder
   }
 
@@ -14343,7 +14343,7 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
-    medicationActual?: SortOrder
+    meditationActual?: SortOrder
     target?: SortOrder
   }
 
@@ -14351,14 +14351,14 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     createdAt?: SortOrder
-    medicationActual?: SortOrder
+    meditationActual?: SortOrder
     target?: SortOrder
   }
 
   export type MeditationSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    medicationActual?: SortOrder
+    meditationActual?: SortOrder
     target?: SortOrder
   }
 
@@ -15456,14 +15456,14 @@ export namespace Prisma {
 
   export type MeditationCreateWithoutUserInput = {
     createdAt?: Date | string
-    medicationActual: number
+    meditationActual: number
     target?: number
   }
 
   export type MeditationUncheckedCreateWithoutUserInput = {
     id?: number
     createdAt?: Date | string
-    medicationActual: number
+    meditationActual: number
     target?: number
   }
 
@@ -15703,7 +15703,7 @@ export namespace Prisma {
     id?: IntFilter<"Meditation"> | number
     userId?: IntFilter<"Meditation"> | number
     createdAt?: DateTimeFilter<"Meditation"> | Date | string
-    medicationActual?: IntFilter<"Meditation"> | number
+    meditationActual?: IntFilter<"Meditation"> | number
     target?: IntFilter<"Meditation"> | number
   }
 
@@ -16827,7 +16827,7 @@ export namespace Prisma {
   export type MeditationCreateManyUserInput = {
     id?: number
     createdAt?: Date | string
-    medicationActual: number
+    meditationActual: number
     target?: number
   }
 
@@ -16957,21 +16957,21 @@ export namespace Prisma {
 
   export type MeditationUpdateWithoutUserInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    medicationActual?: IntFieldUpdateOperationsInput | number
+    meditationActual?: IntFieldUpdateOperationsInput | number
     target?: IntFieldUpdateOperationsInput | number
   }
 
   export type MeditationUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    medicationActual?: IntFieldUpdateOperationsInput | number
+    meditationActual?: IntFieldUpdateOperationsInput | number
     target?: IntFieldUpdateOperationsInput | number
   }
 
   export type MeditationUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    medicationActual?: IntFieldUpdateOperationsInput | number
+    meditationActual?: IntFieldUpdateOperationsInput | number
     target?: IntFieldUpdateOperationsInput | number
   }
 
