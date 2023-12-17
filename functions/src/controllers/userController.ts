@@ -9,7 +9,7 @@ import { prisma } from '../config/db/db.connection';
 
 
 //------ Login user ------
-const login = async (req: Request, res: Response, next: NextFunction) => {
+const userLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { username, password } = req.body;
     const result = await loginUser({ username, password });
@@ -28,7 +28,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 
 //------ Create user ------
-const regUser = async (req: Request & { session: CustomSession }, res: Response, next: NextFunction) => {
+const userRegister = async (req: Request & { session: CustomSession }, res: Response, next: NextFunction) => {
   try {
   const { username, email, password } = req.body;
   const verificationToken = v4()
@@ -67,7 +67,7 @@ const userProfile = async (req: Request, res: Response, next: NextFunction) => {
 
 
 //------ Get all users ------
-const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+const userGetAll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const result = await getUsers() 
     if (result.success) {
@@ -84,7 +84,7 @@ const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
 
 
 //------ Update user -------
-const editUser = async (req: Request, res: Response, next: NextFunction) => {
+const userEdit = async (req: Request, res: Response, next: NextFunction) => {
   const decodeToken = getToken(req)
   const { username } = loggedUser(decodeToken)
     try {
@@ -105,7 +105,7 @@ const editUser = async (req: Request, res: Response, next: NextFunction) => {
 
 
 //------ Verify user email -------
-const emailVerification = async (req: Request, res: Response, next: NextFunction) => {
+const userEmailVerification = async (req: Request, res: Response, next: NextFunction) => {
   const verificationToken = req.query.token as string;
   try {
     const result = await verifyEmail(verificationToken);
@@ -121,7 +121,7 @@ const emailVerification = async (req: Request, res: Response, next: NextFunction
 
 
 // ----- resend email verification -----
-const resendVerification = async (req: Request & { session: CustomSession }, res: Response, next: NextFunction) => {
+const userResendVerification = async (req: Request & { session: CustomSession }, res: Response, next: NextFunction) => {
   try {
     const email = req.session.email;
 
@@ -148,7 +148,7 @@ const resendVerification = async (req: Request & { session: CustomSession }, res
 
 
 // //------ Password reset -------
-const resetPassReq = async (req: Request, res: Response, next: NextFunction) => {
+const userResetPassReq = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { email } = req.body;
     const result = await passResetReq(email);
@@ -169,7 +169,7 @@ const resetPassReq = async (req: Request, res: Response, next: NextFunction) => 
   }
 }
 
-const resetPass = async (req: Request, res: Response, next: NextFunction) => {
+const userResetPass = async (req: Request, res: Response, next: NextFunction) => {
   try {
       const {userId, token, password} = req.body;
       const result = await passwordReset(userId, token, password);
@@ -190,4 +190,4 @@ const resetPass = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 
-export { userProfile, getAllUsers, regUser, login, emailVerification, resendVerification, editUser, resetPassReq, resetPass }
+export { userProfile, userGetAll, userRegister, userLogin, userEmailVerification, userResendVerification, userEdit, userResetPassReq, userResetPass }

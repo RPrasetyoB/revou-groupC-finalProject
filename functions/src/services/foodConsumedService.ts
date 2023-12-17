@@ -3,14 +3,12 @@ import { prisma } from "../config/db/db.connection";
 import { endOfDay, startOfDay, subSeconds } from "date-fns";
 import { v4 as uuidv4 } from "uuid";
 
-
-
 const today = new Date();
 const startOfToday = startOfDay(today);
 const endOfToday = endOfDay(today);
 
 //----- create foodConsumed ------
-const foodConsumed = async (userId: number, input: FoodInput) => {
+const postFoodConsumed = async (userId: number, input: FoodInput) => {
   try {
     const foodNames = "foodNames" in input ? input.foodNames : [input.foodName];
     const filteredFoodNames = foodNames.filter(Boolean);
@@ -59,8 +57,9 @@ const foodConsumed = async (userId: number, input: FoodInput) => {
   }
 };
 
+
 //----- get food consumed -----
-const getFood = async (userId: number) => {
+const getFoodConsumed = async (userId: number) => {
   try {
     const foodConsumed = await prisma.foodConsumed.findMany({
       where: {
@@ -87,8 +86,34 @@ const getFood = async (userId: number) => {
   }
 };
 
+
+//----- get all food consumed -----
+const getAllFoodConsumed = async (userId: number) => {
+  try {
+    const allFoodConsumed = await prisma.foodConsumed.findMany({
+      where: {
+        userId: userId
+      }
+    });
+    return {
+      success: true,
+      message: "Successfully recorded consumed food",
+      data: allFoodConsumed,
+    };
+  } catch (error: any) {
+    throw new ErrorCatch({
+      success: false,
+      message: error.message,
+      status: 500,
+    });
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+
 //----- update food consumed -----
-const editFood = async (userId: number, input: FoodInput, uniqueId : string) => {
+const editFoodConsumed = async (userId: number, input: FoodInput, uniqueId : string) => {
   try {
     const user = await prisma.foodConsumed.findMany({
       where: {
@@ -161,7 +186,7 @@ const editFood = async (userId: number, input: FoodInput, uniqueId : string) => 
 
 
 //----- delete food consumed ------
-const deleteFood = async (userId: number, uniqueId : string) => {
+const deleteFoodConsumed = async (userId: number, uniqueId : string) => {
   try {
     const user = await prisma.foodConsumed.findMany({
       where: {
@@ -214,4 +239,4 @@ const deleteFood = async (userId: number, uniqueId : string) => {
 }
 
 
-export { foodConsumed, getFood, editFood, deleteFood };
+export { postFoodConsumed, getFoodConsumed, getAllFoodConsumed, editFoodConsumed, deleteFoodConsumed };

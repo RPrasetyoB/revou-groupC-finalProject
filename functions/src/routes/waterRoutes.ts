@@ -1,11 +1,11 @@
 import express from 'express'
-// import { getAllTodo, createTodo, updateTodo, deleteTodo } from '../controllers/waterController'
+import { createUpdateWaterDaily, getAllWaterHistory, getWaterDaily } from '../controllers/waterController'
+import authentication from '../middlewares/authentication'
 
-// const todoRoutes = express.Router()
+const waterRoutes = express.Router()
 
-// todoRoutes.get('/todos', getAllTodo)
-// todoRoutes.post('/todos', createTodo)
-// todoRoutes.put('/todos/:id', updateTodo)
-// todoRoutes.delete('/todos/:id', deleteTodo)
+waterRoutes.post('/water', authentication, createUpdateWaterDaily)
+waterRoutes.get('/water', authentication, getWaterDaily)
+waterRoutes.get('/all-water', authentication, getAllWaterHistory)
 
-// export default todoRoutes
+export default waterRoutes
