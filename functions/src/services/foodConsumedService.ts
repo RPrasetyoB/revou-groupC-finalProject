@@ -72,7 +72,7 @@ const getFoodConsumed = async (userId: number) => {
     });
     return {
       success: true,
-      message: "Successfully recorded consumed food",
+      message: "Successfully get daily food consumed",
       data: foodConsumed,
     };
   } catch (error: any) {
@@ -97,7 +97,7 @@ const getAllFoodConsumed = async (userId: number) => {
     });
     return {
       success: true,
-      message: "Successfully recorded consumed food",
+      message: "Successfully get food consumed history",
       data: allFoodConsumed,
     };
   } catch (error: any) {

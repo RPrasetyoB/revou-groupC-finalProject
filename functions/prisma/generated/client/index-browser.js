@@ -181,7 +181,7 @@ exports.Prisma.MeditationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   createdAt: 'createdAt',
-  medicationActual: 'medicationActual',
+  meditationActual: 'meditationActual',
   target: 'target'
 };
 

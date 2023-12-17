@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { getToken, loggedUser } from "../utils/getToken";
-import { getAllSteps, getTodaySteps, postTodaySteps } from "../services/steps";
+import { getAllSteps, getTodaySteps, postTodaySteps } from "../services/stepsService";
 
 //------ post daily steps ------
 const createUpdateStepsDaily = async ( req: Request, res: Response, next: NextFunction ) => {

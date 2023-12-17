@@ -102,7 +102,7 @@ model Meditation {
   user              User      @relation(fields: [userId], references: [id])
   userId            Int
   createdAt         DateTime  @default(now())
-  medicationActual  Int
+  meditationActual  Int
   target            Int       @default(15)
 }
 
