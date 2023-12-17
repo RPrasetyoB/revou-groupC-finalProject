@@ -1,6 +1,25 @@
 import { NextFunction, Request, Response } from "express";
 import { getToken, loggedUser } from "../utils/getToken";
-import { caloriesCalculation, getCaloriesUser } from "../services/caloriesService";
+import { getAllCalories, getCaloriesUser, postCaloriesCalculation } from "../services/caloriesService";
+
+//------ create user calories ------
+const createCalories = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const decodedToken = getToken(req)
+        const { userId } = loggedUser(decodedToken)
+        const result = await postCaloriesCalculation(userId)
+        if(result?.success) {
+            return res.status(200).json({
+                message: result.message,
+                data: result.data
+            })
+        }
+    } catch (error) {
+        next(error)
+    }
+
+}
+
 
 //----- get user calories ------
 const getCalories = async (req: Request, res: Response, next: NextFunction) => {
@@ -20,13 +39,13 @@ const getCalories = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 
-//------ create user calories ------
-const createCalories = async (req: Request, res: Response, next: NextFunction) => {
+//----- get all user calories ------
+const getAllCaloriesHistory = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const decodedToken = getToken(req)
         const { userId } = loggedUser(decodedToken)
-        const result = await caloriesCalculation(userId)
-        if(result?.success) {
+        const result = await getAllCalories(userId)
+        if(result.success) {
             return res.status(200).json({
                 message: result.message,
                 data: result.data
@@ -35,7 +54,6 @@ const createCalories = async (req: Request, res: Response, next: NextFunction) =
     } catch (error) {
         next(error)
     }
-
 }
 
-export { getCalories, createCalories }
+export { getCalories, getAllCaloriesHistory, createCalories }
