@@ -138,7 +138,7 @@ const editFoodConsumed = async (userId: number, input: FoodInput, uniqueId : str
     if (!getFood || getFood.length === 0) {
       throw new ErrorCatch({
         success: false,
-        message: "Food consumed not found or Unauthorized to delete",
+        message: "Food consumed not found or Unauthorized to update",
         status: 404,
       });
     }
