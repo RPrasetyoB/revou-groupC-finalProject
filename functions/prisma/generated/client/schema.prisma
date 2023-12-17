@@ -42,7 +42,7 @@ model Sleep {
   user          User?     @relation(fields: [userId], references: [id])
   userId        Int?
   createdAt     DateTime  @default(now())
-  sleepStart    DateTime  @default(now())
+  sleepStart    DateTime  
   sleepEnd      DateTime
   sleepActual   Int
   target        Int       @default(7)

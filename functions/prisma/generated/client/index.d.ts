@@ -13138,7 +13138,7 @@ export namespace Prisma {
 
   export type SleepCreateInput = {
     createdAt?: Date | string
-    sleepStart?: Date | string
+    sleepStart: Date | string
     sleepEnd: Date | string
     sleepActual: number
     target?: number
@@ -13149,7 +13149,7 @@ export namespace Prisma {
     id?: number
     userId?: number | null
     createdAt?: Date | string
-    sleepStart?: Date | string
+    sleepStart: Date | string
     sleepEnd: Date | string
     sleepActual: number
     target?: number
@@ -13178,7 +13178,7 @@ export namespace Prisma {
     id?: number
     userId?: number | null
     createdAt?: Date | string
-    sleepStart?: Date | string
+    sleepStart: Date | string
     sleepEnd: Date | string
     sleepActual: number
     target?: number
@@ -15356,7 +15356,7 @@ export namespace Prisma {
 
   export type SleepCreateWithoutUserInput = {
     createdAt?: Date | string
-    sleepStart?: Date | string
+    sleepStart: Date | string
     sleepEnd: Date | string
     sleepActual: number
     target?: number
@@ -15365,7 +15365,7 @@ export namespace Prisma {
   export type SleepUncheckedCreateWithoutUserInput = {
     id?: number
     createdAt?: Date | string
-    sleepStart?: Date | string
+    sleepStart: Date | string
     sleepEnd: Date | string
     sleepActual: number
     target?: number
@@ -16795,7 +16795,7 @@ export namespace Prisma {
   export type SleepCreateManyUserInput = {
     id?: number
     createdAt?: Date | string
-    sleepStart?: Date | string
+    sleepStart: Date | string
     sleepEnd: Date | string
     sleepActual: number
     target?: number

@@ -20,6 +20,7 @@
   - Added the required column `currentMood` to the `Mood` table without a default value. This is not possible if the table is not empty.
   - Added the required column `sleepActual` to the `Sleep` table without a default value. This is not possible if the table is not empty.
   - Added the required column `sleepEnd` to the `Sleep` table without a default value. This is not possible if the table is not empty.
+  - Added the required column `sleepStart` to the `Sleep` table without a default value. This is not possible if the table is not empty.
   - Added the required column `stepsActual` to the `Steps` table without a default value. This is not possible if the table is not empty.
   - Added the required column `waterActual` to the `Water` table without a default value. This is not possible if the table is not empty.
 
@@ -62,7 +63,7 @@ DROP COLUMN "sleep_end",
 DROP COLUMN "sleep_start",
 ADD COLUMN     "sleepActual" INTEGER NOT NULL,
 ADD COLUMN     "sleepEnd" TIMESTAMP(3) NOT NULL,
-ADD COLUMN     "sleepStart" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN     "sleepStart" TIMESTAMP(3) NOT NULL,
 ALTER COLUMN "target" SET DEFAULT 7;
 
 -- AlterTable
