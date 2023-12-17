@@ -7,6 +7,7 @@ import foodConsumedRoutes from './foodConsumedRoutes';
 import waterRoutes from './waterRoutes';
 import stepsRoutes from './stepsRoutes';
 import sleepRoutes from './sleepRoutes';
+import meditationRoutes from './meditationRoutes';
 
 const routes = express.Router()
 
@@ -17,5 +18,6 @@ routes.use('/v1', foodConsumedRoutes);
 routes.use('/v1', waterRoutes);
 routes.use('/v1', stepsRoutes);
 routes.use('/v1', sleepRoutes);
+routes.use('/v1', meditationRoutes);
 
 export default routes

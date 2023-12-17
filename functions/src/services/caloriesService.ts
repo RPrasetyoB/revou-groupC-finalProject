@@ -162,7 +162,12 @@ const getCaloriesUser = async (userId: number, username?: string) => {
     });
       
     const user = await prisma.user.findUnique({
-      where: { username },
+      where: { username,
+        createdAt:{
+          gte: startOfToday,
+          lte: endOfToday
+        }
+      },
       include: {
         food: true,
       },
@@ -194,15 +199,16 @@ const getCaloriesUser = async (userId: number, username?: string) => {
 //------ Get food calories ------
 const getAllCalories = async ( userId: number ) => {
   try {
-    const allFoodConsumed = await prisma.foodConsumed.findMany({
-      where: {
-        userId: userId 
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        food: true,
       },
-    }) 
+    })
     return {
       success: true,
       message: "success get all calories data",
-      data: allFoodConsumed,
+      data: user?.food,
     };
   } catch (error: any) {
     throw new ErrorCatch({

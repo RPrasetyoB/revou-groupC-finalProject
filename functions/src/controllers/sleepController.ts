@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { getToken, loggedUser } from "../utils/getToken";
-import { getTodaySleep, postTodaySleep } from "../services/sleep";
+import { getAllSleep, getTodaySleep, postTodaySleep } from "../services/sleepService";
 
 //------ post daily sleep ------
 const createUpdateSleepDaily = async ( req: Request, res: Response, next: NextFunction ) => {
@@ -54,7 +54,7 @@ const getAllSleepHistory = async ( req: Request, res: Response, next: NextFuncti
   try {
     const decodedToken = getToken(req);
     const { userId } = loggedUser(decodedToken);
-    const result = await getTodaySleep(userId);
+    const result = await getAllSleep(userId);
     if (result.success) {
       return res.status(200).json({
         success: true,
