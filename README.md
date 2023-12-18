@@ -28,8 +28,6 @@ Development project from designing, building, and maintaining both the server-si
 
 ## Front-end sneak peek
 
-
-
 ## Back-end Authentication
 
 ## Back-end Authorization
@@ -41,17 +39,13 @@ Development project from designing, building, and maintaining both the server-si
 ## Security test
 
 - Front-end :
-  
-  
 
 - Back-end:
-  
-  
 
 ## Postmant API documentation
 
 - Documentation link:<br>
-    https://documenter.getpostman.com/view/29092304/2s9YRGw8Tq
+    [final-project](https://documenter.getpostman.com/view/29092304/2s9YkgDkPz)
 - Set variable {{base_url}} to:<br>
     https://us-central1-milestone3-rpb.cloudfunctions.net/milestone3_rpb
 

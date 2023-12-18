@@ -47,7 +47,7 @@ const sendVerificationEmail = async (email: string, verificationToken: string) =
 
 const sentResetPassword = async (email: string, token: string, userId : number) => {
   const buttonName = 'Reset Password'
-  const buttonHref = `${FE_URL}/request-reset/${token}/${userId}`
+  const buttonHref = `${FE_URL}/reset-password/${token}/${userId}`
   const buttonReset = `<a href="${buttonHref}" style="padding: 8px 14px; border: none;border-radius: 5px; background-color: dodgerblue; color: white; font-size: 14px;text-decoration: none;font-family: sans-serif;" >${buttonName}</a>`
 
   const emailMessage = `
