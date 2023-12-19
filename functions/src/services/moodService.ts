@@ -1,7 +1,7 @@
 import ErrorCatch from "../utils/errorCatch";
 import { prisma } from "../config/db/db.connection";
 import { endOfDay, startOfDay } from "date-fns";
-import { Todaymood } from "@prisma/client";
+import { Todaymood } from "../../prisma/generated/client";
 
 const today = new Date();
 const startOfToday = startOfDay(today);
