@@ -10,6 +10,7 @@ const createCalories = async (req: Request, res: Response, next: NextFunction) =
         const result = await postCaloriesCalculation(userId)
         if(result?.success) {
             return res.status(200).json({
+                success: true,
                 message: result.message,
                 data: result.data
             })
@@ -29,6 +30,7 @@ const getCalories = async (req: Request, res: Response, next: NextFunction) => {
         const result = await getCaloriesUser(userId, username)
         if(result.success) {
             return res.status(200).json({
+                success: true,
                 message: result.message,
                 data: result.data
             })
@@ -47,6 +49,7 @@ const getAllCaloriesHistory = async (req: Request, res: Response, next: NextFunc
         const result = await getAllCalories(userId)
         if(result.success) {
             return res.status(200).json({
+                success: true,
                 message: result.message,
                 data: result.data
             })
