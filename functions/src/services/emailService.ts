@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
 
 const sendVerificationEmail = async (email: string, verificationToken: string) => {
   const buttonName = 'Verify email'
-  const buttonHref = `${BE_URL}/v1/verify?token=${verificationToken}`
+  const buttonHref = `https://group-c-project.onrender.com/v1/verify?token=${verificationToken}`
   const buttonReset = `<a href="${buttonHref}" style="padding: 8px 14px; border: none;border-radius: 5px; background-color: dodgerblue; color: white; font-size: 14px;text-decoration: none;font-family: sans-serif;" >${buttonName}</a>`
 
   const emailMessage = `
