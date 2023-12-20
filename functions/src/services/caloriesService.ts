@@ -161,17 +161,15 @@ const getCaloriesUser = async (userId: number, username?: string) => {
       },
     });
       
-    const user = await prisma.user.findFirst({
-      where: { id: userId,
+    const user = await prisma.calories.findFirst({
+      where: { userId: userId,
         createdAt:{
           gte: startOfToday,
           lte: endOfToday
         }
-      },
-      include: {
-        food: true,
-      },
+      }
     });
+  console.log(' ', user)
     if (!user) {
       throw new ErrorCatch({
         success: false,
@@ -182,7 +180,7 @@ const getCaloriesUser = async (userId: number, username?: string) => {
     return {
       success: true,
       message: "success get calories data",
-      data: user.food,
+      data: user,
     };
   } catch (error: any) {
     throw new ErrorCatch({
