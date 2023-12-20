@@ -161,8 +161,8 @@ const getCaloriesUser = async (userId: number, username?: string) => {
       },
     });
       
-    const user = await prisma.user.findUnique({
-      where: { username,
+    const user = await prisma.user.findFirst({
+      where: { id: userId,
         createdAt:{
           gte: startOfToday,
           lte: endOfToday
