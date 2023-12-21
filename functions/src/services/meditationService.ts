@@ -3,8 +3,6 @@ import { prisma } from "../config/db/db.connection";
 import { endOfDay, startOfDay } from "date-fns";
 
 const today = new Date();
-const startOfToday = startOfDay(today);
-const endOfToday = endOfDay(today);
 
 // ------ create daily meditation ------
 const postTodayMeditation = async (userId: number, meditationActual: number) => {
@@ -12,10 +10,7 @@ const postTodayMeditation = async (userId: number, meditationActual: number) => 
     const userMeditation = await prisma.meditation.findFirst({
       where: {
         userId: userId,
-        createdAt: {
-          gte: startOfToday,
-          lte: endOfToday,
-        },
+        createdAt: today
       },
     });
 
@@ -36,10 +31,7 @@ const postTodayMeditation = async (userId: number, meditationActual: number) => 
       const updateMeditation = await prisma.meditation.update({
         where: {
           id: userMeditation.id,
-          createdAt: {
-            gte: startOfToday,
-            lte: endOfToday,
-          },
+          createdAt: today
         },
         data: {
             meditationActual: meditationActual,
@@ -70,10 +62,7 @@ const getTodayMeditation = async ( userId: number ) => {
     const dailyMeditation = await prisma.meditation.findFirst({
       where:{
         userId: userId,
-        createdAt: {
-          gte: startOfToday,
-          lte: endOfToday
-        }
+        createdAt: today
       }
     })
     return {

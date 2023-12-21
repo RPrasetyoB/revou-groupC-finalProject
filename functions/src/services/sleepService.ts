@@ -3,8 +3,6 @@ import { prisma } from "../config/db/db.connection";
 import { endOfDay, startOfDay } from "date-fns";
 
 const today = new Date();
-const startOfToday = startOfDay(today);
-const endOfToday = endOfDay(today);
 
 // ------ create daily sleep ------
 const postTodaySleep = async (userId: number, sleepStart: Date, sleepEnd: Date) => {
@@ -12,10 +10,7 @@ const postTodaySleep = async (userId: number, sleepStart: Date, sleepEnd: Date) 
     const userSleep = await prisma.sleep.findFirst({
       where: {
         userId: userId,
-        createdAt: {
-          gte: startOfToday,
-          lte: endOfToday,
-        },
+        createdAt: today
       },
     });
     const calculateSleepDuration = (start: Date, end: Date): number => {
@@ -41,10 +36,7 @@ const postTodaySleep = async (userId: number, sleepStart: Date, sleepEnd: Date) 
       const updateSleep = await prisma.sleep.update({
         where: {
           id: userSleep.id,
-          createdAt: {
-            gte: startOfToday,
-            lte: endOfToday,
-          },
+          createdAt: today
         },
         data: {
           sleepStart: sleepStart,
@@ -76,10 +68,7 @@ const getTodaySleep = async ( userId: number ) => {
     const dailySleep = await prisma.sleep.findFirst({
       where:{
         userId: userId,
-        createdAt: {
-          gte: startOfToday,
-          lte: endOfToday
-        }
+        createdAt: today
       }
     })
     return {

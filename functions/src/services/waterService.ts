@@ -3,8 +3,6 @@ import { prisma } from "../config/db/db.connection";
 import { endOfDay, startOfDay } from "date-fns";
 
 const today = new Date();
-const startOfToday = startOfDay(today);
-const endOfToday = endOfDay(today);
 
 // ------ create daily water ------
 const postTodayWater = async (userId: number, waterActual: number) => {
@@ -12,10 +10,7 @@ const postTodayWater = async (userId: number, waterActual: number) => {
     const userWater = await prisma.water.findFirst({
       where: {
         userId: userId,
-        createdAt: {
-          gte: startOfToday,
-          lte: endOfToday,
-        },
+        createdAt: today
       },
     });
 
@@ -36,10 +31,7 @@ const postTodayWater = async (userId: number, waterActual: number) => {
       const updateWater = await prisma.water.update({
         where: {
           id: userWater.id,
-          createdAt: {
-            gte: startOfToday,
-            lte: endOfToday,
-          },
+          createdAt: today
         },
         data: {
           waterActual: waterActual,
@@ -70,10 +62,7 @@ const getTodayWater = async ( userId: number ) => {
     const dailyWater = await prisma.water.findFirst({
       where:{
         userId: userId,
-        createdAt: {
-          gte: startOfToday,
-          lte: endOfToday
-        }
+        createdAt: today
       }
     })
     return {

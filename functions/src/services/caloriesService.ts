@@ -3,8 +3,6 @@ import { prisma } from "../config/db/db.connection";
 import { endOfDay, startOfDay } from "date-fns";
 
 const today = new Date();
-const startOfToday = startOfDay(today);
-const endOfToday = endOfDay(today);
 
 //----- post food calories ------
 const postCaloriesCalculation = async (userId?: number) => {
@@ -62,10 +60,7 @@ const postCaloriesCalculation = async (userId?: number) => {
     const foodConsumed = await prisma.foodConsumed.findMany({
       where: {
         userId: userId,
-        createdAt:{
-          gte: startOfToday,
-          lte: endOfToday
-        } 
+        createdAt: today
       },
     }) as { calories: number }[];
 
@@ -78,10 +73,7 @@ const postCaloriesCalculation = async (userId?: number) => {
     const existingCalories = await prisma.calories.findMany({
       where: {
         userId: userId,
-        createdAt: {
-          gte: startOfToday,
-          lte: endOfToday
-        } 
+        createdAt: today
       },
     }) as { id: number }[];
 
@@ -132,10 +124,7 @@ const getCaloriesUser = async (userId: number) => {
     const foodConsumed = await prisma.foodConsumed.findMany({
       where: {
         userId: userId,
-        createdAt:{
-          gte: startOfToday,
-          lte: endOfToday
-        } 
+        createdAt: today
       },
     }) as { calories: number }[];
 
@@ -147,10 +136,7 @@ const getCaloriesUser = async (userId: number) => {
     const existingCalories = await prisma.calories.findFirst({
       where: {
         userId: userId,
-        createdAt: {
-          gte: startOfToday,
-          lte: endOfToday
-        } 
+        createdAt: today
       },
     })
     if(existingCalories){
@@ -164,10 +150,7 @@ const getCaloriesUser = async (userId: number) => {
       
     const user = await prisma.calories.findFirst({
       where: { userId: userId,
-        createdAt:{
-          gte: startOfToday,
-          lte: endOfToday
-        }
+        createdAt: today
       }
     });
   console.log('user', user)

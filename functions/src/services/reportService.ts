@@ -94,7 +94,10 @@ const postTodayReport = async (userId: number) => {
     const meditation = await getMeditation(userId);
     const mood = await getMood(userId);
     const calculatePercentage = (actual: number, target: number) => {
-      return target !== 0 ? ((target - actual) / target) * 100 : 0 || null;
+      if(actual > target){
+        return 100;
+      }
+      return target !== 0 ? (actual / target) * 100 : 0 || null;
     };
     const calculateAveragePercentage = (values: (number | null)[]): number => {
       const filteredValues = values.filter(
