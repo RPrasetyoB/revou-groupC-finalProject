@@ -222,7 +222,9 @@ const getAllReport = async (userId: number) => {
     const getReport = await prisma.report.findMany({
       where: {
         userId: userId,
-        date: sevenDaysAgo
+        date: {
+          gte: sevenDaysAgo
+        }
       },
     });
     if(getReport) {
