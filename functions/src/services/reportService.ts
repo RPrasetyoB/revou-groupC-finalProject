@@ -1,7 +1,6 @@
 import ErrorCatch from "../utils/errorCatch";
 import { prisma } from "../config/db/db.connection";
-import { eachDayOfInterval, endOfDay, startOfDay, subDays } from "date-fns";
-import { getCaloriesUser } from "./caloriesService";
+import { endOfDay, startOfDay, subDays } from "date-fns";
 import { getTodaySleep } from "./sleepService";
 import { getTodaySteps } from "./stepsService";
 import { getTodayWater } from "./waterService";
