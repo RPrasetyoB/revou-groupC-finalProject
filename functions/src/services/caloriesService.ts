@@ -127,7 +127,7 @@ const postCaloriesCalculation = async (userId?: number) => {
 
 
 //------ Get food calories ------
-const getCaloriesUser = async (userId: number, username?: string) => {
+const getCaloriesUser = async (userId: number) => {
   try {
     const foodConsumed = await prisma.foodConsumed.findMany({
       where: {
@@ -144,7 +144,7 @@ const getCaloriesUser = async (userId: number, username?: string) => {
       totalActualCalories = foodConsumed.reduce((total, item) => total + (item.calories ?? 0), 0);
     }
 
-    const existingCalories = await prisma.calories.findMany({
+    const existingCalories = await prisma.calories.findFirst({
       where: {
         userId: userId,
         createdAt: {
@@ -152,14 +152,15 @@ const getCaloriesUser = async (userId: number, username?: string) => {
           lte: endOfToday
         } 
       },
-    }) as { id: number }[];
-
-    await prisma.calories.update({
-      where: { id: existingCalories[0].id },
-      data: {
-        actual: totalActualCalories,
-      },
-    });
+    })
+    if(existingCalories){
+      await prisma.calories.update({
+        where: { id: existingCalories.id },
+        data: {
+          actual: totalActualCalories,
+        },
+      });
+    }
       
     const user = await prisma.calories.findFirst({
       where: { userId: userId,
@@ -169,7 +170,7 @@ const getCaloriesUser = async (userId: number, username?: string) => {
         }
       }
     });
-  console.log(' ', user)
+  console.log('user', user)
     if (!user) {
       throw new ErrorCatch({
         success: false,

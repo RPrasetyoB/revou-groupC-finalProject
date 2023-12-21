@@ -20,7 +20,7 @@ authRoutes.get('/auth/google/callback', passport.authenticate('google', { failur
   (req , res) => {
       const user = req.user as User;
       const token = user.token
-      res.redirect(`${FE_URL}/home?token=${token}`);
+      res.redirect(`${FE_URL}/?token=${token}`);
     }
   );
 

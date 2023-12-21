@@ -27,7 +27,7 @@ const getCalories = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const decodedToken = getToken(req)
         const { userId, username } = loggedUser(decodedToken)
-        const result = await getCaloriesUser(userId, username)
+        const result = await getCaloriesUser(userId)
         if(result.success) {
             return res.status(200).json({
                 success: true,
