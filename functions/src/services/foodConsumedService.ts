@@ -1,9 +1,12 @@
 import ErrorCatch from "../utils/errorCatch";
 import { prisma } from "../config/db/db.connection";
-import { endOfDay, startOfDay, subSeconds } from "date-fns";
+import { subSeconds } from "date-fns";
 import { v4 as uuidv4 } from "uuid";
+import { endOfDay, startOfDay } from "date-fns";
 
 const today = new Date();
+const startOfToday = startOfDay(today);
+const endOfToday = endOfDay(today);
 
 //----- create foodConsumed ------
 const postFoodConsumed = async (userId: number, input: FoodInput) => {
@@ -62,7 +65,10 @@ const getFoodConsumed = async (userId: number) => {
     const foodConsumed = await prisma.foodConsumed.findMany({
       where: {
         userId: userId,
-        createdAt: today
+        createdAt:{
+          gte: startOfToday,
+          lte: endOfToday
+        }
       },
     });
     return {

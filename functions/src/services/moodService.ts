@@ -1,9 +1,11 @@
 import ErrorCatch from "../utils/errorCatch";
 import { prisma } from "../config/db/db.connection";
-import { endOfDay, startOfDay } from "date-fns";
 import { Todaymood } from "../../prisma/generated/client";
+import { endOfDay, startOfDay } from "date-fns";
 
 const today = new Date();
+const startOfToday = startOfDay(today);
+const endOfToday = endOfDay(today);
 
 // ------ create daily mood ------
 const postTodayMood = async (userId: number, currentMood: Todaymood) => {
@@ -11,7 +13,10 @@ const postTodayMood = async (userId: number, currentMood: Todaymood) => {
     const userMood = await prisma.mood.findFirst({
       where: {
         userId: userId,
-        createdAt: today
+        createdAt:{
+          gte: startOfToday,
+          lte: endOfToday
+        }
       },
     });
 
@@ -32,7 +37,10 @@ const postTodayMood = async (userId: number, currentMood: Todaymood) => {
       const updateMood = await prisma.mood.update({
         where: {
           id: userMood.id,
-          createdAt: today
+          createdAt:{
+            gte: startOfToday,
+            lte: endOfToday
+          }
         },
         data: {
           currentMood: currentMood,
@@ -63,7 +71,10 @@ const getTodayMood = async ( userId: number ) => {
     const dailyMood = await prisma.mood.findFirst({
       where:{
         userId: userId,
-        createdAt: today
+        createdAt:{
+          gte: startOfToday,
+          lte: endOfToday
+        }
       }
     })
     return {
