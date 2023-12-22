@@ -1,4 +1,4 @@
-import { prisma } from "../config/db/db.connection";
+import { prisma } from "../config/db/dbConnection";
 import ErrorCatch from "../utils/errorCatch";
 
 const findOrCreateGoogleUser = async (profile: {id: string, displayName: string, emails: { value: string }[]}) => {

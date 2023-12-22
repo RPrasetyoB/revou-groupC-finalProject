@@ -3,7 +3,7 @@ import bcryptjs from "bcryptjs";
 import jwt from "jsonwebtoken";
 import NodeCache from "node-cache";
 import ErrorCatch from "../utils/errorCatch";
-import { prisma } from "../config/db/db.connection";
+import { prisma } from "../config/db/dbConnection";
 import { sentResetPassword } from "./emailService";
 import { JWT_Sign } from "../config/auth/jwt";
 

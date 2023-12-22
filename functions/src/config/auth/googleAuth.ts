@@ -3,13 +3,14 @@ dotenv.config();
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { googleLogin } from '../../controllers/googleController';
+import { BE_URL } from '../../utils/appUrl';
 
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-      callbackURL: 'https://group-c-project.onrender.com/v1/auth/google/callback',
+      callbackURL: `${BE_URL}/v1/auth/google/callback`,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {

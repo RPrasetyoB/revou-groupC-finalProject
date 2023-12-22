@@ -1,5 +1,5 @@
 import ErrorCatch from "../utils/errorCatch";
-import { prisma } from "../config/db/db.connection";
+import { prisma } from "../config/db/dbConnection";
 import { subSeconds } from "date-fns";
 import { v4 as uuidv4 } from "uuid";
 import { endOfDay, startOfDay } from "date-fns";

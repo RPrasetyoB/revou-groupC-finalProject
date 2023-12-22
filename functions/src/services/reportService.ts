@@ -1,5 +1,5 @@
 import ErrorCatch from "../utils/errorCatch";
-import { prisma } from "../config/db/db.connection";
+import { prisma } from "../config/db/dbConnection";
 import { endOfDay, startOfDay, subDays } from "date-fns";
 import { getTodaySleep } from "./sleepService";
 import { getTodaySteps } from "./stepsService";
@@ -165,7 +165,7 @@ const postTodayReport = async (userId: number) => {
       });
       return {
         success: true,
-        message: "success create daily report",
+        message: "success update daily report",
         data: updateReport,
       };
     }

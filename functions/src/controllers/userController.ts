@@ -5,7 +5,7 @@ import { v4 } from "uuid";
 import { getToken, loggedUser } from '../utils/getToken';
 import { getUser, getUsers, loginUser, passResetReq, passwordReset, registerUser, updateUser, verifyEmail } from '../services/userService'
 import { sendVerificationEmail } from '../services/emailService';
-import { prisma } from '../config/db/db.connection';
+import { prisma } from '../config/db/dbConnection';
 
 
 //------ Login user ------

@@ -1,5 +1,5 @@
 import ErrorCatch from "../utils/errorCatch";
-import { prisma } from "../config/db/db.connection";
+import { prisma } from "../config/db/dbConnection";
 import { Todaymood } from "../../prisma/generated/client";
 import { endOfDay, startOfDay } from "date-fns";
 
