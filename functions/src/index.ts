@@ -29,22 +29,4 @@ app.listen(server_port, () => {
   console.log(`server listening at http://localhost:${server_port}`);
 });
 
-export const grupc_project = functions.https.onRequest(async (req, res) => {
-  try {
-    const allowedOrigins = [
-      "http://localhost:5173",
-      "https://helena-health-tracker.web.app",
-    ];
-    const origin = req.headers.origin;
-    if (allowedOrigins.includes(origin!)) {
-      res.header("Access-Control-Allow-Origin", origin);
-    }
-    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type");
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.status(200).send("Allowed by cors");
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
+export const grupc_project = functions.https.onRequest(app);
