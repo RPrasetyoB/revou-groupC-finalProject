@@ -1,4 +1,5 @@
-![Helena Logo](./src/assets/helena-main-logo-01-01.svg){: width="300px" height="100px"}
+![image](https://github.com/RPrasetyoB/revou-groupC-finalProject/assets/129088807/c92382e1-e356-4f3a-bdfd-204877fad784)
+
 
 ## Project Overview
 
