@@ -1,91 +1,81 @@
-# Final project
+![image](https://github.com/RPrasetyoB/revou-groupC-finalProject/assets/129088807/c92382e1-e356-4f3a-bdfd-204877fad784)
 
-Development project from designing, building, and maintaining both the server-side (back end) and client-side (front end) components of an application. This individual manages the entire software stack, ensuring the integration and functionality of both ends for a complete user experience.
 
-## Table of content
+## Project Overview
 
-- Technologies used
+| Title  | Helena | Etc. |
+| --- | --- | --- |
+| Theme  | Good Health and Well Being |  |
+| Members  | Renaldi Prasetyo Basuki (Team Lead/ Backend Engineer) | sumitomo.andi@gmail.com |
+|  | Dody Hartanto (Frontend Engineer) | muharridody@gmail.com |
+|  | Joko Setiawan (Frontend Engineer/UI Designer) | jokosetiawan.career@gmail.com |
+|  | Andar Pratama (Project Manager/Advisor) | andar.webdev@gmail.com |
 
-- Front-end sneak peek
+### Who are we*?*
 
-- Authentication & Authorization
+We are **Group C**, a team from *Full Stack Software Engineering Students at RevoU 2nd Batch (Team2)*, dedicated to crafting a transformative health web application. Our project aims to seamlessly track users' health levels and deliver personalized recommendations for fostering a healthy lifestyle. Through a combination of skillful TypeScript programming, backed by the robust capabilities of Express - Node.js for our backend and the dynamic React library for our frontend, we are committed to creating a user-centric and impactful solution. Feel free to reach out if you have any questions or if there's anything specific you'd like to know about our project.
 
-- Security Test
+### Introduction to Helena
 
-- API documentation
+Introducing Helena, your holistic health companion. Helena is more than just an app; it's your personalized wellness guide. Seamlessly track your water consumption, calories, steps, and sleep, while also engaging in meditation to foster mindfulness. Helena goes beyond the numbers—monitor your mood to gain insights into your emotional well-being. We believe in empowering you on your journey to a healthier, happier life. Join us as we help you make informed choices, stay active, find moments of calm, and achieve overall well-being. Helena is here to support you every step of the way, making your health goals attainable and enjoyable.
 
-- App testing
+## Links
 
-- Deployment
+### Project Management:
 
-## Technologies  used
+- [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1FHpBRQIJEUgGnYUbDaOS6hG5REn8UDxLnd9q60qbiSU/edit?usp=sharing)
 
-- Typescript
+## System Design
 
-- BE: NodeJs / Express
+- [Business Flow Diagram](https://lucid.app/lucidchart/49a08d03-f428-43a4-ac21-54dbd82c03ca/edit?invitationId=inv_534bc916-4bb3-463f-8ba2-2cb9565e04f3&page=0_0#)
+- [Entity Relationship Diagram](https://lucid.app/lucidchart/28567ca2-56dc-4b2a-b423-d03054c3961a/edit?invitationId=inv_415fc2f1-d21c-4567-9578-55e7c249093b&page=0_0#)
 
-- FE: React
+## UI Design & Assets
 
-## Front-end sneak peek
+- **Color Palette**:
+    - [Color Palette: #005792 #53CDE2 #D1F4FA #EDF9FC - Color Hunt](https://colorhunt.co/palette/00579253cde2d1f4faedf9fc)
+    
+- **Font**:
+    - **Heading :**
+        - [Montserrat - Google Fonts](https://fonts.google.com/specimen/Montserrat)
+        
+    - **Body :**
+        - [Poppins - Google Fonts](https://fonts.google.com/specimen/Poppins)
+        
+- **Figma**:
+    - [Figma Files](https://www.figma.com/files/team/1310608240701278147)
 
-## Back-end Authentication
+## Development & Production
 
-## Back-end Authorization
+### Backend
 
-##### By Role :
+- [Repository - Github](https://github.com/RPrasetyoB/revou-groupC-finalProject.git)
+- **Database**: PostgreSQL
+- **DB Hosting**: [Supabase](https://supabase.com/dashboard/project/ehfrzwkcdejuqjaqmlht)
+- **API Documentation**: [Postman](https://documenter.getpostman.com/view/29092304/2s9YkgDkPz)
+- **Development**: [Render](https://group-c-project.onrender.com/)  [Render Dashboard](https://dashboard.render.com/web/srv-clrapuogqk6s7394nca0)
+- **Production**: [Firebase](https://us-central1-final-project-16787.cloudfunctions.net/grupc_project)
+- **Dev-tools**:
+    - Node.js
+    - Express
+    - Typescript
+    - Prisma
+    - Passport JS
+- **Additional Dependencies**:
+    - Scheduler: [Firebase Scheduler](https://firebase.google.com/docs/functions/schedule-functions?gen=2nd)
 
-##### By Username :
+### Frontend
 
-## Security test
-
-- Front-end :
-
-- Back-end:
-
-## Postmant API documentation
-
-- Documentation link:<br>
-    [final-project](https://documenter.getpostman.com/view/29092304/2s9YkgDkPz)
-- Set variable {{base_url}} to:<br>
-    https://us-central1-milestone3-rpb.cloudfunctions.net/milestone3_rpb
-
-## API End Point
-
-|                                                                   | Endpoint               | Req body                                                                                       | Authorization |
-| ----------------------------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------- | ------------- |
-| Login                                                             | POST /v1/auth/login    | username, password                                                                             | -             |
-| Register                                                          | POST /v1/auth/register | username, Email, password                                                                      | -             |
-| Get all todolist (admin)<br>Get logged in user's todolist (guest) | GET<br>/v1/todos       | -                                                                                              | by role       |
-| Add new todo                                                      | POST<br>/v1/todos      | todo, priority<br/>(status auto set to "in progress"<br/>and dueDate auto set to 2 days ahead) | -             |
-| Update todo                                                       | PUT<br>/v1/todos/:id   | todo, status, dueDate                                                                          | by username   |
-| Delete todo                                                       | DEL<br>/v1/todos/:id   |                                                                                                | by username   |
-
-## Users for test
-
-- admin
-
-```json
-{
-"username":"rpb"
-"password":"rpb123"
-}
-```
-
-- guest
-
-```json
-{
-"username":"rpb2"
-"password":"rpb123"
-}
-```
-
-## Deployment
-
-###### Both BE and FE Deployed to Firebase
-
-- Front-end: https://milestone3-rpb.web.app
-
-- Back-end: https://us-central1-milestone3-rpb.cloudfunctions.net/milestone3_rpb
-
-![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)
+- [Repository - Github](https://github.com/hartantodody/group-c-frontend)
+- **Framework**: React
+- **CSS Framework**: Material UI
+- **Development**: [Netlify](https://helena-development.netlify.app/)
+- **Production**: [Firebase](https://helena-health-tracker.web.app/)
+- **Dev-tools**:
+    - Node.js
+    - React Vite
+    - CSS3
+    - Material UI
+    - Google Map API
+    - Framer Motion
+    - React Plotly
