@@ -6,6 +6,7 @@ import { getToken, loggedUser } from '../utils/getToken';
 import { getUser, getUsers, loginUser, passResetReq, passwordReset, registerUser, updateUser, verifyEmail } from '../services/userService'
 import { sendVerificationEmail } from '../services/emailService';
 import { prisma } from '../config/db/dbConnection';
+import { FE_URL } from '../utils/appUrl';
 
 
 //------ Login user ------
@@ -110,7 +111,7 @@ const userEmailVerification = async (req: Request, res: Response, next: NextFunc
   try {
     const result = await verifyEmail(verificationToken);
     if (result.success) {
-      res.redirect('http://localhost:5173/verify');
+      res.redirect(`${FE_URL}/verify`);
     } else {
       res.redirect('http://localhost:5173/failed-verify')
     }
