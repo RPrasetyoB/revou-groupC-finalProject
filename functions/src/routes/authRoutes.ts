@@ -16,11 +16,11 @@ authRoutes.post('/verify', userResendVerification)
 authRoutes.post('/request-reset', userResetPassReq)
 authRoutes.post('/reset', userResetPass)
 authRoutes.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-authRoutes.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: `${FE_URL}/signin`, session: false }),
+authRoutes.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: `${FE_URL}/google-auth-failed`, session: false }),
   (req , res) => {
       const user = req.user as User;
       const token = user.token
-      res.redirect(`${FE_URL}/?token=${token}`);
+      res.redirect(`${FE_URL}/google-auth-success?token=${token}`);
     }
   );
 
