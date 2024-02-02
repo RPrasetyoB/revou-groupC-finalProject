@@ -20,8 +20,8 @@ app.use(mainRoutes);
 db();
 app.use(express.json());
 middleWares(app);
-// app.use(cors())
-app.use(cors(corsOptions));
+app.use(cors())
+// app.use(cors(corsOptions));
 scheduleStart();
 app.use(routes);
 app.use(errorHandler);
